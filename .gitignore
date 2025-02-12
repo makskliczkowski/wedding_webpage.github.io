@@ -1,1 +1,5 @@
 *.ico
+*.DS_*
+*.png
+*.zip
+*.txt
