@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Windows 95 Emulation</title>
+  <style>
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #008080;
+      font-family: "MS Sans Serif", Tahoma, Geneva, sans-serif;
+      user-select: none;
+      overflow: hidden;
+    }
+    .desktop {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      /* Replace with your desired desktop background image */
+      background: url("https://via.placeholder.com/1024x768/008080/FFFFFF?text=Desktop+Background") no-repeat center center;
+      background-size: cover;
+    }
+    /* Desktop Icons */
+    .icon {
+      width: 64px;
+      text-align: center;
+      color: white;
+      cursor: pointer;
+      position: absolute;
+    }
+    .icon img {
+      width: 48px;
+      height: 48px;
+    }
+    /* Initial positions */
+    #invitation-icon { top: 20px; left: 20px; }
+    #outlook-icon    { top: 20px; left: 100px; }
+    #recycle-icon    { top: 150px; left: 20px; }
+    #mycomputer-icon { top: 250px; left: 20px; }
+    #picture1-icon   { top: 350px; left: 20px; }
+    #picture2-icon   { top: 350px; left: 100px; }
+    
+    /* Taskbar */
+    .taskbar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: #C0C0C0;
+      border-top: 2px solid #FFF;
+      border-left: 2px solid #FFF;
+      border-right: 2px solid #808080;
+      border-bottom: 2px solid #808080;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+    .start-button {
+      background: #C0C0C0;
+      padding: 5px 10px;
+      border: 2px outset #FFF;
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+    .start-button img {
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+    #window-buttons {
+      margin-left: 5px;
+      display: flex;
+      align-items: center;
+    }
+    .window-button {
+      background: #C0C0C0;
+      border: 2px outset #FFF;
+      margin-right: 2px;
+      padding: 2px 10px;
+      cursor: pointer;
+      font-family: "MS Sans Serif", Tahoma, Geneva, sans-serif;
+    }
+    .window-button.active {
+      background: #000080;
+      color: white;
+    }
+    .tray {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+    .clock {
+      font-weight: bold;
+    }
+    
+    /* Start Menu */
+    .start-menu {
+      position: absolute;
+      bottom: 40px;
+      left: 0;
+      width: 300px;
+      background: #C0C0C0;
+      border: 2px solid #000;
+      z-index: 1500;
+      /* Initially hidden */
+      display: none;
+    }
+    .start-menu.flex { /* Class to show the menu */
+      display: flex;
+    }
+    .start-logo {
+      width: 60px;
+      background: #000080;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .start-logo img {
+      width: 40px;
+      height: auto;
+    }
+    .start-menu-items {
+      flex: 1;
+    }
+    .start-menu-items ul {
+      list-style: none;
+      margin: 0;
+      padding: 5px;
+    }
+    .start-menu-items li {
+      padding: 3px 10px;
+      position: relative;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .start-menu-items li:hover {
+      background-color: #000080;
+      color: white;
+    }
+    .start-menu-items li ul {
+      display: none;
+      position: absolute;
+      left: 100%;
+      top: 0;
+      background: #C0C0C0;
+      border: 2px solid #000;
+      z-index: 1500;
+      min-width: 150px;
+    }
+    .start-menu-items li:hover > ul {
+      display: block;
+    }
+    
+    /* Windows (Application Windows) */
+    .window {
+      position: absolute;
+      width: 400px;
+      height: 300px;
+      background: #C0C0C0;
+      border: 2px solid #000;
+      box-shadow: 2px 2px 0 #808080;
+      display: none;
+      z-index: 2000;
+      overflow: hidden;
+    }
+    .title-bar {
+      background: #000080;
+      color: white;
+      padding: 2px 5px;
+      cursor: move;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      user-select: none;
+    }
+    .window-controls {
+      display: flex;
+    }
+    .window-controls button {
+      background: #C0C0C0;
+      border: 2px outset #FFF;
+      cursor: pointer;
+      margin-left: 2px;
+      font-family: "MS Sans Serif", Tahoma, Geneva, sans-serif;
+    }
+    .content {
+      padding: 10px;
+      background: #FFF;
+      height: calc(100% - 25px);
+      overflow: auto;
+      font-size: 13px;
+      color: black;
+    }
+    /* Resizer elements for resizing windows */
+    .resizer {
+      width: 10px;
+      height: 10px;
+      background: transparent;
+      position: absolute;
+    }
+    .resizer.resizer-lower-right {
+      right: 0;
+      bottom: 0;
+      cursor: se-resize;
+    }
+    .resizer.resizer-lower-left {
+      left: 0;
+      bottom: 0;
+      cursor: sw-resize;
+    }
+    .resizer.resizer-upper-left {
+      left: 0;
+      top: 0;
+      cursor: nw-resize;
+    }
+    .resizer.resizer-left {
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: w-resize;
+    }
+    
+    /* Email Window Specific Styles */
+    .menu-bar {
+      background: #C0C0C0;
+      padding: 2px 5px;
+      border-bottom: 2px solid #000;
+      display: flex;
+      font-size: 13px;
+      position: relative;
+    }
+    .menu-item {
+      margin-right: 10px;
+      cursor: pointer;
+      position: relative;
+    }
+    /* Dropdown menu for email File menu */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background: #C0C0C0;
+      border: 2px solid #000;
+      z-index: 2100;
+      top: 20px;
+      left: 0;
+      width: 100px;
+    }
+    .menu-item:hover .dropdown-menu {
+      display: block;
+    }
+    .dropdown-item {
+      padding: 3px 10px;
+      cursor: pointer;
+    }
+    .dropdown-item:hover {
+      background: #000080;
+      color: white;
+    }
+    .email-container {
+      display: flex;
+      height: calc(100% - 25px - 25px); /* subtract title bar and menu bar */
+    }
+    .email-nav {
+      width: 150px;
+      border-right: 2px solid #000;
+      background: #E0E0E0;
+      padding: 5px;
+    }
+    .email-nav .folder {
+      padding: 3px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      margin-bottom: 3px;
+    }
+    .email-nav .folder:hover {
+      background: #000080;
+      color: white;
+    }
+    .email-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .email-list {
+      border-bottom: 2px solid #000;
+      padding: 5px;
+      height: 40%;
+      overflow-y: auto;
+    }
+    .email-content {
+      padding: 5px;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .email-item {
+      padding: 3px;
+      border-bottom: 1px solid #000;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="desktop">
+    <!-- Desktop Icons -->
+    <div class="icon" id="invitation-icon">
+      <img src="https://via.placeholder.com/48/FFFFFF/000000?text=TXT" alt="Text Document Icon">
+      <div>Invitation.txt</div>
+    </div>
+    <div class="icon" id="outlook-icon">
+      <img src="https://via.placeholder.com/48/FFFFFF/000000?text=EML" alt="Email Icon">
+      <div>Inbox</div>
+    </div>
+    <div class="icon" id="recycle-icon">
+      <img src="https://via.placeholder.com/48/FFFFFF/000000?text=RB" alt="Recycle Bin Icon">
+      <div>Recycle Bin</div>
+    </div>
+    <div class="icon" id="mycomputer-icon">
+      <img src="https://via.placeholder.com/48/FFFFFF/000000?text=MC" alt="My Computer Icon">
+      <div>My Computer</div>
+    </div>
+    <div class="icon" id="picture1-icon">
+      <img src="https://via.placeholder.com/48/FFFFFF/000000?text=P1" alt="Picture 1 Icon">
+      <div>Picture 1</div>
+    </div>
+    <div class="icon" id="picture2-icon">
+      <img src="https://via.placeholder.com/48/FFFFFF/000000?text=P2" alt="Picture 2 Icon">
+      <div>Picture 2</div>
+    </div>
+    
+    <!-- Taskbar -->
+    <div class="taskbar">
+      <div class="start-button" id="start-button">
+        <img src="https://via.placeholder.com/16/000080/FFFFFF?text=W" alt="Win95 Logo">Start
+      </div>
+      <div id="window-buttons"></div>
+      <div class="tray">
+        <!-- Sound icon removed; only clock remains -->
+        <div class="clock" id="clock">12:00</div>
+      </div>
+    </div>
+    
+    <!-- Start Menu (initially hidden) -->
+    <div class="start-menu" id="start-menu">
+      <div class="start-logo">
+        <img src="https://via.placeholder.com/40x80/000080/FFFFFF?text=WIN" alt="Vertical Logo">
+      </div>
+      <div class="start-menu-items">
+        <ul>
+          <li>
+            Programs &raquo;
+            <ul>
+              <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Virus</a></li>
+            </ul>
+          </li>
+          <li>
+            Documents &raquo;
+            <ul>
+              <li><a href="#" onclick="alert('My Documents'); return false;">My Documents</a></li>
+              <li><a href="#" onclick="alert('Shared Documents'); return false;">Shared Documents</a></li>
+            </ul>
+          </li>
+          <li>
+            Settings &raquo;
+            <ul>
+              <li><a href="#" onclick="alert('Control Panel'); return false;">Control Panel</a></li>
+              <li><a href="#" onclick="alert('Printers'); return false;">Printers</a></li>
+            </ul>
+          </li>
+          <li><a href="#" onclick="alert('Find'); return false;">Find</a></li>
+          <li><a href="#" onclick="openWindow('help-window'); return false;">Help</a></li>
+          <li><a href="#" onclick="alert('Run...'); return false;">Run...</a></li>
+          <li><a href="#" onclick="alert('Shutting down...'); return false;">Shutdown...</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Application Windows -->
+    <!-- Invitation Window -->
+    <div class="window" id="invitation-window" style="left: 60px; top: calc(100vh - 300px - 45px);">
+      <div class="title-bar" id="invitation-title">
+        <span>Invitation.txt</span>
+        <div class="window-controls">
+          <button class="minimize" onclick="minimizeWindow('invitation-window')">_</button>
+          <button class="maximize" onclick="maximizeWindow('invitation-window')">[ ]</button>
+          <button class="close-button" onclick="closeWindow('invitation-window')">X</button>
+        </div>
+      </div>
+      <div class="content">
+        <p>You are cordially invited to our special event!</p>
+        <img src="https://via.placeholder.com/200x100/000080/FFFFFF?text=Event+Image" alt="Event Image" style="display:block; margin-bottom:10px;">
+        <p>Please confirm your attendance:</p>
+        <p>
+          <button onclick="sendEmail(true)">Confirm</button>
+          <button onclick="sendEmail(false)">Decline</button>
+        </p>
+      </div>
+      <!-- Four resizers -->
+      <div class="resizer resizer-lower-right"></div>
+      <div class="resizer resizer-lower-left"></div>
+      <div class="resizer resizer-upper-left"></div>
+      <div class="resizer resizer-left"></div>
+    </div>
+    
+    <!-- Email Window (Outlook Express Style) -->
+    <div class="window" id="email-window" style="left: 480px; top: calc(100vh - 300px - 45px);">
+      <div class="title-bar" id="email-title">
+        <span>Outlook Express</span>
+        <div class="window-controls">
+          <button class="minimize" onclick="minimizeWindow('email-window')">_</button>
+          <button class="maximize" onclick="maximizeWindow('email-window')">[ ]</button>
+          <button class="close-button" onclick="closeWindow('email-window')">X</button>
+        </div>
+      </div>
+      <div class="menu-bar">
+        <span class="menu-item" id="email-file-menu">File
+          <div class="dropdown-menu">
+            <div class="dropdown-item" onclick="sendEmailMessage()">Send</div>
+          </div>
+        </span>
+        <span class="menu-item" onclick="alert('Edit menu not implemented')">Edit</span>
+        <span class="menu-item" onclick="alert('View menu not implemented')">View</span>
+        <span class="menu-item" onclick="alert('Go menu not implemented')">Go</span>
+        <span class="menu-item" onclick="alert('Help menu not implemented')">Help</span>
+      </div>
+      <div class="email-container">
+        <div class="email-nav">
+          <div class="folder" onclick="switchFolder('inbox')" id="folder-inbox">Inbox</div>
+          <div class="folder" onclick="switchFolder('outbox')" id="folder-outbox">Outbox</div>
+          <div class="folder" onclick="switchFolder('sent')" id="folder-sent">Sent Items</div>
+        </div>
+        <div class="email-main">
+          <div class="email-list" id="email-list">
+            <!-- Email list populated via JS -->
+          </div>
+          <div class="email-content" id="email-content">
+            <p>Select an email to view its content.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Four resizers -->
+      <div class="resizer resizer-lower-right"></div>
+      <div class="resizer resizer-lower-left"></div>
+      <div class="resizer resizer-upper-left"></div>
+      <div class="resizer resizer-left"></div>
+    </div>
+    
+    <!-- Help Window -->
+    <div class="window" id="help-window" style="left: 300px; top: 100px;">
+      <div class="title-bar" id="help-title">
+        <span>Help</span>
+        <div class="window-controls">
+          <button class="minimize" onclick="minimizeWindow('help-window')">_</button>
+          <button class="maximize" onclick="maximizeWindow('help-window')">[ ]</button>
+          <button class="close-button" onclick="closeWindow('help-window')">X</button>
+        </div>
+      </div>
+      <div class="content">
+        <img src="https://via.placeholder.com/300x150/000080/FFFFFF?text=Help+Image" alt="Help Image" style="display:block; margin-bottom:10px;">
+        <p>This is the Windows 95 Help. For further assistance, please consult the user manual or contact support.</p>
+      </div>
+      <!-- Four resizers -->
+      <div class="resizer resizer-lower-right"></div>
+      <div class="resizer resizer-lower-left"></div>
+      <div class="resizer resizer-upper-left"></div>
+      <div class="resizer resizer-left"></div>
+    </div>
+    
+    <!-- My Computer Window -->
+    <div class="window" id="mycomputer-window" style="left: 300px; top: 200px;">
+      <div class="title-bar" id="mycomputer-title">
+        <span>My Computer</span>
+        <div class="window-controls">
+          <button class="minimize" onclick="minimizeWindow('mycomputer-window')">_</button>
+          <button class="maximize" onclick="maximizeWindow('mycomputer-window')">[ ]</button>
+          <button class="close-button" onclick="closeWindow('mycomputer-window')">X</button>
+        </div>
+      </div>
+      <div class="content">
+        <p>This is My Computer. Here you can find your drives and system information.</p>
+      </div>
+      <!-- Four resizers -->
+      <div class="resizer resizer-lower-right"></div>
+      <div class="resizer resizer-lower-left"></div>
+      <div class="resizer resizer-upper-left"></div>
+      <div class="resizer resizer-left"></div>
+    </div>
+    
+    <!-- Picture 1 Window -->
+    <div class="window" id="picture1-window" style="left: 400px; top: 150px; width: 500px; height: 400px;">
+      <div class="title-bar" id="picture1-title">
+        <span>Picture 1</span>
+        <div class="window-controls">
+          <button class="minimize" onclick="minimizeWindow('picture1-window')">_</button>
+          <button class="maximize" onclick="maximizeWindow('picture1-window')">[ ]</button>
+          <button class="close-button" onclick="closeWindow('picture1-window')">X</button>
+        </div>
+      </div>
+      <div class="content" style="text-align: center;">
+        <img src="https://via.placeholder.com/480x360/008000/FFFFFF?text=Picture+1" alt="Picture 1" style="max-width:100%; max-height:100%;">
+      </div>
+      <!-- Four resizers -->
+      <div class="resizer resizer-lower-right"></div>
+      <div class="resizer resizer-lower-left"></div>
+      <div class="resizer resizer-upper-left"></div>
+      <div class="resizer resizer-left"></div>
+    </div>
+    
+    <!-- Picture 2 Window -->
+    <div class="window" id="picture2-window" style="left: 450px; top: 200px; width: 500px; height: 400px;">
+      <div class="title-bar" id="picture2-title">
+        <span>Picture 2</span>
+        <div class="window-controls">
+          <button class="minimize" onclick="minimizeWindow('picture2-window')">_</button>
+          <button class="maximize" onclick="maximizeWindow('picture2-window')">[ ]</button>
+          <button class="close-button" onclick="closeWindow('picture2-window')">X</button>
+        </div>
+      </div>
+      <div class="content" style="text-align: center;">
+        <img src="https://via.placeholder.com/480x360/FF0000/FFFFFF?text=Picture+2" alt="Picture 2" style="max-width:100%; max-height:100%;">
+      </div>
+      <!-- Four resizers -->
+      <div class="resizer resizer-lower-right"></div>
+      <div class="resizer resizer-lower-left"></div>
+      <div class="resizer resizer-upper-left"></div>
+      <div class="resizer resizer-left"></div>
+    </div>
+  </div>
+  
+  <script>
+    // Global object to track window buttons on the taskbar
+    const windowButtons = {};
+    
+    // Open a window and add a corresponding taskbar button if needed.
+    function openWindow(windowId) {
+      const win = document.getElementById(windowId);
+      win.style.display = 'block';
+      win.style.zIndex = Date.now();
+      if (!windowButtons[windowId]) {
+        const titleText = win.querySelector('.title-bar span').textContent;
+        createWindowButton(windowId, titleText);
+      } else {
+        windowButtons[windowId].classList.add('active');
+      }
+      if(windowId === 'email-window'){
+        switchFolder('inbox');
+      }
+    }
+    
+    // Create a taskbar button for the window.
+    function createWindowButton(windowId, windowTitle) {
+      const btn = document.createElement('button');
+      btn.className = 'window-button active';
+      btn.textContent = windowTitle;
+      btn.onclick = function() {
+        const win = document.getElementById(windowId);
+        if(win.style.display === 'none' || win.style.display === ''){
+          win.style.display = 'block';
+          win.style.zIndex = Date.now();
+          btn.classList.add('active');
+        } else {
+          win.style.display = 'none';
+          btn.classList.remove('active');
+        }
+      };
+      document.getElementById('window-buttons').appendChild(btn);
+      windowButtons[windowId] = btn;
+    }
+    
+    // Close, minimize, and maximize functions
+    function closeWindow(windowId) {
+      const win = document.getElementById(windowId);
+      win.style.display = 'none';
+      if(windowButtons[windowId]) {
+        // Remove the button entirely on exit
+        windowButtons[windowId].remove();
+        delete windowButtons[windowId];
+      }
+    }
+    
+    function minimizeWindow(windowId) {
+      document.getElementById(windowId).style.display = 'none';
+      if(windowButtons[windowId]) windowButtons[windowId].classList.remove('active');
+    }
+    
+    function maximizeWindow(windowId) {
+      const win = document.getElementById(windowId);
+      if(!win.dataset.maximized || win.dataset.maximized === 'false'){
+        win.dataset.originalLeft = win.style.left;
+        win.dataset.originalTop = win.style.top;
+        win.dataset.originalWidth = win.style.width;
+        win.dataset.originalHeight = win.style.height;
+        win.style.left = '0px';
+        win.style.top = '0px';
+        win.style.width = window.innerWidth + 'px';
+        win.style.height = (window.innerHeight - 40) + 'px';
+        win.dataset.maximized = 'true';
+      } else {
+        win.style.left = win.dataset.originalLeft;
+        win.style.top = win.dataset.originalTop;
+        win.style.width = win.dataset.originalWidth;
+        win.style.height = win.dataset.originalHeight;
+        win.dataset.maximized = 'false';
+      }
+    }
+    
+    // Mailto function for Invitation window (kept for compatibility)
+    function sendEmail(confirm) {
+      const recipient = "rsvp@example.com";
+      const subject = encodeURIComponent("RSVP for the Event");
+      const body = confirm 
+        ? encodeURIComponent("I confirm my attendance at the event. Thank you!") 
+        : encodeURIComponent("I regret to inform you that I will not be able to attend the event.");
+      window.location.href = "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+    }
+    
+    // Email Send Function from File menu in email window
+    function sendEmailMessage() {
+      alert("Email has been sent. Congratulations.");
+    }
+    
+    // Make a window draggable via its title bar.
+    function makeDraggable(windowEl, handleEl) {
+      let offsetX = 0, offsetY = 0, isDragging = false;
+      handleEl.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        const rect = windowEl.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+        windowEl.style.zIndex = Date.now();
+        e.preventDefault();
+      });
+      document.addEventListener('mousemove', function(e) {
+        if(isDragging) {
+          const desktopRect = document.querySelector('.desktop').getBoundingClientRect();
+          let newLeft = e.clientX - offsetX - desktopRect.left;
+          let newTop = e.clientY - offsetY - desktopRect.top;
+          if(newLeft < 0) newLeft = 0;
+          if(newTop < 0) newTop = 0;
+          windowEl.style.left = newLeft + 'px';
+          windowEl.style.top = newTop + 'px';
+        }
+      });
+      document.addEventListener('mouseup', function() {
+        isDragging = false;
+      });
+    }
+    
+    // Make desktop icons draggable and snap to grid
+    function makeIconDraggable(icon) {
+      let offsetX, offsetY, startX, startY;
+      let dragging = false;
+      icon.addEventListener('mousedown', function(e) {
+        if(e.button !== 0) return;
+        dragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        const rect = icon.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+        icon.style.zIndex = 9999;
+        e.preventDefault();
+      });
+      document.addEventListener('mousemove', function(e) {
+        if(dragging) {
+          let newLeft = e.clientX - offsetX;
+          let newTop = e.clientY - offsetY;
+          icon.style.left = newLeft + 'px';
+          icon.style.top = newTop + 'px';
+        }
+      });
+      document.addEventListener('mouseup', function(e) {
+        if(dragging) {
+          dragging = false;
+          let gridSize = 80;
+          let left = parseInt(icon.style.left);
+          let top = parseInt(icon.style.top);
+          let snappedLeft = Math.round(left / gridSize) * gridSize;
+          let snappedTop = Math.round(top / gridSize) * gridSize;
+          icon.style.left = snappedLeft + 'px';
+          icon.style.top = snappedTop + 'px';
+        }
+      });
+    }
+    
+    // Initialize draggable icons
+    document.querySelectorAll('.icon').forEach(function(icon){
+      makeIconDraggable(icon);
+    });
+    
+    // Desktop Icon double-click events to open windows
+    document.getElementById('invitation-icon').addEventListener('dblclick', function() {
+      openWindow('invitation-window');
+    });
+    document.getElementById('outlook-icon').addEventListener('dblclick', function() {
+      openWindow('email-window');
+    });
+    document.getElementById('mycomputer-icon').addEventListener('dblclick', function() {
+      openWindow('mycomputer-window');
+    });
+    document.getElementById('picture1-icon').addEventListener('dblclick', function() {
+      openWindow('picture1-window');
+    });
+    document.getElementById('picture2-icon').addEventListener('dblclick', function() {
+      openWindow('picture2-window');
+    });
+    document.getElementById('recycle-icon').addEventListener('dblclick', function() {
+      alert('Recycle Bin is empty.');
+    });
+    
+    // Make windows draggable
+    makeDraggable(document.getElementById('invitation-window'), document.getElementById('invitation-title'));
+    makeDraggable(document.getElementById('email-window'), document.getElementById('email-title'));
+    makeDraggable(document.getElementById('help-window'), document.getElementById('help-title'));
+    makeDraggable(document.getElementById('mycomputer-window'), document.getElementById('mycomputer-title'));
+    makeDraggable(document.getElementById('picture1-window'), document.getElementById('picture1-title'));
+    makeDraggable(document.getElementById('picture2-window'), document.getElementById('picture2-title'));
+    
+    // Make windows resizable using the resizer elements
+    function makeResizable(windowEl) {
+      let isResizing = false;
+      let startX, startY, startWidth, startHeight, startLeft, startTop, currentResizer;
+      const resizers = windowEl.querySelectorAll('.resizer');
+      resizers.forEach(resizer => {
+        resizer.addEventListener('mousedown', function(e) {
+          isResizing = true;
+          startX = e.clientX;
+          startY = e.clientY;
+          const rect = windowEl.getBoundingClientRect();
+          startWidth = rect.width;
+          startHeight = rect.height;
+          startLeft = rect.left;
+          startTop = rect.top;
+          currentResizer = resizer;
+          e.preventDefault();
+          e.stopPropagation();
+        });
+      });
+      document.addEventListener('mousemove', function(e) {
+        if (!isResizing) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        if (currentResizer.classList.contains('resizer-lower-right')) {
+          windowEl.style.width = (startWidth + dx) + 'px';
+          windowEl.style.height = (startHeight + dy) + 'px';
+        } else if (currentResizer.classList.contains('resizer-lower-left')) {
+          windowEl.style.width = (startWidth - dx) + 'px';
+          windowEl.style.height = (startHeight + dy) + 'px';
+          windowEl.style.left = (startLeft + dx) + 'px';
+        } else if (currentResizer.classList.contains('resizer-upper-left')) {
+          windowEl.style.width = (startWidth - dx) + 'px';
+          windowEl.style.height = (startHeight - dy) + 'px';
+          windowEl.style.left = (startLeft + dx) + 'px';
+          windowEl.style.top = (startTop + dy) + 'px';
+        } else if (currentResizer.classList.contains('resizer-left')) {
+          windowEl.style.width = (startWidth - dx) + 'px';
+          windowEl.style.left = (startLeft + dx) + 'px';
+        }
+      });
+      document.addEventListener('mouseup', function(e) {
+        isResizing = false;
+      });
+    }
+    
+    // Initialize resizable windows
+    ['invitation-window', 'email-window', 'help-window', 'mycomputer-window', 'picture1-window', 'picture2-window'].forEach(function(id) {
+      makeResizable(document.getElementById(id));
+    });
+    
+    // Email data for folders
+    const emailData = {
+      inbox: [
+        { id: 1, subject: "Invitation to Our Special Event", content: "Dear Guest,\n\nYou are invited to our special event. [Fill out text]" }
+      ],
+      outbox: [
+        { id: 3, subject: "Outbox Email", content: "There are no emails in the Outbox." }
+      ],
+      sent: [
+        { id: 2, subject: "Email to Elon Musk and Donald Trump", content: "Dear Elon Musk and Donald Trump,\n\n[Your message here]" }
+      ]
+    };
+    
+    function switchFolder(folder) {
+      const list = document.getElementById('email-list');
+      const content = document.getElementById('email-content');
+      list.innerHTML = '';
+      content.innerHTML = '<p>Select an email to view its content.</p>';
+      const emails = emailData[folder] || [];
+      emails.forEach(function(email) {
+        const item = document.createElement('div');
+        item.className = 'email-item';
+        item.textContent = email.subject;
+        item.onclick = function() {
+          content.innerHTML = '<pre>' + email.content + '</pre>';
+          // If this is the invitation email (id 1), add confirm/decline buttons.
+          if(email.id === 1) {
+            const btnDiv = document.createElement('div');
+            btnDiv.innerHTML = '<button onclick="sendEmail(true)">Confirm</button> <button onclick="sendEmail(false)">Decline</button>';
+            content.appendChild(btnDiv);
+          }
+        };
+        list.appendChild(item);
+      });
+    }
+    
+    // Update the clock every second
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      document.getElementById('clock').textContent = hours + ":" + minutes;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+    
+    // Toggle Start Menu display (only when clicking the start button)
+    const startButton = document.getElementById('start-button');
+    const startMenu = document.getElementById('start-menu');
+    startButton.addEventListener('click', function(e) {
+      // Toggle between 'flex' and 'none'
+      if(startMenu.style.display === 'flex') {
+        startMenu.style.display = 'none';
+      } else {
+        startMenu.style.display = 'flex';
+      }
+      e.stopPropagation();
+    });
+    // Hide Start Menu when clicking outside of it.
+    document.addEventListener('click', function(e) {
+      if (!startMenu.contains(e.target) && e.target !== startButton) {
+        startMenu.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

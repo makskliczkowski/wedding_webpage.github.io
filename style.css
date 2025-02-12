@@ -1,0 +1,309 @@
+    /* Base Styles */
+    body {
+        margin      : 0;
+        padding     : 0;
+        background  : #008080;
+        font-family : "MS Sans Serif", Tahoma, Geneva, sans-serif;
+        user-select : none;
+        overflow    : hidden;
+      }
+      .desktop {
+        position    : relative;
+        width       : 100vw;
+        height      : 100vh;
+        /* Replace with your desired desktop background image */
+        background  : url("") no-repeat center center;
+        background-size: cover;
+        font-size   : 10px;
+      }
+      /* Desktop Icons */
+      .icon {
+        width       : 44px;
+        text-align  : center;
+        color       : white;
+        cursor      : pointer;
+        position    : absolute;
+      }
+      .icon img {
+        width       : 44px;
+        height      : 44px;
+      }
+      /* Initial positions */
+      #invitation-icon { top: 20px; left: 20px; }
+      #outlook-icon    { top: 20px; left: 100px; }
+      #recycle-icon    { top: 150px; left: 20px; }
+      #mycomputer-icon { top: 250px; left: 20px; }
+      #picture1-icon   { top: 350px; left: 20px; }
+      #picture2-icon   { top: 350px; left: 100px; }
+      
+      /* Taskbar */
+      .taskbar {
+        position      : absolute;
+        bottom        : 0;
+        left          : 0;
+        right         : 0;
+        height        : 35px;
+        background    : #C0C0C0;
+        border-top    : 2px solid #FFF;
+        border-left   : 2px solid #FFF;
+        border-right  : 2px solid #808080;
+        border-bottom : 2px solid #808080;
+        display       : flex;
+        align-items   : center;
+        padding       : 0 3px;
+        box-sizing    : border-box;
+        z-index       : 1000;
+      }
+
+      .taskbar-icon {
+        margin: 0 5px;
+        cursor: pointer;
+      }
+      .taskbar-icon:hover {
+        background: #A0A0A0;  
+      }
+      .start-button {
+        background: #C0C0C0;
+        padding: 5px 10px;
+        border: 2px outset #FFF;
+        cursor: pointer;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+      }
+      .start-button img {
+        vertical-align: middle;
+        margin-right: 4px;
+      }
+      #window-buttons {
+        margin-left: 5px;
+        display: flex;
+        align-items: center;
+      }
+      .window-button {
+        background: #C0C0C0;
+        border: 2px outset #FFF;
+        margin-right: 2px;
+        padding: 2px 10px;
+        cursor: pointer;
+        font-family: "MS Sans Serif", Tahoma, Geneva, sans-serif;
+      }
+      .window-button.active {
+        background: #000080;
+        color: white;
+      }
+      .tray {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+      }
+      .clock {
+        font-weight: bold;
+      }
+      
+      /* Start Menu */
+      .start-menu {
+        position    : absolute;
+        bottom      : 40px;
+        left        : 0;
+        width       : 250px;
+        background  : #C0C0C0;
+        border      : 2px solid #000;
+        z-index     : 1500;
+        /* Initially hidden */
+        display: none;
+      }
+      .start-menu.flex { /* Class to show the menu */
+        display: flex;
+      }
+      .start-logo {
+        width: 60px;
+        background: #000080;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .start-logo img {
+        width: 40px;
+        height: auto;
+      }
+      .start-menu-items {
+        flex: 1;
+      }
+      .start-menu-items ul {
+        list-style: none;
+        margin: 0;
+        padding: 5px;
+      }
+      .start-menu-items li {
+        padding: 3px 10px;
+        position: relative;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+      .start-menu-items li:hover {
+        background-color: #000080;
+        color: white;
+      }
+      .start-menu-items li ul {
+        display: none;
+        position: absolute;
+        left: 100%;
+        top: 0;
+        background: #C0C0C0;
+        border: 2px solid #000;
+        z-index: 1500;
+        min-width: 150px;
+      }
+      .start-menu-items li:hover > ul {
+        display: block;
+      }
+      
+      /* Windows (Application Windows) */
+      .window {
+        position  : absolute;
+        width     : 500px;
+        height    : 400px;
+        background: #C0C0C0;
+        border    : 2px solid #000;
+        box-shadow: 2px 2px 0 #808080;
+        display   : none;
+        z-index   : 2000;
+        overflow  : hidden;
+      }
+      .title-bar {
+        background    : #000080;
+        color         : white;
+        padding       : 2px 2px;
+        cursor        : move;
+        display       : flex;
+        justify-content: space-between;
+        align-items   : center;
+        font-size     : 10px;
+        user-select   : none;
+      }
+      .window-controls {
+        display: flex;
+      }
+      .window-controls button {
+        background    : #C0C0C0;
+        border        : 2px outset #FFF;
+        cursor        : pointer;
+        margin-left   : 2px;
+        font-family   : "MS Sans Serif", Tahoma, Geneva, sans-serif;
+      }
+      .content {
+        padding       : 10px;
+        background    : #FFF;
+        height        : calc(100% - 25px);
+        overflow      : auto;
+        font-size     : 11px;
+        color         : black;
+      }
+      /* Resizer elements for resizing windows */
+      .resizer {
+        width         : 10px;
+        height        : 10px;
+        background    : transparent;
+        position      : absolute;
+      }
+      .resizer.resizer-lower-right {
+        right         : 0;
+        bottom        : 0;
+        cursor        : se-resize;
+      }
+      .resizer.resizer-lower-left {
+        left         : 0;
+        bottom       : 0;
+        cursor       : sw-resize;
+      }
+      .resizer.resizer-upper-left {
+        left: 0;
+        top: 0;
+        cursor: nw-resize;
+      }
+      .resizer.resizer-left {
+        left         : 0;
+        top          : 50%;
+        transform    : translateY(-50%);
+        cursor       : w-resize;
+      }
+      
+      /* Email Window Specific Styles */
+      .menu-bar {
+        background: #C0C0C0;
+        padding: 2px 5px;
+        border-bottom: 2px solid #000;
+        display: flex;
+        font-size: 13px;
+        position: relative;
+      }
+      .menu-item {
+        margin-right: 10px;
+        cursor: pointer;
+        position: relative;
+      }
+      /* Dropdown menu for email File menu */
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        background: #C0C0C0;
+        border: 2px solid #000;
+        z-index: 2100;
+        top: 20px;
+        left: 0;
+        width: 100px;
+      }
+      .menu-item:hover .dropdown-menu {
+        display: block;
+      }
+      .dropdown-item {
+        padding: 3px 10px;
+        cursor: pointer;
+      }
+      .dropdown-item:hover {
+        background: #000080;
+        color: white;
+      }
+      .email-container {
+        display: flex;
+        height: calc(100% - 25px - 25px); /* subtract title bar and menu bar */
+      }
+      .email-nav {
+        width: 150px;
+        border-right: 2px solid #000;
+        background: #E0E0E0;
+        padding: 5px;
+      }
+      .email-nav .folder {
+        padding: 3px;
+        cursor: pointer;
+        border: 1px solid transparent;
+        margin-bottom: 3px;
+      }
+      .email-nav .folder:hover {
+        background: #000080;
+        color: white;
+      }
+      .email-main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .email-list {
+        border-bottom: 2px solid #000;
+        padding: 5px;
+        height: 40%;
+        overflow-y: auto;
+      }
+      .email-content {
+        padding: 5px;
+        flex: 1;
+        overflow-y: auto;
+      }
+      .email-item {
+        padding: 3px;
+        border-bottom: 1px solid #000;
+        cursor: pointer;
+      }

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slubny Windows 95</title>
+    <!-- Use the style from this folder -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="desktop">
+        <!-- Desktop Icons -->
+      <div class="icon" id="invitation-icon">
+        <img src="icons/All [Without duplicates]/Document with phone.ico" alt="Text Document Icon" style = "height:35px; width: auto; vertical-align: middle; float: middle;">
+        <div>Invitation.txt</div>
+      </div>
+      <div class="icon" id="outlook-icon">
+          <img src="icons/All [Without duplicates]/Mail catalog.ico" alt="Email Icon" style="height:35px; width: auto; vertical-align: middle; float: middle;">
+          <div>Fancy-Outlook-express</div>
+      </div>
+      <div class="icon" id="recycle-icon">
+          <img src="icons/All [Without duplicates]/Recycle Bin with torned document and program.ico" alt="Recycle Bin Icon" style="height:35px; width:auto;vertical-align: middle; float: middle;">
+          <div>Recycle Bin</div>
+      </div>
+      <div class="icon" id="mycomputer-icon">
+          <img src="icons/All [Without duplicates]/My Computer.ico" alt="My Computer Icon" style="height:35px; width: auto; vertical-align: middle; float: middle;">
+          <div>My Computer</div>
+      </div>
+      <div class="icon" id="picture1-icon">
+          <img src="icons/All [Without duplicates]/Drawing red picture.ico" alt="Picture 1 Icon" style="height:35px; width: auto; vertical-align: middle; float: middle;" >
+          <div>separowo.jpg</div>
+      </div>
+      <div class="icon" id="picture2-icon">
+          <img src="icons/All [Without duplicates]/Drawing green picture.ico" alt="Picture 2 Icon" style="height:35px; width: auto; vertical-align: middle; float: middle;" >
+          <div>to_my.png</div>
+      </div>
+    
+      <!-- Taskbar -->
+      <div class="taskbar">
+          <div class="start-button" id="start-button">
+              <img src="icons/All [Without duplicates]/Windows logo (without text).ico" alt="Win95 Logo" style="height:15px; width: auto; ">Start
+          </div>
+          <div id="window-buttons"></div>
+          <div class="tray">
+              <div class="sound">
+                  <img src="icons/All [Without duplicates]/Sound program.ico" alt="Sound Icon" style="height:20px; width: auto; vertical-align: middle; float: left;">
+              </div>
+              <div class="clock" id="clock" style="font-size: 14px; color: black;">12:00</div>
+          </div>
+      </div>
+    
+      <!-- Start Menu (initially hidden) -->
+      <div class="start-menu" id="start-menu" style="display: none;">
+          <div class="start-logo">
+              <img src="icons/All [Without duplicates]/Windows logo (with text).ico" alt="Vertical Logo" style="width:50px;transform: rotate(270deg) scaleX(1.5);">
+          </div>
+          <div class="start-menu-items">
+              <ul>
+              <li>
+                  <img src="icons/All [Without duplicates]/Programs.ico" alt="Programs Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;"> Programs &raquo;
+                  <ul>
+                      <li>
+                          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                              <img src="icons/All [Without duplicates]/Search on computer.ico" alt="Virus Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;"> Virus
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" onclick="alert('New Program'); return false;">
+                              <img src="icons/All [Without duplicates]/New letter.ico" alt="New Program Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;"> New Program
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <li>
+                  <img src="icons/All [Without duplicates]/Folder.ico" alt="Folder Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;">
+                  Documents &raquo;
+                  <ul>
+                      <li>
+                          <a href="https://drive.google.com">
+                              <img src="icons/All [Without duplicates]/Folder.ico" alt="Folder Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;">
+                              My Documents
+                          </a>
+                      </li>
+                      <li>
+                          <a href="" onclick="alert('Shared Documents'); return false;">
+                              <img src="icons/All [Without duplicates]/Folder (hi-res).ico" alt="Shared Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;">
+                              Shared Documents
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <li>
+                  <img src="icons/All [Without duplicates]/Settings.ico" alt="Settings Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;"> Settings &raquo;
+                  <ul>
+                      <li>
+                          <a href="#" onclick="alert('Control Panel'); return false;">
+                              <img src="icons/All [Without duplicates]/Controls.ico" alt="Control Panel Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;"> Control Panel
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" onclick="alert('Printers'); return false;">
+                              <img src="icons/All [Without duplicates]/Printer (3D).ico" alt="Printers Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;"> Printers
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="#" onclick="alert('Find'); return false;">
+                      <img src="icons/All [Without duplicates]/Search folder.ico" alt="Find Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;"> Find
+                  </a>
+              </li>
+              <li>
+                  <a href="#" onclick="openWindow('help-window'); return false;">
+                      <img src="icons/All [Without duplicates]/Help page.ico" alt="Help Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;"> Help
+                  </a>
+              </li>
+              <li>
+                  <a href="#" onclick="alert('Run...'); return false;">
+                      <img src="icons/All [Without duplicates]/Explosion (1 of 3).ico" alt="Run Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;"> Run...
+                  </a>
+              </li>
+              <li>
+                  <a href="#" onclick="alert('Shutting down...'); return false;">
+                      <img src="icons/All [Without duplicates]/Turn Off Computer (full).ico" alt="Shutdown Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;"> Shutdown...
+                  </a>
+              </li>
+              <li>
+                  <a href="#" onclick="alert('Restarting...'); return false;">
+                      <img src="icons/All [Without duplicates]/Exit (gray).ICO" alt="Restart Icon" style="height:20px; width: auto; vertical-align: middle; float: middle;"> Restart...
+                  </a>
+              </li>
+          </ul>
+          </div>
+      </div>
+    
+      <!-- Application Windows -->
+      <!-- Invitation Window -->
+      <div class="window" id="invitation-window" style="left: 60px; top: calc(100vh - 300px - 45px);">
+        <div class="title-bar" id="invitation-title">
+                <img src="icons/All [Without duplicates]/Document with phone.ico" alt="Invitation Icon" style="height:20px; vertical-align: middle; float: left;">
+                <span>Invitation.txt</span>
+              <div class="window-controls">
+                <button class="minimize" onclick="minimizeWindow('invitation-window')">
+                    [ ]
+                </button>
+                <button class="maximize" onclick="maximizeWindow('invitation-window')">
+                    _
+                </button>
+                <button class="close-button" onclick="closeWindow('invitation-window')">
+                    x
+                </button>
+              </div>
+        </div>
+        <div class="content">
+            <h2 style="text-align: center;">Oliwia i Maks</h2>
+            <h3 style="text-align: center;">serdecznie zapraszają</h3>
+            <p style="text-align: center;">na uroczystość zawarcia związku małżeńskiego oraz
+              przyjęcie weselne, które odbędą się</p>
+            <h2 style="text-align: center;">3 sierpnia 2025 o godzinie 17:00 w Dworku Separowo</h2>
+            <h4 style="text-align: center;">Separowo 8, 62-066 Separowo</h4>
+            <p style="text-align: center;">Prosimy o potwierdznie swojej obecności do 01.05.25</p>
+            <p style="text-align: center;">
+              <button onclick="sendEmail(true)">Confirm</button>
+              <button onclick="sendEmail(false)">Decline</button>
+            </p>
+            <img src="Photos/my5.jpg" alt="Event Image" style="display:block; margin:0 auto 10px; max-height:50%;">
+            <p style="text-align: center;">Jak cos, prosimy o smiale odzywanie się...</p>
+        </div>
+        <!-- Four resizers -->
+        <div class="resizer resizer-lower-right"></div>
+        <div class="resizer resizer-lower-left"></div>
+        <div class="resizer resizer-upper-left"></div>
+        <div class="resizer resizer-left"></div>
+      </div>
+    
+    <!-- Email Window (Outlook Express Style) -->
+    <div class="window" id="email-window" style="left: 480px; top: calc(100vh - 300px - 45px);">
+      <div class="title-bar" id="email-title">
+        <img src="icons/All [Without duplicates]/Mail catalog.ico" alt="Email Icon" style="height:20px; vertical-align: middle; float: left;">
+          <span>Outlook Express</span>
+        <div class="window-controls">
+          <button class="minimize" onclick="minimizeWindow('email-window')">_</button>
+          <button class="maximize" onclick="maximizeWindow('email-window')">[ ]</button>
+          <button class="close-button" onclick="closeWindow('email-window')">X</button>
+        </div>
+      </div>
+      <div class="menu-bar">
+        <span class="menu-item" id="email-file-menu">File
+          <div class="dropdown-menu">
+            <div class="dropdown-item" role="button" tabindex="0" onclick="sendEmailMessage()" onkeydown="if(event.key === 'Enter' || event.key === ' ') { sendEmailMessage(); }">
+              Send
+            </div>
+          </div>
+        </span>
+        <span class="menu-item" onclick="alert('Edit menu not implemented')">Edit</span>
+        <span class="menu-item" onclick="alert('View menu not implemented')">View</span>
+        <span class="menu-item" onclick="alert('Go menu not implemented')">Go</span>
+        <span class="menu-item" onclick="alert('Help menu not implemented')">Help</span>
+      </div>
+      <div class="email-container">
+        <div class="email-nav">
+          <div class="folder" onclick="switchFolder('inbox')" id="folder-inbox">
+            <img src="icons/All [Without duplicates]/Mail catalog.ico" alt="Inbox Icon" style="height:20px; vertical-align: middle; float: left;"> Inbox
+          </div>
+          <div class="folder" onclick="switchFolder('outbox')" id="folder-outbox">
+            <img src="icons/All [Without duplicates]/Mail wizard.ico" alt="Outbox Icon" style="height:20px; vertical-align: middle; float: left;"> Outbox
+          </div>
+          <div class="folder" onclick="switchFolder('sent')" id="folder-sent">
+            <img src="icons/All [Without duplicates]/Mail stamp (return).ico" alt="Sent Items Icon" style="height:20px; vertical-align: middle; float: left;"> Sent Items
+          </div>
+        </div>
+        <div class="email-main">
+          <div class="email-list" id="email-list">
+            <!-- Email list populated via JS -->
+          </div>
+          <div class="email-content" id="email-content">
+            <p style="text-align: center;">Proszę wybrać e-mail z listy, aby go otworzyć.</p>
+            <p style="text-align: center;">Dziękujemy za korzystanie z naszej aplikacji!</p>
+            <p style="text-align: center;">Czy potrzebujesz dalszej pomocy?</p>
+            <p style="text-align: center;">Jeśli tak, kliknij przycisk poniżej.</p>
+            <button onclick="openHelp()">Pomoc</button>
+          </div>
+        </div>
+      </div>
+      <!-- Four resizers -->
+      <div class="resizer resizer-lower-right"></div>
+      <div class="resizer resizer-lower-left"></div>
+      <div class="resizer resizer-upper-left"></div>
+      <div class="resizer resizer-left"></div>
+    </div>
+    
+    <!-- Help Window -->
+    <div class="window" id="help-window" style="left: 300px; top: 100px;">
+      <div class="title-bar" id="help-title">
+        <img src="icons/All [Without duplicates]/Help (gray).ICO" alt="Help Icon" style="height:50%;">
+        <span>Help</span>
+        <div class="window-controls">
+          <button class="minimize" onclick="minimizeWindow('help-window')">_</button>
+          <button class="maximize" onclick="maximizeWindow('help-window')">[ ]</button>
+          <button class="close-button" onclick="closeWindow('help-window')">X</button>
+        </div>
+      </div>
+      <div class="content">
+        <img src="Photos/mapa1.png" alt="Help Image" style="display:block; margin-bottom:10px; height:50%;">
+        <p>W razie potrzeby pomocy z dostaniem się do Dworku, prosimy o kontakt. Dziękujemy za korzystanie z naszej aplikacji!</p>
+        <p>Jeśli masz inne pytania, nie wahaj się i skontaktuj się z nami!</p>
+        <p>Prosimy także o zapisanie lokalizacji wydarzenia na mapie, aby uniknąć nieporozumień.</p>
+      </div>
+      <!-- Four resizers -->
+      <div class="resizer resizer-lower-right"></div>
+      <div class="resizer resizer-lower-left"></div>
+      <div class="resizer resizer-upper-left"></div>
+      <div class="resizer resizer-left"></div>
+    </div>
+    
+    <!-- My Computer Window -->
+    <div class="window" id="mycomputer-window" style="left: 300px; top: 200px;">
+      <div class="title-bar" id="mycomputer-title">
+        <span>My Computer</span>
+        <div class="window-controls">
+          <button class="minimize" onclick="minimizeWindow('mycomputer-window')">_</button>
+          <button class="maximize" onclick="maximizeWindow('mycomputer-window')">[ ]</button>
+          <button class="close-button" onclick="closeWindow('mycomputer-window')">X</button>
+        </div>
+      </div>
+      <div class="content">
+        <!-- Icons for full drives -->
+        <div class="drive">
+          <img src="icons/All [Without duplicates]/Drive.ico" alt="Full Drive Icon" style="height:50%;">
+          <p>C: (Full) [50GB/50GB]</p>
+        </div>
+        <div class="drive">
+          <img src="icons/All [Without duplicates]/Drive.ico" alt="Full Drive Icon" style="height:50%;">
+          <p>D: (Full) [50GB/50GB]</p>
+        </div>
+        <div class="drive">
+          <img src="icons/All [Without duplicates]/Drive.ico" alt="Full Drive Icon" style="height:50%;">
+          <p>E: (Full) [500GB/50GB]</p>
+        </div>
+        <hr>
+        <p>The cake is a lie!</p>
+        <img src="Photos/cake.jpg" alt="Cake Image" style="display:block; margin-bottom:10px; height:50%;">
+        <p>For more information about this cake, please visit our recipes section!</p>
+      </div>
+      <!-- Four resizers -->
+      <div class="resizer resizer-lower-right"></div>
+      <div class="resizer resizer-lower-left"></div>
+      <div class="resizer resizer-upper-left"></div>
+      <div class="resizer resizer-left"></div>
+    </div>
+    
+    <!-- Picture 1 Window -->
+    <div class="window" id="picture1-window" style="left: 400px; top: 150px; width: 500px; height: 400px;">
+      <div class="title-bar" id="picture1-title">
+        <span>separowo.jpg</span>
+        <div class="window-controls">
+          <button class="minimize" onclick="minimizeWindow('picture1-window')">_</button>
+          <button class="maximize" onclick="maximizeWindow('picture1-window')">[ ]</button>
+          <button class="close-button" onclick="closeWindow('picture1-window')">X</button>
+        </div>
+      </div>
+      <div class="content" style="text-align: center;">
+        <img src="Photos/dworek2.jpg" alt="Picture 1" style="max-max-height:100%; height:50%;">
+      </div>
+      <!-- Four resizers -->
+      <div class="resizer resizer-lower-right"></div>
+      <div class="resizer resizer-lower-left"></div>
+      <div class="resizer resizer-upper-left"></div>
+      <div class="resizer resizer-left"></div>
+    </div>
+    
+    <!-- Picture 2 Window -->
+    <div class="window" id="picture2-window" style="left: 450px; top: 200px; width: 500px; height: 400px;">
+      <div class="title-bar" id="picture2-title">
+        <span>to_my.png</span>
+        <div class="window-controls">
+          <button class="minimize" onclick="minimizeWindow('picture2-window')">_</button>
+          <button class="maximize" onclick="maximizeWindow('picture2-window')">[ ]</button>
+          <button class="close-button" onclick="closeWindow('picture2-window')">X</button>
+        </div>
+      </div>
+      <div class="content" style="text-align: center;">
+        <img src="Photos/my2.jpg" alt="Picture 2" style="max-max-height:100%; height:50%;">
+      </div>
+      <!-- Four resizers -->
+      <div class="resizer resizer-lower-right"></div>
+      <div class="resizer resizer-lower-left"></div>
+      <div class="resizer resizer-upper-left"></div>
+      <div class="resizer resizer-left"></div>
+    </div>
+  </div>
+  
+  <!-- Link to the external JavaScript file -->
+  <script src="script.js"></script>
+</body>
+</html>
