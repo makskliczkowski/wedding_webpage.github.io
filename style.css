@@ -307,3 +307,23 @@
         border-bottom: 1px solid #000;
         cursor: pointer;
       }
+
+      @media (max-width: 600px) {
+        .desktop {
+          font-size: 14px; /* powiększ tekst */
+        }
+        .icon {
+          width: 60px;
+        }
+        .icon img {
+          width: 60px;
+          height: 60px;
+        }
+        .taskbar {
+          height: 45px;
+          padding: 0 5px;
+        }
+        .start-menu {
+          width: 200px;
+        }
+      }
