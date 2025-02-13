@@ -159,22 +159,22 @@ document.querySelectorAll('.icon').forEach(function(icon){
 });
 
 // Desktop Icon double-click events to open windows
-document.getElementById('invitation-icon').addEventListener('dblclick', function() {
+document.getElementById('invitation-icon').addEventListener('click', function() {
   openWindow('invitation-window');
 });
-document.getElementById('outlook-icon').addEventListener('dblclick', function() {
+document.getElementById('outlook-icon').addEventListener('click', function() {
   openWindow('email-window');
 });
-document.getElementById('mycomputer-icon').addEventListener('dblclick', function() {
+document.getElementById('mycomputer-icon').addEventListener('click', function() {
   openWindow('mycomputer-window');
 });
-document.getElementById('picture1-icon').addEventListener('dblclick', function() {
+document.getElementById('picture1-icon').addEventListener('click', function() {
   openWindow('picture1-window');
 });
-document.getElementById('picture2-icon').addEventListener('dblclick', function() {
+document.getElementById('picture2-icon').addEventListener('click', function() {
   openWindow('picture2-window');
 });
-document.getElementById('recycle-icon').addEventListener('dblclick', function() {
+document.getElementById('recycle-icon').addEventListener('click', function() {
   alert('Recycle Bin is empty.');
 });
 
@@ -359,3 +359,16 @@ function makeDraggable(windowEl, handleEl) {
   document.addEventListener('mouseup', stopDrag);
   document.addEventListener('touchend', stopDrag);
 }
+
+
+function addIconListener(iconId, windowId) {
+  const icon = document.getElementById(iconId);
+  icon.addEventListener('click', () => openWindow(windowId));
+  icon.addEventListener('touchend', () => openWindow(windowId));
+}
+
+addIconListener('invitation-icon', 'invitation-window');
+addIconListener('outlook-icon', 'email-window');
+addIconListener('mycomputer-icon', 'mycomputer-window');
+addIconListener('picture1-icon', 'picture1-window');
+addIconListener('picture2-icon', 'picture2-window');
