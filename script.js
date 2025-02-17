@@ -110,28 +110,41 @@ function sendEmailMessage() {
 
 function makeDraggable(windowEl, handleEl) {
   let offsetX = 0, offsetY = 0, isDragging = false;
-  handleEl.addEventListener('mousedown', function(e) {
+
+  function startDrag(e) {
     isDragging = true;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     const rect = windowEl.getBoundingClientRect();
-    offsetX = e.clientX - rect.left;
-    offsetY = e.clientY - rect.top;
+    offsetX = clientX - rect.left;
+    offsetY = clientY - rect.top;
     windowEl.style.zIndex = Date.now();
     e.preventDefault();
-  });
-  document.addEventListener('mousemove', function(e) {
-    if(isDragging) {
-      const desktopRect = document.querySelector('.desktop').getBoundingClientRect();
-      let newLeft = e.clientX - offsetX - desktopRect.left;
-      let newTop = e.clientY - offsetY - desktopRect.top;
-      if(newLeft < 0) newLeft = 0;
-      if(newTop < 0) newTop = 0;
-      windowEl.style.left = newLeft + 'px';
-      windowEl.style.top = newTop + 'px';
-    }
-  });
-  document.addEventListener('mouseup', function() {
+  }
+
+  function doDrag(e) {
+    if (!isDragging) return;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const desktopRect = document.querySelector('.desktop').getBoundingClientRect();
+    let newLeft = clientX - offsetX - desktopRect.left;
+    let newTop = clientY - offsetY - desktopRect.top;
+    if(newLeft < 0) newLeft = 0;
+    if(newTop < 0) newTop = 0;
+    windowEl.style.left = newLeft + 'px';
+    windowEl.style.top = newTop + 'px';
+  }
+
+  function stopDrag() {
     isDragging = false;
-  });
+  }
+
+  handleEl.addEventListener('mousedown', startDrag);
+  handleEl.addEventListener('touchstart', startDrag);
+  document.addEventListener('mousemove', doDrag);
+  document.addEventListener('touchmove', doDrag);
+  document.addEventListener('mouseup', stopDrag);
+  document.addEventListener('touchend', stopDrag);
 }
 
 // ############################################################
@@ -313,7 +326,8 @@ function makeDraggable(windowEl, handleEl)
 {
   let offsetX = 0, offsetY = 0, isDragging = false;
 
-  function startDrag(e) {
+  function startDrag(e) 
+  {
     isDragging = true;
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
@@ -324,7 +338,8 @@ function makeDraggable(windowEl, handleEl)
     e.preventDefault();
   }
 
-  function doDrag(e) {
+  function doDrag(e) 
+  {
     if (!isDragging) return;
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
@@ -337,7 +352,8 @@ function makeDraggable(windowEl, handleEl)
     windowEl.style.top = newTop + 'px';
   }
 
-  function stopDrag() {
+  function stopDrag() 
+  {
     isDragging = false;
   }
 
@@ -355,36 +371,29 @@ document.querySelectorAll('.icon').forEach(function(icon){
   makeIconDraggable(icon);
 });
 
-// Desktop Icon double-click events to open windows
-document.getElementById('invitation-icon').addEventListener('dblclick', function() {
-  openWindow('invitation-window');
-});
-document.getElementById('outlook-icon').addEventListener('dblclick', function() {
-  openWindow('email-window');
-});
-document.getElementById('mycomputer-icon').addEventListener('dblclick', function() {
-  openWindow('mycomputer-window');
-});
-document.getElementById('picture1-icon').addEventListener('dblclick', function() {
-  openWindow('picture1-window');
-});
-document.getElementById('picture2-icon').addEventListener('dblclick', function() {
-  openWindow('picture2-window');
-});
-document.getElementById('recycle-icon').addEventListener('dblclick', function() {
-  alert('Recycle Bin is empty.');
-});
-document.getElementById('folder-icon').addEventListener('dblclick', function() {
-  openWindow('folder-window');
-});
-document.getElementById('gallery-icon').addEventListener('dblclick', function() {
-  openWindow('gallery-window');
-});
-document.getElementById('upload-icon').addEventListener('dblclick', function() {
-  openWindow('upload-window');
-});
+function addIconListener(iconId, windowId) {
+  const icon = document.getElementById(iconId);
+  if (!icon) return;
+  icon.addEventListener('click', () => openWindow(windowId));
+  icon.addEventListener('touchend', () => openWindow(windowId));
+}
 
+addIconListener('invitation-icon', 'invitation-window');
+addIconListener('outlook-icon', 'email-window');
+addIconListener('mycomputer-icon', 'mycomputer-window');
+addIconListener('picture1-icon', 'picture1-window');
+addIconListener('picture2-icon', 'picture2-window');
+addIconListener('recycle-icon', 'recycle-window');
+addIconListener('folder-icon', 'folder-window');
+addIconListener('gallery-icon', 'gallery-window');
+addIconListener('upload-icon', 'upload-window');
+addIconListener('help-icon', 'help-window');
+addIconListener('ie-icon', 'ie-widget');
+
+// ############################################################
 // Make windows draggable
+// ############################################################
+
 makeDraggable(document.getElementById('invitation-window'), document.getElementById('invitation-title'));
 makeDraggable(document.getElementById('email-window'), document.getElementById('email-title'));
 makeDraggable(document.getElementById('help-window'), document.getElementById('help-title'));
@@ -394,6 +403,8 @@ makeDraggable(document.getElementById('picture2-window'), document.getElementByI
 makeDraggable(document.getElementById('folder-window'), document.getElementById('folder-title'));
 makeDraggable(document.getElementById('gallery-window'), document.getElementById('gallery-title'));
 makeDraggable(document.getElementById('upload-window'), document.getElementById('upload-title'));
+makeDraggable(document.getElementById('recycle-window'), document.getElementById('recycle-title'));  
+makeDraggable(document.getElementById('ie-widget'), document.getElementById('ie-title'));
 
 // ############################################################
 // Make windows resizable using the resizer elements
@@ -450,7 +461,7 @@ function makeResizable(windowEl) {
 
 [ 'invitation-window', 'email-window', 'help-window', 
   'mycomputer-window', 'picture1-window', 'picture2-window', 'folder-window',
-  'gallery-window', 'upload-window'
+  'gallery-window', 'upload-window', 'recycle-window', 'ie-widget'
 ].forEach(function(id) {
   if (id) {
     makeResizable(document.getElementById(id));
@@ -554,20 +565,4 @@ document.addEventListener('click', function(e)
   }
 });
 
-function addIconListener(iconId, windowId) 
-{
-  const icon = document.getElementById(iconId);
-  icon.addEventListener('click', () => openWindow(windowId));
-  icon.addEventListener('touchend', () => openWindow(windowId));
-}
-
-addIconListener('folder-icon', 'folder-window');
-addIconListener('invitation-icon', 'invitation-window');
-addIconListener('outlook-icon', 'email-window');
-addIconListener('mycomputer-icon', 'mycomputer-window');
-addIconListener('picture1-icon', 'picture1-window');
-addIconListener('picture2-icon', 'picture2-window');
-addIconListener('gallery-icon', 'gallery-window');
-addIconListener('upload-icon', 'upload-window');
-
-// ############################################################
+// ###########################################################
