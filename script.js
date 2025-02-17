@@ -177,6 +177,15 @@ document.getElementById('picture2-icon').addEventListener('dblclick', function()
 document.getElementById('recycle-icon').addEventListener('dblclick', function() {
   alert('Recycle Bin is empty.');
 });
+document.getElementById('folder-icon').addEventListener('dblclick', function() {
+  openWindow('folder-window');
+});
+document.getElementById('gallery-icon').addEventListener('dblclick', function() {
+  openWindow('gallery-window');
+});
+document.getElementById('upload-icon').addEventListener('dblclick', function() {
+  openWindow('upload-window');
+});
 
 // Make windows draggable
 makeDraggable(document.getElementById('invitation-window'), document.getElementById('invitation-title'));
@@ -233,8 +242,14 @@ function makeResizable(windowEl) {
 }
 
 // Initialize resizable windows
-['invitation-window', 'email-window', 'help-window', 'mycomputer-window', 'picture1-window', 'picture2-window'].forEach(function(id) {
-  makeResizable(document.getElementById(id));
+[ 'invitation-window', 'email-window', 'help-window', 
+  'mycomputer-window', 'picture1-window', 'picture2-window', 'folder-window',
+  'galery-window', 'upload-window'
+
+].forEach(function(id) {
+  if (id) {
+    makeResizable(document.getElementById(id));
+  }
 });
 
 // Email data for folders
@@ -363,15 +378,19 @@ function makeDraggable(windowEl, handleEl) {
 
 function addIconListener(iconId, windowId) {
   const icon = document.getElementById(iconId);
-  icon.addEventListener('click', () => openWindow(windowId));
+  icon.addEventListener('dblclick', () => openWindow(windowId));
   icon.addEventListener('touchend', () => openWindow(windowId));
 }
 
+
+addIconListener('folder-icon', 'folder-window');
 addIconListener('invitation-icon', 'invitation-window');
 addIconListener('outlook-icon', 'email-window');
 addIconListener('mycomputer-icon', 'mycomputer-window');
 addIconListener('picture1-icon', 'picture1-window');
 addIconListener('picture2-icon', 'picture2-window');
+addIconListener('gallery-icon', 'gallery-window');
+addIconListener('upload-icon', 'upload-window');
 
 // ################################################################################################################
 // Pictures show in folder
@@ -420,7 +439,6 @@ function openPicture(src, title) {
   makeDraggable(picWindow, titleBar);
   makeResizable(picWindow);
 }
-
 
 // ################################################################################################################
 
