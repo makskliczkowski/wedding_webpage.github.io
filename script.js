@@ -159,22 +159,22 @@ document.querySelectorAll('.icon').forEach(function(icon){
 });
 
 // Desktop Icon double-click events to open windows
-document.getElementById('invitation-icon').addEventListener('click', function() {
+document.getElementById('invitation-icon').addEventListener('dblclick', function() {
   openWindow('invitation-window');
 });
-document.getElementById('outlook-icon').addEventListener('click', function() {
+document.getElementById('outlook-icon').addEventListener('dblclick', function() {
   openWindow('email-window');
 });
-document.getElementById('mycomputer-icon').addEventListener('click', function() {
+document.getElementById('mycomputer-icon').addEventListener('dblclick', function() {
   openWindow('mycomputer-window');
 });
-document.getElementById('picture1-icon').addEventListener('click', function() {
+document.getElementById('picture1-icon').addEventListener('dblclick', function() {
   openWindow('picture1-window');
 });
-document.getElementById('picture2-icon').addEventListener('click', function() {
+document.getElementById('picture2-icon').addEventListener('dblclick', function() {
   openWindow('picture2-window');
 });
-document.getElementById('recycle-icon').addEventListener('click', function() {
+document.getElementById('recycle-icon').addEventListener('dblclick', function() {
   alert('Recycle Bin is empty.');
 });
 
@@ -372,3 +372,131 @@ addIconListener('outlook-icon', 'email-window');
 addIconListener('mycomputer-icon', 'mycomputer-window');
 addIconListener('picture1-icon', 'picture1-window');
 addIconListener('picture2-icon', 'picture2-window');
+
+// ################################################################################################################
+// Pictures show in folder
+// ################################################################################################################
+
+function openPicture(src, title) {
+  // For simplicity, open a new window widget that fills with the chosen image.
+  // You could modify this function to use an existing picture window or modal.
+  const picWindow = document.createElement('div');
+  picWindow.className = 'window';
+  picWindow.style.cssText = 'left: 100px; top: 100px; width: 500px; height: 400px; display: block; z-index: ' + Date.now();
+
+  // Title bar
+  const titleBar = document.createElement('div');
+  titleBar.className = 'title-bar';
+  titleBar.innerHTML = `<span>${title}</span>
+    <div class="window-controls">
+      <button class="minimize" onclick="this.parentNode.parentNode.parentNode.style.display='none'">_</button>
+      <button class="maximize" onclick="alert('Maximize not implemented')">[ ]</button>
+      <button class="close-button" onclick="this.parentNode.parentNode.parentNode.remove()">X</button>
+    </div>`;
+  picWindow.appendChild(titleBar);
+
+  // Content area with full-size image
+  const content = document.createElement('div');
+  content.className = 'content';
+  content.style.cssText = 'padding: 0; overflow: hidden;';
+  const img = document.createElement('img');
+  img.src = src;
+  img.alt = title;
+  img.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
+  content.appendChild(img);
+  picWindow.appendChild(content);
+
+  // Append resizers (you can add these similarly as before)
+  ['resizer-lower-right','resizer-lower-left','resizer-upper-left','resizer-left'].forEach(className => {
+      const resizer = document.createElement('div');
+      resizer.className = 'resizer ' + className;
+      picWindow.appendChild(resizer);
+  });
+
+  // Append to desktop
+  document.querySelector('.desktop').appendChild(picWindow);
+
+  // Optionally, make the new window draggable and resizable
+  makeDraggable(picWindow, titleBar);
+  makeResizable(picWindow);
+}
+
+
+// ################################################################################################################
+
+// Ustawienia – podmień na swoje dane
+const NAS_BASE_URL = 'http://your-nas-ip:5000/webapi/';
+let authToken = 'YOUR_AUTH_TOKEN'; // Token uzyskany przez logowanie do DSM
+
+// Funkcja przesyłania plików do NAS za pomocą API File Station
+function uploadMedia() {
+  const input = document.getElementById('file-input');
+  if (input.files.length === 0) {
+    alert("Wybierz plik do przesłania.");
+    return;
+  }
+  const formData = new FormData();
+  // Przesyłamy do folderu /Public/Uploads – dostosuj ścieżkę, jeśli potrzebujesz
+  formData.append('folder_path', '/Public/Uploads');
+  formData.append('overwrite', 'true');
+  for (let i = 0; i < input.files.length; i++) {
+    formData.append('file', input.files[i]);
+  }
+  
+  const url = `${NAS_BASE_URL}entry.cgi?api=SYNO.FileStation.Upload&version=2&method=upload&folder_path=/Public/Uploads&overwrite=true&_sid=${authToken}`;
+  
+  fetch(url, {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if(data.success) {
+      document.getElementById('upload-status').textContent = 'File uploaded successfully.';
+    } else {
+      document.getElementById('upload-status').textContent = 'Error uploading file.';
+      console.error(data);
+    }
+  })
+  .catch(err => {
+    document.getElementById('upload-status').textContent = 'Error uploading file.';
+    console.error(err);
+  });
+}
+
+// Funkcja ładowania galerii – pobiera listę plików z NAS przy użyciu API File Station
+function loadGallery() {
+  const folderPath = '/Public/Uploads'; // Folder, z którego pobieramy pliki
+  const url = `${NAS_BASE_URL}entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=${encodeURIComponent(folderPath)}&_sid=${authToken}`;
+  
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if(data.success) {
+        const container = document.getElementById('gallery-container');
+        container.innerHTML = '';
+        data.data.files.forEach(file => {
+          // Sprawdzamy, czy plik to obraz lub film
+          if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+            const img = document.createElement('img');
+            // Upewnij się, że Twoje NAS umożliwia publiczny dostęp do tych plików lub odpowiednio skonfiguruj przekierowanie
+            img.src = `http://your-nas-ip:5000/files/Public/Uploads/${encodeURIComponent(file.name)}`;
+            img.alt = file.name;
+            img.style.width = '100px';
+            img.style.margin = '5px';
+            container.appendChild(img);
+          } else if (/\.(mp4|webm|ogg)$/i.test(file.name)) {
+            const video = document.createElement('video');
+            video.src = `http://your-nas-ip:5000/files/Public/Uploads/${encodeURIComponent(file.name)}`;
+            video.controls = true;
+            video.style.width = '150px';
+            video.style.margin = '5px';
+            container.appendChild(video);
+          }
+        });
+      } else {
+        console.error('Błąd pobierania plików', data);
+      }
+    })
+    .catch(err => console.error(err));
+}
