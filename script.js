@@ -2,28 +2,34 @@
 const windowButtons = {};
 
 // Open a window and add a corresponding taskbar button if needed.
-function openWindow(windowId) {
-  const win = document.getElementById(windowId);
+function openWindow(windowId) 
+{
+  const win         = document.getElementById(windowId);
   win.style.display = 'block';
-  win.style.zIndex = Date.now();
-  if (!windowButtons[windowId]) {
+  win.style.zIndex  = Date.now();
+  if (!windowButtons[windowId]) 
+  {
     const titleText = win.querySelector('.title-bar span').textContent;
     createWindowButton(windowId, titleText);
   } else {
     windowButtons[windowId].classList.add('active');
   }
+
+  // Switch to the inbox folder when the email window is opened.
   if(windowId === 'email-window'){
     switchFolder('inbox');
   }
 }
 
 // Create a taskbar button for the window.
-function createWindowButton(windowId, windowTitle) {
-  const btn = document.createElement('button');
-  btn.className = 'window-button active';
+function createWindowButton(windowId, windowTitle) 
+{
+  const btn       = document.createElement('button');
+  btn.className   = 'window-button active';
   btn.textContent = windowTitle;
-  btn.onclick = function() {
-    const win = document.getElementById(windowId);
+  btn.onclick     = function() 
+  {
+    const win     = document.getElementById(windowId);
     if(win.style.display === 'none' || win.style.display === ''){
       win.style.display = 'block';
       win.style.zIndex = Date.now();
@@ -37,11 +43,16 @@ function createWindowButton(windowId, windowTitle) {
   windowButtons[windowId] = btn;
 }
 
+// ############################################################
 // Close, minimize, and maximize functions
-function closeWindow(windowId) {
-  const win = document.getElementById(windowId);
+// ############################################################
+
+function closeWindow(windowId) 
+{
+  const win       = document.getElementById(windowId);
   win.style.display = 'none';
-  if(windowButtons[windowId]) {
+  if(windowButtons[windowId]) 
+  {
     // Remove the button entirely on exit
     windowButtons[windowId].remove();
     delete windowButtons[windowId];
@@ -55,26 +66,30 @@ function minimizeWindow(windowId) {
 
 function maximizeWindow(windowId) {
   const win = document.getElementById(windowId);
-  if(!win.dataset.maximized || win.dataset.maximized === 'false'){
-    win.dataset.originalLeft = win.style.left;
-    win.dataset.originalTop = win.style.top;
-    win.dataset.originalWidth = win.style.width;
-    win.dataset.originalHeight = win.style.height;
-    win.style.left = '0px';
-    win.style.top = '0px';
-    win.style.width = window.innerWidth + 'px';
-    win.style.height = (window.innerHeight - 40) + 'px';
-    win.dataset.maximized = 'true';
+  if(!win.dataset.maximized || win.dataset.maximized === 'false')
+  {
+    win.dataset.originalLeft    = win.style.left;
+    win.dataset.originalTop     = win.style.top;
+    win.dataset.originalWidth   = win.style.width;
+    win.dataset.originalHeight  = win.style.height;
+    win.style.left              = '0px';
+    win.style.top               = '0px';
+    win.style.width             = window.innerWidth + 'px';
+    win.style.height            = (window.innerHeight - 40) + 'px';
+    win.dataset.maximized       = 'true';
   } else {
-    win.style.left = win.dataset.originalLeft;
-    win.style.top = win.dataset.originalTop;
-    win.style.width = win.dataset.originalWidth;
-    win.style.height = win.dataset.originalHeight;
-    win.dataset.maximized = 'false';
+    win.style.left              = win.dataset.originalLeft;
+    win.style.top               = win.dataset.originalTop;
+    win.style.width             = win.dataset.originalWidth;
+    win.style.height            = win.dataset.originalHeight;
+    win.dataset.maximized       = 'false';
   }
 }
 
+// ############################################################
 // Mailto function for Invitation window (kept for compatibility)
+// ############################################################
+
 function sendEmail(confirm) {
   const recipient = "maxgrom97@gmail.com";
   const subject = encodeURIComponent("[Slub separowo] Potwierdzenie obecnosci.");
@@ -89,7 +104,10 @@ function sendEmailMessage() {
   alert("Email has been sent. Congratulations.");
 }
 
+// ############################################################
 // Make a window draggable via its title bar.
+// ############################################################
+
 function makeDraggable(windowEl, handleEl) {
   let offsetX = 0, offsetY = 0, isDragging = false;
   handleEl.addEventListener('mousedown', function(e) {
@@ -116,7 +134,10 @@ function makeDraggable(windowEl, handleEl) {
   });
 }
 
+// ############################################################
 // Make desktop icons draggable and snap to grid
+// ############################################################
+
 function makeIconDraggable(icon) {
   let offsetX, offsetY, startX, startY;
   let dragging = false;
@@ -153,7 +174,183 @@ function makeIconDraggable(icon) {
   });
 }
 
+// ############################################################
+// Pictures show in folder
+// ############################################################
+
+function openPicture(src, title) 
+{
+  // For simplicity, open a new window widget that fills with the chosen image.
+  // You could modify this function to use an existing picture window or modal.
+  const picWindow = document.createElement('div');
+  picWindow.className = 'window';
+  picWindow.style.cssText = 'left: 100px; top: 100px; width: 500px; height: 400px; display: block; z-index: ' + Date.now();
+
+  // Title bar
+  const titleBar = document.createElement('div');
+  titleBar.className = 'title-bar';
+  titleBar.innerHTML = `<span>${title}</span>
+    <div class="window-controls">
+      <button class="minimize" onclick="this.parentNode.parentNode.parentNode.style.display='none'">_</button>
+      <button class="maximize" onclick="alert('Maximize not implemented')">[ ]</button>
+      <button class="close-button" onclick="this.parentNode.parentNode.parentNode.remove()">X</button>
+    </div>`;
+  picWindow.appendChild(titleBar);
+
+  // Content area with full-size image
+  const content = document.createElement('div');
+  content.className = 'content';
+  content.style.cssText = 'padding: 0; overflow: hidden;';
+  const img = document.createElement('img');
+  img.src = src;
+  img.alt = title;
+  img.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
+  content.appendChild(img);
+  picWindow.appendChild(content);
+
+  // Append resizers (you can add these similarly as before)
+  ['resizer-lower-right','resizer-lower-left','resizer-upper-left','resizer-left'].forEach(className => {
+      const resizer = document.createElement('div');
+      resizer.className = 'resizer ' + className;
+      picWindow.appendChild(resizer);
+  });
+
+  // Append to desktop
+  document.querySelector('.desktop').appendChild(picWindow);
+
+  // Optionally, make the new window draggable and resizable
+  makeDraggable(picWindow, titleBar);
+  makeResizable(picWindow);
+}
+
+// ############################################################
+// File upload and gallery functions
+// ############################################################
+
+const NAS_BASE_URL  = 'http://your-nas-ip:5000/webapi/';    // Adres IP NAS i port
+let authToken       = 'YOUR_AUTH_TOKEN';                    // Token uzyskany przez logowanie do DSM
+
+// Funkcja przesyłania plików do NAS za pomocą API File Station
+function uploadMedia() 
+{
+  const input = document.getElementById('file-input');
+  if (input.files.length === 0) {
+    alert("Wybierz plik do przesłania.");
+    return;
+  }
+  const formData = new FormData();
+  // Przesyłamy do folderu /Public/Uploads – dostosuj ścieżkę, jeśli potrzebujesz
+  formData.append('folder_path', '/Public/Uploads');
+  formData.append('overwrite', 'true');
+  for (let i = 0; i < input.files.length; i++) {
+    formData.append('file', input.files[i]);
+  }
+  
+  const url = `${NAS_BASE_URL}entry.cgi?api=SYNO.FileStation.Upload&version=2&method=upload&folder_path=/Public/Uploads&overwrite=true&_sid=${authToken}`;
+  
+  fetch(url, {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if(data.success) {
+      document.getElementById('upload-status').textContent = 'File uploaded successfully.';
+    } else {
+      document.getElementById('upload-status').textContent = 'Error uploading file.';
+      console.error(data);
+    }
+  })
+  .catch(err => {
+    document.getElementById('upload-status').textContent = 'Error uploading file.';
+    console.error(err);
+  });
+}
+
+// Load the gallery from the NAS folder - this function is called when the Gallery icon is clicked  
+function loadGallery() 
+{
+  const folderPath = '/Public/Uploads'; // Folder, z którego pobieramy pliki
+  const url = `${NAS_BASE_URL}entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=${encodeURIComponent(folderPath)}&_sid=${authToken}`;
+  
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if(data.success) {
+        const container = document.getElementById('gallery-container');
+        container.innerHTML = '';
+        data.data.files.forEach(file => {
+          // Sprawdzamy, czy plik to obraz lub film
+          if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+            const img = document.createElement('img');
+            // Upewnij się, że Twoje NAS umożliwia publiczny dostęp do tych plików lub odpowiednio skonfiguruj przekierowanie
+            img.src = `http://your-nas-ip:5000/files/Public/Uploads/${encodeURIComponent(file.name)}`;
+            img.alt = file.name;
+            img.style.width = '100px';
+            img.style.margin = '5px';
+            container.appendChild(img);
+          } else if (/\.(mp4|webm|ogg)$/i.test(file.name)) {
+            const video = document.createElement('video');
+            video.src = `http://your-nas-ip:5000/files/Public/Uploads/${encodeURIComponent(file.name)}`;
+            video.controls = true;
+            video.style.width = '150px';
+            video.style.margin = '5px';
+            container.appendChild(video);
+          }
+        });
+      } else {
+        console.error('Błąd pobierania plików', data);
+      }
+    })
+    .catch(err => console.error(err));
+}
+
+// ############################################################
 // Initialize draggable icons
+// ############################################################
+
+function makeDraggable(windowEl, handleEl) 
+{
+  let offsetX = 0, offsetY = 0, isDragging = false;
+
+  function startDrag(e) {
+    isDragging = true;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const rect = windowEl.getBoundingClientRect();
+    offsetX = clientX - rect.left;
+    offsetY = clientY - rect.top;
+    windowEl.style.zIndex = Date.now();
+    e.preventDefault();
+  }
+
+  function doDrag(e) {
+    if (!isDragging) return;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const desktopRect = document.querySelector('.desktop').getBoundingClientRect();
+    let newLeft = clientX - offsetX - desktopRect.left;
+    let newTop = clientY - offsetY - desktopRect.top;
+    if(newLeft < 0) newLeft = 0;
+    if(newTop < 0) newTop = 0;
+    windowEl.style.left = newLeft + 'px';
+    windowEl.style.top = newTop + 'px';
+  }
+
+  function stopDrag() {
+    isDragging = false;
+  }
+
+  handleEl.addEventListener('mousedown', startDrag);
+  handleEl.addEventListener('touchstart', startDrag);
+  
+  document.addEventListener('mousemove', doDrag);
+  document.addEventListener('touchmove', doDrag);
+  
+  document.addEventListener('mouseup', stopDrag);
+  document.addEventListener('touchend', stopDrag);
+}
+
 document.querySelectorAll('.icon').forEach(function(icon){
   makeIconDraggable(icon);
 });
@@ -194,8 +391,14 @@ makeDraggable(document.getElementById('help-window'), document.getElementById('h
 makeDraggable(document.getElementById('mycomputer-window'), document.getElementById('mycomputer-title'));
 makeDraggable(document.getElementById('picture1-window'), document.getElementById('picture1-title'));
 makeDraggable(document.getElementById('picture2-window'), document.getElementById('picture2-title'));
+makeDraggable(document.getElementById('folder-window'), document.getElementById('folder-title'));
+makeDraggable(document.getElementById('gallery-window'), document.getElementById('gallery-title'));
+makeDraggable(document.getElementById('upload-window'), document.getElementById('upload-title'));
 
+// ############################################################
 // Make windows resizable using the resizer elements
+// ############################################################
+
 function makeResizable(windowEl) {
   let isResizing = false;
   let startX, startY, startWidth, startHeight, startLeft, startTop, currentResizer;
@@ -241,18 +444,23 @@ function makeResizable(windowEl) {
   });
 }
 
+// ############################################################
 // Initialize resizable windows
+// ############################################################
+
 [ 'invitation-window', 'email-window', 'help-window', 
   'mycomputer-window', 'picture1-window', 'picture2-window', 'folder-window',
-  'galery-window', 'upload-window'
-
+  'gallery-window', 'upload-window'
 ].forEach(function(id) {
   if (id) {
     makeResizable(document.getElementById(id));
   }
 });
 
-// Email data for folders
+// ############################################################
+// Initialize email folders
+// ############################################################
+
 const emailData = {
   inbox: [
     {
@@ -280,6 +488,10 @@ const emailData = {
     }
   ]
 };
+
+// ############################################################
+// Switch between email folders
+// ############################################################
 
 function switchFolder(folder) {
   const list = document.getElementById('email-list');
@@ -315,12 +527,18 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
+// ############################################################
 // Toggle Start Menu display (only when clicking the start button)
-const startButton = document.getElementById('start-button');
-const startMenu = document.getElementById('start-menu');
-startButton.addEventListener('click', function(e) {
+// ############################################################
+
+const startButton   = document.getElementById('start-button');
+const startMenu     = document.getElementById('start-menu');
+
+startButton.addEventListener('click', function(e) 
+{
   // Toggle between 'flex' and 'none'
-  if(startMenu.style.display === 'flex') {
+  if(startMenu.style.display === 'flex') 
+  {
     startMenu.style.display = 'none';
   } else {
     startMenu.style.display = 'flex';
@@ -328,60 +546,20 @@ startButton.addEventListener('click', function(e) {
   e.stopPropagation();
 });
 // Hide Start Menu when clicking outside of it.
-document.addEventListener('click', function(e) {
-  if (!startMenu.contains(e.target) && e.target !== startButton) {
+document.addEventListener('click', function(e) 
+{
+  if (!startMenu.contains(e.target) && e.target !== startButton) 
+  {
     startMenu.style.display = 'none';
   }
 });
 
-function makeDraggable(windowEl, handleEl) {
-  let offsetX = 0, offsetY = 0, isDragging = false;
-
-  function startDrag(e) {
-    isDragging = true;
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    const rect = windowEl.getBoundingClientRect();
-    offsetX = clientX - rect.left;
-    offsetY = clientY - rect.top;
-    windowEl.style.zIndex = Date.now();
-    e.preventDefault();
-  }
-
-  function doDrag(e) {
-    if (!isDragging) return;
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    const desktopRect = document.querySelector('.desktop').getBoundingClientRect();
-    let newLeft = clientX - offsetX - desktopRect.left;
-    let newTop = clientY - offsetY - desktopRect.top;
-    if(newLeft < 0) newLeft = 0;
-    if(newTop < 0) newTop = 0;
-    windowEl.style.left = newLeft + 'px';
-    windowEl.style.top = newTop + 'px';
-  }
-
-  function stopDrag() {
-    isDragging = false;
-  }
-
-  handleEl.addEventListener('mousedown', startDrag);
-  handleEl.addEventListener('touchstart', startDrag);
-  
-  document.addEventListener('mousemove', doDrag);
-  document.addEventListener('touchmove', doDrag);
-  
-  document.addEventListener('mouseup', stopDrag);
-  document.addEventListener('touchend', stopDrag);
-}
-
-
-function addIconListener(iconId, windowId) {
+function addIconListener(iconId, windowId) 
+{
   const icon = document.getElementById(iconId);
-  icon.addEventListener('dblclick', () => openWindow(windowId));
+  icon.addEventListener('click', () => openWindow(windowId));
   icon.addEventListener('touchend', () => openWindow(windowId));
 }
-
 
 addIconListener('folder-icon', 'folder-window');
 addIconListener('invitation-icon', 'invitation-window');
@@ -392,129 +570,4 @@ addIconListener('picture2-icon', 'picture2-window');
 addIconListener('gallery-icon', 'gallery-window');
 addIconListener('upload-icon', 'upload-window');
 
-// ################################################################################################################
-// Pictures show in folder
-// ################################################################################################################
-
-function openPicture(src, title) {
-  // For simplicity, open a new window widget that fills with the chosen image.
-  // You could modify this function to use an existing picture window or modal.
-  const picWindow = document.createElement('div');
-  picWindow.className = 'window';
-  picWindow.style.cssText = 'left: 100px; top: 100px; width: 500px; height: 400px; display: block; z-index: ' + Date.now();
-
-  // Title bar
-  const titleBar = document.createElement('div');
-  titleBar.className = 'title-bar';
-  titleBar.innerHTML = `<span>${title}</span>
-    <div class="window-controls">
-      <button class="minimize" onclick="this.parentNode.parentNode.parentNode.style.display='none'">_</button>
-      <button class="maximize" onclick="alert('Maximize not implemented')">[ ]</button>
-      <button class="close-button" onclick="this.parentNode.parentNode.parentNode.remove()">X</button>
-    </div>`;
-  picWindow.appendChild(titleBar);
-
-  // Content area with full-size image
-  const content = document.createElement('div');
-  content.className = 'content';
-  content.style.cssText = 'padding: 0; overflow: hidden;';
-  const img = document.createElement('img');
-  img.src = src;
-  img.alt = title;
-  img.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
-  content.appendChild(img);
-  picWindow.appendChild(content);
-
-  // Append resizers (you can add these similarly as before)
-  ['resizer-lower-right','resizer-lower-left','resizer-upper-left','resizer-left'].forEach(className => {
-      const resizer = document.createElement('div');
-      resizer.className = 'resizer ' + className;
-      picWindow.appendChild(resizer);
-  });
-
-  // Append to desktop
-  document.querySelector('.desktop').appendChild(picWindow);
-
-  // Optionally, make the new window draggable and resizable
-  makeDraggable(picWindow, titleBar);
-  makeResizable(picWindow);
-}
-
-// ################################################################################################################
-
-// Ustawienia – podmień na swoje dane
-const NAS_BASE_URL = 'http://your-nas-ip:5000/webapi/';
-let authToken = 'YOUR_AUTH_TOKEN'; // Token uzyskany przez logowanie do DSM
-
-// Funkcja przesyłania plików do NAS za pomocą API File Station
-function uploadMedia() {
-  const input = document.getElementById('file-input');
-  if (input.files.length === 0) {
-    alert("Wybierz plik do przesłania.");
-    return;
-  }
-  const formData = new FormData();
-  // Przesyłamy do folderu /Public/Uploads – dostosuj ścieżkę, jeśli potrzebujesz
-  formData.append('folder_path', '/Public/Uploads');
-  formData.append('overwrite', 'true');
-  for (let i = 0; i < input.files.length; i++) {
-    formData.append('file', input.files[i]);
-  }
-  
-  const url = `${NAS_BASE_URL}entry.cgi?api=SYNO.FileStation.Upload&version=2&method=upload&folder_path=/Public/Uploads&overwrite=true&_sid=${authToken}`;
-  
-  fetch(url, {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => response.json())
-  .then(data => {
-    if(data.success) {
-      document.getElementById('upload-status').textContent = 'File uploaded successfully.';
-    } else {
-      document.getElementById('upload-status').textContent = 'Error uploading file.';
-      console.error(data);
-    }
-  })
-  .catch(err => {
-    document.getElementById('upload-status').textContent = 'Error uploading file.';
-    console.error(err);
-  });
-}
-
-// Funkcja ładowania galerii – pobiera listę plików z NAS przy użyciu API File Station
-function loadGallery() {
-  const folderPath = '/Public/Uploads'; // Folder, z którego pobieramy pliki
-  const url = `${NAS_BASE_URL}entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=${encodeURIComponent(folderPath)}&_sid=${authToken}`;
-  
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      if(data.success) {
-        const container = document.getElementById('gallery-container');
-        container.innerHTML = '';
-        data.data.files.forEach(file => {
-          // Sprawdzamy, czy plik to obraz lub film
-          if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
-            const img = document.createElement('img');
-            // Upewnij się, że Twoje NAS umożliwia publiczny dostęp do tych plików lub odpowiednio skonfiguruj przekierowanie
-            img.src = `http://your-nas-ip:5000/files/Public/Uploads/${encodeURIComponent(file.name)}`;
-            img.alt = file.name;
-            img.style.width = '100px';
-            img.style.margin = '5px';
-            container.appendChild(img);
-          } else if (/\.(mp4|webm|ogg)$/i.test(file.name)) {
-            const video = document.createElement('video');
-            video.src = `http://your-nas-ip:5000/files/Public/Uploads/${encodeURIComponent(file.name)}`;
-            video.controls = true;
-            video.style.width = '150px';
-            video.style.margin = '5px';
-            container.appendChild(video);
-          }
-        });
-      } else {
-        console.error('Błąd pobierania plików', data);
-      }
-    })
-    .catch(err => console.error(err));
-}
+// ############################################################
