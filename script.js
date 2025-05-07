@@ -700,27 +700,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Start Menu ---
   function initStartMenu() {
-      startButton.addEventListener('click', (e) => { toggleStartMenu(); e.stopPropagation(); });
-      document.addEventListener('click', (e) => {
-          if (startMenu.classList.contains('active') && !startMenu.contains(e.target) && e.target !== startButton) { closeStartMenu(); }
-      });
-       startMenu.addEventListener('click', (e) => {
-           e.stopPropagation();
-           const linkItem = e.target.closest('a');
-           if (linkItem && !linkItem.closest('li.has-submenu')) {
-              if (linkItem.getAttribute('onclick')?.includes('openWindow')) { closeStartMenu(); }
-           }
-       });
-  }
-  function toggleStartMenu() {
-      const isActive = startMenu.classList.toggle('active');
-      startButton.classList.toggle('active', isActive); startButton.classList.toggle('button-border-lowered', isActive); startButton.classList.toggle('button-border-raised', !isActive);
-      if (isActive) { deselectAllIcons(); hideContextMenu(); }
-  }
-  function closeStartMenu() {
-      startMenu.classList.remove('active'); startButton.classList.remove('active');
-      startButton.classList.remove('button-border-lowered'); startButton.classList.add('button-border-raised');
-  }
+    startButton.addEventListener('click', (e) => {
+        toggleStartMenu();
+        e.stopPropagation(); // Prevent desktop click listener from closing immediately
+    });
+
+    // Close menu if clicking outside
+    document.addEventListener('click', (e) => {
+        // Check if startMenu is active AND the click was outside BOTH the menu and the start button
+        if (startMenu.classList.contains('active') && !startMenu.contains(e.target) && e.target !== startButton && !startButton.contains(e.target) /* check if click was on image inside button */) {
+            closeStartMenu();
+        }
+    });
+    // Prevent clicks inside the menu from closing it via the document listener
+     startMenu.addEventListener('click', (e) => {
+         e.stopPropagation();
+         // If a direct link (not submenu trigger) is clicked, close the menu
+         const linkItem = e.target.closest('a');
+         if (linkItem && !linkItem.closest('li.has-submenu')) {
+            // If the link has an onclick that opens a window, close the start menu
+            if (linkItem.getAttribute('onclick')?.includes('openWindow')) {
+                closeStartMenu();
+            }
+            // For actual hrefs that navigate away, the menu will close naturally.
+            // If it's an href="#" and an onclick that does something else, it will also close.
+         }
+     });
+}
+
+function toggleStartMenu() {
+    const isActive = startMenu.classList.toggle('active');
+    startButton.classList.toggle('active', isActive); // Toggle button pressed state
+    startButton.classList.toggle('button-border-lowered', isActive);
+    startButton.classList.toggle('button-border-raised', !isActive);
+    if (isActive) {
+      deselectAllIcons(); // Deselect desktop icons when opening start menu
+      hideContextMenu();  // Hide context menu if it's open
+    }
+}
+
+function closeStartMenu() {
+    startMenu.classList.remove('active');
+    startButton.classList.remove('active');
+    startButton.classList.remove('button-border-lowered');
+    startButton.classList.add('button-border-raised');
+}
 
   // --- Clock ---
   function initClock() {

@@ -4,7 +4,9 @@
     --win95-dark-gray: #808080;
     --win95-white: #FFFFFF;
     --win95-black: #000000;
-    --win95-blue: #000080;
+    --win95-blue: #000080; /* Active window title bar, selections */
+    --win95-inactive-blue-dark: #0A246A; /* Darker part of inactive title gradient (example) */
+    --win95-inactive-blue-light: #808080; /* Lighter part for inactive (grayish) */
     --win95-button-face: var(--win95-gray);
     --win95-button-shadow: var(--win95-dark-gray);
     --win95-button-highlight: var(--win95-white);
@@ -16,10 +18,10 @@ body {
     margin: 0;
     padding: 0;
     background: #008080; /* Windows 95 teal background */
-    font-family: "Tahoma", "MS Sans Serif", Geneva, sans-serif; /* Tahoma is closer */
-    font-size: 12px; /* Base font size */
+    font-family: "Tahoma", "MS Sans Serif", "Arial", sans-serif; /* Prioritize Tahoma, fallback to common sans-serifs */
+    font-size: 12px;
     user-select: none;
-    overflow: hidden;
+    overflow: hidden; /* Prevent body scrollbars, individual elements handle their own */
     color: var(--win95-black);
 }
 
@@ -27,39 +29,46 @@ body {
     position: relative;
     width: 100vw;
     height: 100vh;
-    background: url("") no-repeat center center; /* Add your background image if desired */
-    background-size: cover;
-    overflow: hidden; /* Prevent scrollbars on desktop */
+    /* Optional: Add your wedding-themed background image here */
+    /* background: url("path/to/your/wedding_background.jpg") no-repeat center center; */
+    /* background-size: cover; */
+    overflow: hidden; /* Prevent scrollbars on desktop itself */
 }
 
 /* --- Standard Win95 Borders --- */
 .button-border-raised {
-    border: 1px solid var(--win95-black);
+    border-style: solid;
+    border-width: 1px;
     border-top-color: var(--win95-button-highlight);
     border-left-color: var(--win95-button-highlight);
     border-right-color: var(--win95-button-shadow);
     border-bottom-color: var(--win95-button-shadow);
-    box-shadow: inset 1px 1px 0px 0px var(--win95-gray); /* Inner light edge */
+    box-shadow: inset 1px 1px 0 0 var(--win95-button-face), /* Inner face color */
+                1px 1px 0 0 var(--win95-black); /* Outer slight dark pixel for definition, optional */
 }
 .button-border-lowered {
-    border: 1px solid var(--win95-black);
+    border-style: solid;
+    border-width: 1px;
     border-top-color: var(--win95-button-shadow);
     border-left-color: var(--win95-button-shadow);
     border-right-color: var(--win95-button-highlight);
     border-bottom-color: var(--win95-button-highlight);
-     box-shadow: inset 1px 1px 0px 0px #dfdfdf; /* Inner dark edge */
+    box-shadow: inset 1px 1px 0 0 #A0A0A0; /* Inner dark edge */
 }
-.window-border {
-    border: 1px solid var(--win95-black);
-    border-top: 1px solid var(--win95-white);
-    border-left: 1px solid var(--win95-white);
-    box-shadow: 1px 1px 0 0 var(--win95-dark-gray); /* Outer shadow */
+.window-border { /* For general window frames */
+    border: 2px solid var(--win95-gray); /* Main frame */
+    border-top-color: var(--win95-button-highlight);
+    border-left-color: var(--win95-button-highlight);
+    border-right-color: var(--win95-button-shadow);
+    border-bottom-color: var(--win95-button-shadow);
+    /* Add a 1px inner black line for depth if desired, like real Win95 */
+    /* box-shadow: inset 1px 1px 0 0 var(--win95-black), inset -1px -1px 0 0 var(--win95-black); */
 }
-.content-border-sunken {
+.content-border-sunken { /* For sunken elements like text inputs, iframe containers */
      border: 1px solid var(--win95-white);
      border-top-color: var(--win95-dark-gray);
      border-left-color: var(--win95-dark-gray);
-     box-shadow: inset 1px 1px 0 0 #A0A0A0;
+     box-shadow: inset 1px 1px 0 0 #A0A0A0; /* Slightly darker inner shadow */
 }
 
 
@@ -68,31 +77,33 @@ body {
     width: var(--icon-grid-size);
     padding: 5px 0;
     text-align: center;
-    color: white;
+    color: white; /* Text color for desktop icons */
     cursor: pointer;
-    position: absolute; /* Will be overridden for mobile */
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 11px;
-    text-shadow: 1px 1px 2px var(--win95-black);
+    text-shadow: 1px 1px 1px var(--win95-black); /* Shadow for readability on various backgrounds */
+    box-sizing: border-box;
 }
-.icon .icon-img { /* Renamed from img to .icon-img to avoid conflict */
+.icon .icon-img {
     width: 32px;
     height: 32px;
     margin-bottom: 4px;
     image-rendering: pixelated; /* Keep icons crisp */
 }
-.icon div {
-    background-color: transparent; /* Default */
+.icon div { /* Text label under icon */
+    background-color: transparent;
     padding: 1px 3px;
-    word-wrap: break-word;
-    max-width: 100%;
+    word-wrap: break-word; /* Allow long names to wrap */
+    max-width: calc(var(--icon-grid-size) - 10px); /* Ensure text fits within icon bounds */
+    line-height: 1.2;
 }
-.icon.selected div { /* Style when icon is selected */
+.icon.selected div {
     background-color: var(--win95-blue);
     color: white;
-    outline: 1px dotted var(--win95-white); /* Selection rectangle */
+    outline: 1px dotted var(--win95-white);
     text-shadow: none;
 }
 
@@ -110,7 +121,6 @@ body {
 /* Row 2 */
 #gallery-icon    { top: calc(2 * var(--icon-grid-size)); left: 0; }
 #ie-icon         { top: calc(2 * var(--icon-grid-size)); left: var(--icon-grid-size); }
-/* Add more icon positions as needed */
 
 
 /* Taskbar */
@@ -119,14 +129,14 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 30px; /* Standard Win95 taskbar height */
+    height: 30px;
     background: var(--win95-gray);
     border-top: 1px solid var(--win95-button-highlight);
     display: flex;
-    align-items: stretch; /* Stretch items vertically */
+    align-items: stretch;
     padding: 2px;
     box-sizing: border-box;
-    z-index: 10000; /* Above windows */
+    z-index: 10000;
 }
 
 .start-button {
@@ -140,7 +150,7 @@ body {
     font-size: 12px;
     min-width: 60px;
     box-sizing: border-box;
-    height: 100%; /* Fill taskbar height */
+    height: 100%;
     white-space: nowrap;
 }
 .start-button img {
@@ -149,35 +159,33 @@ body {
     margin-right: 4px;
     image-rendering: pixelated;
 }
-.start-button:active, .start-button.active {
-     /* Sunken effect */
-    padding-top: 1px; /* Shift text down slightly */
+.start-button.active, .start-button:active {
+    padding-top: 1px;
     padding-left: 9px;
 }
-.start-button:active img, .start-button.active img {
+.start-button.active img, .start-button:active img {
      margin-top: 1px;
      margin-left: 1px;
 }
 
-
 #window-buttons-container {
-    flex-grow: 1; /* Take remaining space */
+    flex-grow: 1;
     display: flex;
     align-items: stretch;
-    overflow: hidden; /* Hide overflowing buttons */
+    overflow: hidden;
     padding: 0 2px;
 }
 
 .window-button {
     background: var(--win95-button-face);
-    border: 1px solid transparent; /* Base state */
+    border: 1px solid transparent; /* Base, borders applied by class */
     margin-right: 2px;
     padding: 2px 8px;
     cursor: pointer;
     font-family: inherit;
     font-size: 11px;
-    min-width: 80px; /* Minimum width */
-    max-width: 150px; /* Maximum width */
+    min-width: 80px;
+    max-width: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -185,34 +193,33 @@ body {
     align-items: center;
     justify-content: flex-start;
     box-sizing: border-box;
-    height: 100%; /* Fill taskbar height */
+    height: 100%;
 }
-.window-button img { /* Icon in taskbar button */
+.window-button img {
     width: 16px;
     height: 16px;
     margin-right: 4px;
     image-rendering: pixelated;
 }
-
-.window-button.active { /* Active/focused window */
+.window-button.active {
     font-weight: bold;
 }
-.window-button.minimized { /* Minimized window */
-    /* No specific style needed unless you want distinction */
-}
+/* .window-button.minimized { } /* No specific style needed unless desired */
 
 .tray {
-    margin-left: auto;
+    margin-left: auto; /* Pushes to the right */
     display: flex;
     align-items: center;
     padding: 0 4px;
+    /* Sunken tray effect */
     border-left: 1px solid var(--win95-button-shadow);
     border-top: 1px solid var(--win95-button-highlight);
-    box-shadow: inset 1px 1px 0 0 var(--win95-button-highlight), inset -1px 0 0 0 var(--win95-button-shadow);
+    box-shadow: inset 1px 1px 0 0 var(--win95-button-highlight), /* Inner top/left highlight */
+                inset -1px 0 0 0 var(--win95-button-shadow); /* Inner right shadow (optional) */
     height: 100%;
     box-sizing: border-box;
 }
-.tray img {
+.tray img { /* Icons in tray */
     width: 16px;
     height: 16px;
     margin: 0 3px;
@@ -226,126 +233,205 @@ body {
 /* Start Menu */
 .start-menu {
     position: absolute;
-    bottom: 32px; /* Above taskbar */
+    bottom: 32px; /* Above taskbar + its padding */
     left: 2px;
-    width: 180px; /* Narrower */
+    width: 200px; /* Adjusted width */
     background: var(--win95-gray);
-    z-index: 9999; /* Below taskbar but above windows */
-    display: none; /* Initially hidden */
-    flex-direction: row;
-    padding: 1px; /* Outer padding */
+    z-index: 9999;
+    display: none; /* Initially hidden, JS toggles to flex */
+    flex-direction: row; /* Sidebar and items side-by-side */
+    padding: 1px; /* For outer raised border effect */
+    border-style: solid; /* For the raised look */
+    border-width: 1px;
+    border-top-color: var(--win95-button-highlight);
+    border-left-color: var(--win95-button-highlight);
+    border-right-color: var(--win95-button-shadow);
+    border-bottom-color: var(--win95-button-shadow);
+    box-shadow: 1px 1px 0 0 var(--win95-black); /* Outer shadow */
+}
+.start-menu.active {
+    display: flex;
 }
 
 .start-menu-sidebar {
-    width: 25px;
-    background: var(--win95-dark-gray);
-    color: var(--win95-gray);
+    width: 28px; /* Slightly wider for text */
+    background: var(--win95-blue); /* Win95 start menu often had blue sidebar */
+    color: var(--win95-white);
     writing-mode: vertical-lr;
-    transform: rotate(180deg); /* This flips the text correctly for vertical display */
+    transform: rotate(180deg);
     text-align: center;
     font-weight: bold;
-    font-size: 16px; /* Slightly smaller to prevent overflow */
-    padding: 10px 0; /* Vertical padding */
+    font-size: 18px; /* Adjusted */
+    padding: 10px 0;
     display: flex;
-    align-items: center; /* Center text horizontally in the vertical bar */
-    justify-content: center; /* Center text vertically in the vertical bar */
+    align-items: center;
+    justify-content: center;
     text-transform: uppercase;
     letter-spacing: 1px;
-    overflow: hidden; /* Hide overflow if text is still too big for the bar */
+    flex-shrink: 0; /* Don't shrink sidebar */
 }
 .start-menu-sidebar span {
-    display: block;
-    /* padding-left: 3px; */ /* This might shift text too much in vertical mode; adjust or remove */
-    white-space: nowrap; /* Keep it on one line vertically */
-    /* Add transform for fine-tuning if needed: */
-    /* transform: translateY(5px); /* Example: shift down slightly */
+     display: block;
+     padding-left: 2px; /* Adjust vertical text positioning */
+     white-space: nowrap;
 }
 
+.start-menu-items {
+    flex: 1; /* Take remaining space */
+    background: var(--win95-gray);
+    padding: 2px; /* Inner padding around items */
+    overflow: hidden; /* Prevent items breaking out */
+}
 .start-menu-items ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 .start-menu-items li {
-    padding: 4px 5px 4px 28px; /* Increased top/bottom padding, increased left for icon */
+    padding: 4px 8px 4px 30px; /* Space for icon, increased vertical padding */
     position: relative;
-    white-space: nowrap; /* Keep this, but ensure menu is wide enough or text is short */
+    white-space: nowrap;
     cursor: pointer;
     display: flex;
     align-items: center;
     font-size: 12px;
-    line-height: 1.4; /* Added line-height for better vertical spacing if text wraps (if nowrap is removed) */
-                      /* Or just rely on padding if nowrap is kept */
-    min-height: 20px; /* Ensure a minimum height for each item */
+    min-height: 22px; /* Ensures items have some height */
+    box-sizing: border-box;
 }
 .start-menu-items li img {
     position: absolute;
-    left: 6px; /* Adjusted for increased padding */
+    left: 6px; /* Position icon */
     top: 50%;
     transform: translateY(-50%);
     width: 16px;
     height: 16px;
     image-rendering: pixelated;
 }
+.start-menu-items li span { /* The text label */
+    flex-grow: 1;
+    overflow: hidden; /* Prevent long text from breaking layout */
+    text-overflow: ellipsis; /* Show ... for long text */
+}
+.start-menu-items li.has-submenu::after { /* Arrow for submenu */
+    content: '►';
+    position: absolute;
+    right: 8px; /* Position arrow */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 9px;
+}
+.start-menu-items li a { /* Make links fill the li */
+    text-decoration: none;
+    color: inherit;
+    display: flex; /* Ensure icon and span align if 'a' is used */
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+/* .start-menu-items li a span { flex-grow: 1; } /* Already handled by li span */
+
+.start-menu-items li:hover,
+.start-menu-items li a:hover { /* For both li and a inside li */
+    background-color: var(--win95-blue);
+    color: white;
+}
+/* Submenus */
+.start-menu-items li ul {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -3px; /* Align with parent item's top border */
+    background: var(--win95-gray);
+    z-index: 1500; /* Above other start menu items */
+    min-width: 160px; /* Width for submenus */
+    padding: 1px; /* For border effect */
+    border-style: solid; /* Same border as main menu */
+    border-width: 1px;
+    border-top-color: var(--win95-button-highlight);
+    border-left-color: var(--win95-button-highlight);
+    border-right-color: var(--win95-button-shadow);
+    border-bottom-color: var(--win95-button-shadow);
+    box-shadow: 1px 1px 0 0 var(--win95-black);
+}
+.start-menu-items li:hover > ul {
+    display: block;
+}
+.start-menu-items li ul li {
+    padding-left: 30px; /* Indent submenu items */
+}
+/* .start-menu-items li ul li img { left: 6px; } /* Icon position already set by general li img */
+
+.start-menu-items li.separator {
+    padding: 0; /* Remove padding for separator line */
+    min-height: 0; /* No min height needed */
+    margin: 3px 2px; /* Margin around separator */
+}
+.start-menu-items li.separator hr {
+    border: none;
+    border-top: 1px solid var(--win95-button-shadow);
+    border-bottom: 1px solid var(--win95-button-highlight);
+    margin: 0; /* Remove default hr margin */
+}
+
 
 /* Windows (Application Windows) */
 .window {
     position: absolute;
-    width: 500px; /* Default size */
+    display: none; /* Hidden by default, JS changes to 'flex' */
+    flex-direction: column; /* Stack title, menu, content */
+    width: 500px;
     height: 400px;
     background: var(--win95-gray);
-    box-shadow: 2px 2px 0 #555; /* More subtle shadow */
-    display: none; /* Hidden by default */
-    z-index: 50; /* Base z-index */
-    overflow: hidden; /* Prevent content spilling before resize */
-    min-width: 150px; /* Prevent making too small */
-    min-height: 100px;
-    display: flex;
-    flex-direction: column;
+    /* Win95 had a 2px border, then a 1px black line, then content */
+    /* Achieved by .window-border and then inner elements manage their own borders */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* Softer shadow for modern feel, or use Win95 style */
+    /* box-shadow: 1px 1px 0 0 var(--win95-black), 2px 2px 0 0 var(--win95-black); /* More authentic pixel shadow */
+    z-index: 50;
+    overflow: hidden; /* Important! Prevents content spill during resize/drag */
+    min-width: 200px;
+    min-height: 150px;
 }
-.window.active {
-    z-index: 100; /* Bring active window to front */
+.window.active .title-bar { /* Active window title bar */
+    background: linear-gradient(to right, var(--win95-blue), #A6CAF0);
+    color: white;
+}
+.window:not(.active) .title-bar { /* Inactive window title bar */
+     background: linear-gradient(to right, var(--win95-inactive-blue-light), #C0C0C0); /* Gray gradient */
+     color: #DFDFDF; /* Dim text */
 }
 .window.maximized {
     left: 0 !important;
     top: 0 !important;
     width: 100vw !important;
-    height: calc(100vh - 30px) !important; /* Full screen minus taskbar */
+    height: calc(100vh - 30px) !important; /* Full screen minus taskbar height */
     box-shadow: none;
-    border: none;
+    border: none; /* Maximized usually has no outer border */
 }
 
 .title-bar {
-    background: linear-gradient(to right, var(--win95-blue), #A6CAF0); /* Gradient title bar */
-    color: white;
     padding: 3px 4px;
-    cursor: grab; /* Indicate draggable */
+    cursor: grab;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 12px;
     font-weight: bold;
-    height: 20px; /* Fixed height */
-    flex-shrink: 0; /* Don't shrink title bar */
+    height: 20px;
+    flex-shrink: 0; /* Prevent shrinking */
     user-select: none;
-    border-bottom: 1px solid var(--win95-black); /* Separator */
+    /* border-bottom: 1px solid var(--win95-black); /* Separator below title bar, optional */
 }
 .title-bar:active {
     cursor: grabbing;
-}
-/* Inactive window title bar */
-.window:not(.active) .title-bar {
-     background: linear-gradient(to right, #7F7F7F, #C0C0C0); /* Gray gradient */
-     color: #C0C0C0; /* Dim text */
 }
 .title-bar-icon {
     width: 16px;
     height: 16px;
     margin-right: 4px;
-    vertical-align: middle;
+    vertical-align: middle; /* Aligns with text better */
     image-rendering: pixelated;
 }
-.title-bar span {
+.title-bar span { /* Window title text */
     flex-grow: 1;
     white-space: nowrap;
     overflow: hidden;
@@ -359,25 +445,25 @@ body {
 }
 .window-controls button {
     background: var(--win95-gray);
-    border: none; /* Use custom border */
+    border: none; /* Use button-border-raised/lowered */
     cursor: pointer;
     margin-left: 2px;
     padding: 0;
-    width: 18px;  /* Or adjust based on symbol size */
-    height: 16px; /* Or adjust */
-    /* font-family: "Marlett", "Webdings"; */ /* Consider removing if Unicode is primary */
-    font-size: 12px; /* May need adjustment for specific Unicode chars */
-    line-height: 14px; /* Adjust for vertical centering of symbols */
+    width: 18px;  /* Adjust if symbols are too wide/narrow */
+    height: 16px; /* Adjust if symbols are too tall/short */
+    font-size: 10px; /* Adjusted for common Unicode symbols, may need tweaking */
+    line-height: 16px; /* To center symbols vertically in the button */
     text-align: center;
-    font-weight: normal; /* Some symbols are inherently bold */
+    font-weight: normal; /* Some symbols are bold by default */
     color: var(--win95-black);
-    display: flex; /* For better centering if needed */
-    align-items: center; /* For better centering if needed */
-    justify-content: center; /* For better centering if needed */
+    display: flex; /* For centering symbols if needed */
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
-.window-controls button:active {
-    padding-top: 1px;
-    padding-left: 1px;
+.window-controls button:active { /* For button press effect */
+    padding-top: 1px; /* Shift symbol down */
+    padding-left: 1px; /* Shift symbol right */
 }
 
 
@@ -386,15 +472,17 @@ body {
     padding: 1px 5px;
     display: flex;
     font-size: 12px;
-    flex-shrink: 0;
-    border-bottom: 1px solid var(--win95-button-highlight);
-    box-shadow: 0 1px 0 0 var(--win95-button-shadow);
+    flex-shrink: 0; /* Prevent shrinking */
+    border-bottom: 1px solid var(--win95-button-shadow); /* Sunken line below menu */
+    box-shadow: 0 1px 0 0 var(--win95-button-highlight); /* Highlight above the sunken line */
+    height: 21px; /* Typical menu bar height */
+    align-items: center;
 }
 .menu-item {
     margin-right: 10px;
     cursor: pointer;
     position: relative;
-    padding: 2px 4px;
+    padding: 2px 6px; /* Padding for menu items */
 }
 .menu-item u { /* Underlined accelerator keys */
     text-decoration: underline;
@@ -407,17 +495,24 @@ body {
     display: none;
     position: absolute;
     background: var(--win95-gray);
-    z-index: 2100; /* Above window content */
-    top: 100%;
+    z-index: 2100; /* Above window content and other elements */
+    top: 100%; /* Position below menu item */
     left: 0;
-    min-width: 100px;
-    padding: 1px;
+    min-width: 120px; /* Min width for dropdown */
+    padding: 1px; /* For border effect */
+    border-style: solid;
+    border-width: 1px;
+    border-top-color: var(--win95-button-highlight);
+    border-left-color: var(--win95-button-highlight);
+    border-right-color: var(--win95-button-shadow);
+    border-bottom-color: var(--win95-button-shadow);
+    box-shadow: 1px 1px 0 0 var(--win95-black); /* Outer shadow for dropdown */
 }
 .menu-item:hover .dropdown-menu {
     display: block;
 }
 .dropdown-item {
-    padding: 3px 10px 3px 25px; /* Space for potential icon */
+    padding: 3px 10px 3px 25px; /* Space for potential icon/check mark */
     cursor: pointer;
     font-size: 12px;
     position: relative;
@@ -430,21 +525,30 @@ body {
 
 
 .content {
-    padding: 10px;
+    padding: 10px; /* Default padding */
     background: var(--win95-white); /* Usually white content area */
     flex-grow: 1; /* Take remaining space */
-    overflow: auto; /* Allow scrolling if needed */
+    overflow: auto; /* Allow scrolling if content overflows */
     font-size: 12px;
     color: var(--win95-black);
-    position: relative; /* For absolute positioned elements inside */
+    position: relative;
+    /* Sunken border for content area (typical Win95 look) */
+    border: 1px solid;
+    border-top-color: var(--win95-button-shadow);
+    border-left-color: var(--win95-button-shadow);
+    border-right-color: var(--win95-button-highlight);
+    border-bottom-color: var(--win95-button-highlight);
+    margin: 2px; /* Margin to show window background around content */
 }
-.content.image-content {
+.content.image-content { /* For windows displaying a single image */
     padding: 0;
-    display: flex; /* Center image */
+    display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Hide parts of image if window too small */
+    overflow: hidden;
     background: var(--win95-dark-gray); /* Background behind image */
+    border: none; /* Image content often has no extra border */
+    margin: 0; /* No margin for full image bleed */
 }
 .content.image-content img {
     max-width: 100%;
@@ -457,50 +561,55 @@ body {
 .resizer {
     width: 8px;
     height: 8px;
-    background: transparent;
+    background: transparent; /* Invisible, rely on cursor */
     position: absolute;
-    z-index: 110; /* Above content */
+    z-index: 110; /* Above content, below title bar if it overlaps */
+    display: none; /* JS will show them */
 }
-.resizer-n  { top: -3px; left: 50%; transform: translateX(-50%); cursor: n-resize; height: 6px; width: calc(100% - 10px); }
-.resizer-ne { top: -3px; right: -3px; cursor: ne-resize; }
-.resizer-e  { top: 50%; right: -3px; transform: translateY(-50%); cursor: e-resize; width: 6px; height: calc(100% - 10px);}
-.resizer-se { bottom: -3px; right: -3px; cursor: se-resize; }
-.resizer-s  { bottom: -3px; left: 50%; transform: translateX(-50%); cursor: s-resize; height: 6px; width: calc(100% - 10px);}
-.resizer-sw { bottom: -3px; left: -3px; cursor: sw-resize; }
-.resizer-w  { top: 50%; left: -3px; transform: translateY(-50%); cursor: w-resize; width: 6px; height: calc(100% - 10px);}
-.resizer-nw { top: -3px; left: -3px; cursor: nw-resize; }
+.resizer-n  { top: -4px; left: 50%; transform: translateX(-50%); cursor: n-resize; height: 8px; width: calc(100% - 10px); }
+.resizer-ne { top: -4px; right: -4px; cursor: ne-resize; }
+.resizer-e  { top: 50%; right: -4px; transform: translateY(-50%); cursor: e-resize; width: 8px; height: calc(100% - 10px);}
+.resizer-se { bottom: -4px; right: -4px; cursor: se-resize; }
+.resizer-s  { bottom: -4px; left: 50%; transform: translateX(-50%); cursor: s-resize; height: 8px; width: calc(100% - 10px);}
+.resizer-sw { bottom: -4px; left: -4px; cursor: sw-resize; }
+.resizer-w  { top: 50%; left: -4px; transform: translateY(-50%); cursor: w-resize; width: 8px; height: calc(100% - 10px);}
+.resizer-nw { top: -4px; left: -4px; cursor: nw-resize; }
 
 
 /* Email Window Specific Styles */
-.email-container {
+.email-container { /* Inside email-window .content */
     display: flex;
-    height: calc(100% - 20px - 20px); /* Adjust based on title/menu bar heights */
-    flex-grow: 1;
+    height: 100%; /* Fill the .content area */
+    padding: 0; /* Override .content padding */
+    margin: -2px; /* Counteract .content margin to use its border */
+    border: none; /* Email container itself doesn't need border if .content has it */
 }
 .email-nav {
     width: 150px;
     flex-shrink: 0;
-    border-right: 1px solid var(--win95-button-shadow);
-    border-top: 1px solid var(--win95-button-highlight); /* Subtle inset */
+    border-right: 1px solid var(--win95-button-shadow); /* Sunken effect part 1 */
+    /* border-top: 1px solid var(--win95-button-highlight); */ /* Subtle inset */
     background: var(--win95-gray);
     padding: 5px;
     overflow-y: auto;
+    box-sizing: border-box;
 }
 .email-nav .folder {
     padding: 3px 5px;
     cursor: pointer;
-    border: 1px solid transparent;
+    border: 1px solid transparent; /* For dotted selection border */
     margin-bottom: 3px;
     display: flex;
     align-items: center;
     font-size: 11px;
+    white-space: nowrap;
 }
 .email-nav .folder img {
     width: 16px; height: 16px; margin-right: 5px; image-rendering: pixelated;
 }
 .email-nav .folder.active {
     border: 1px dotted var(--win95-black);
-    background-color: #e0e0e0; /* Slightly different gray when selected */
+    background-color: #e0e0e0;
 }
 .email-nav .folder:not(.active):hover {
     background: #d0d0d0;
@@ -511,23 +620,32 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Prevent internal scrollbars */
-    background: var(--win95-white);
+    overflow: hidden;
+    background: var(--win95-white); /* Main content area typically white */
 }
-.email-list {
+.email-list { /* Top pane for email subjects */
     padding: 5px;
-    height: 40%; /* Percentage of the main email area */
+    height: 40%;
     overflow-y: auto;
     flex-shrink: 0;
+    border-bottom: 1px solid var(--win95-button-shadow); /* Separator */
+    box-shadow: 0 1px 0 0 var(--win95-button-highlight); /* Highlight for separator */
 }
-.email-content {
-    padding: 10px;
-    flex: 1; /* Takes remaining space */
+.email-content { /* Bottom pane for email body */
+    padding: 0; /* Inner content will have its own padding */
+    flex: 1;
     overflow-y: auto;
-    white-space: pre-wrap; /* Preserve line breaks in email content */
-    border-top: 1px solid var(--win95-button-shadow);
-    box-shadow: inset 0 1px 0 0 var(--win95-button-highlight);
+    /* white-space: pre-wrap; /* JS handles newlines if needed */
 }
+.email-content > div { /* Wrapper for subject/body in displayEmailContent */
+    padding: 10px;
+}
+.email-content > div[style*="border-bottom"] { /* Subject/from part */
+    padding: 5px 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+
 .email-item {
     padding: 3px 5px;
     border-bottom: 1px solid #eee;
@@ -560,48 +678,55 @@ body {
     text-align: center;
     width: 60px;
     cursor: pointer;
+    padding: 5px;
 }
 .drive img {
     width: 32px;
     height: 32px;
     margin-bottom: 5px;
 }
-.drive:hover div {
+.drive:hover div, .drive.selected div { /* Add .selected if you implement selection for drives */
      background-color: var(--win95-blue);
      color: white;
+     outline: 1px dotted var(--win95-white);
 }
 
-/* Folder Window */
+/* Folder Window (Photos) */
 .folder-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 10px; /* Spacing between items */
     padding: 10px;
+    justify-content: flex-start; /* Align items to the start */
 }
 .folder-item {
     text-align: center;
     cursor: pointer;
-    width: 80px; /* Fixed width for items */
+    width: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 5px; /* Padding inside the item box */
+    box-sizing: border-box;
 }
-.folder-item img {
+.folder-item img { /* Thumbnail image */
     width: 60px;
     height: 60px;
-    object-fit: cover;
+    object-fit: cover; /* Cover the area, might crop */
     margin-bottom: 5px;
-    border: 1px solid var(--win95-dark-gray);
+    border: 1px solid var(--win95-dark-gray); /* Border around thumbnail */
 }
-.folder-item div {
+.folder-item div { /* Text label */
     font-size: 11px;
     word-wrap: break-word;
     width: 100%;
-    padding: 1px 3px;
+    padding: 1px 3px; /* Padding for text label background on hover */
+    line-height: 1.2;
 }
-.folder-item:hover div {
+.folder-item:hover div, .folder-item.selected div { /* Add .selected if implemented */
      background-color: var(--win95-blue);
      color: white;
+     outline: 1px dotted var(--win95-white);
 }
 
 /* Internet Explorer Specific */
@@ -612,79 +737,116 @@ body {
     align-items: center;
     gap: 5px;
     border-bottom: 1px solid var(--win95-button-shadow);
-    box-shadow: 0 1px 0 0 var(--win95-button-highlight);
+    box-shadow: 0 1px 0 0 var(--win95-button-highlight); /* Classic IE toolbar separator */
     flex-shrink: 0;
+    height: 28px; /* Fixed height for toolbar */
+    box-sizing: border-box;
 }
 .ie-toolbar label {
     font-size: 11px;
+    margin-right: 3px;
 }
 .ie-toolbar input[type="text"] {
     flex-grow: 1;
     padding: 2px 4px;
     font-size: 12px;
+    height: 20px; /* Match button height roughly */
+    box-sizing: border-box;
+    /* Sunken effect for input */
+    border: 1px solid var(--win95-white);
+    border-top-color: var(--win95-dark-gray);
+    border-left-color: var(--win95-dark-gray);
+    box-shadow: inset 1px 1px 0 0 #A0A0A0;
 }
 .ie-toolbar button {
      padding: 1px 6px;
      font-size: 11px;
+     height: 20px; /* Match input height */
+     line-height: 1; /* Adjust for button text */
 }
-.ie-content {
+.ie-content { /* Container for the iframe */
     padding: 0;
-    overflow: hidden; /* Let iframe handle scrolling */
+    overflow: hidden;
     flex-grow: 1;
-    border: 1px solid var(--win95-dark-gray); /* Border around iframe */
-    margin: 2px; /* Space around iframe */
+    /* Sunken border for iframe area */
+    border: 1px solid var(--win95-white);
+    border-top-color: var(--win95-dark-gray);
+    border-left-color: var(--win95-dark-gray);
+    box-shadow: inset 1px 1px 0 0 #A0A0A0;
+    margin: 2px; /* Space around iframe to show window background */
 }
 #ie-iframe {
     width: 100%;
     height: 100%;
     border: none;
-    background-color: white; /* Default background */
+    background-color: white; /* Default background if page doesn't load */
 }
-.ie-history {
-     padding: 3px 5px;
+.ie-history { /* Status bar / history dropdown area */
+     padding: 2px 5px;
      background: var(--win95-gray);
      font-size: 11px;
      display: flex;
      align-items: center;
      gap: 5px;
-     border-top: 1px solid var(--win95-button-highlight);
+     border-top: 1px solid var(--win95-button-highlight); /* Separator above */
      flex-shrink: 0;
+     height: 24px;
+     box-sizing: border-box;
 }
 #ie-history-select {
     flex-grow: 1;
     font-size: 11px;
+    height: 20px;
+    box-sizing: border-box;
+    /* Sunken effect for select */
+    border: 1px solid var(--win95-white);
+    border-top-color: var(--win95-dark-gray);
+    border-left-color: var(--win95-dark-gray);
+    box-shadow: inset 1px 1px 0 0 #A0A0A0;
 }
 
 /* Recycle Bin */
 #recycle-bin-list {
     list-style: none;
     padding: 0;
-    margin: 10px 0;
+    margin: 0; /* Remove default ul margin */
 }
 #recycle-bin-list li {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 2px 0;
+    gap: 8px; /* Space between icon and text */
+    padding: 3px 5px;
     font-size: 11px;
+    cursor: default; /* Or pointer if selectable */
+}
+#recycle-bin-list li:hover {
+    background-color: #e0e0e0; /* Slight hover effect */
 }
 #recycle-bin-list img {
     width: 16px;
     height: 16px;
+    image-rendering: pixelated;
 }
 
 
 /* Context Menu */
 #context-menu {
     position: absolute;
-    display: none; /* Hidden by default */
+    display: none;
     background-color: var(--win95-gray);
-    min-width: 150px;
-    z-index: 11000; /* Above everything */
-    padding: 1px;
+    min-width: 160px;
+    z-index: 11000;
+    padding: 1px; /* For border effect */
+    border-style: solid;
+    border-width: 1px;
+    border-top-color: var(--win95-button-highlight);
+    border-left-color: var(--win95-button-highlight);
+    border-right-color: var(--win95-button-shadow);
+    border-bottom-color: var(--win95-button-shadow);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Softer shadow */
 }
 .context-menu-item {
-    padding: 3px 10px 3px 25px; /* Space for icon/check */
+    padding: 3px 10px 3px 25px;
     cursor: pointer;
     font-size: 12px;
     position: relative;
@@ -710,214 +872,174 @@ body {
 }
 
 
+/* --- General Button/Input Styling --- */
+/* Apply Win95 border to generic buttons if they don't have specific classes */
+button:not([class*="window-button"]):not([class*="start-button"]):not([class*="-control"]) {
+    background: var(--win95-button-face);
+    color: var(--win95-button-text);
+    padding: 3px 12px; /* Default padding */
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    /* Apply raised border by default */
+    border-style: solid;
+    border-width: 1px;
+    border-top-color: var(--win95-button-highlight);
+    border-left-color: var(--win95-button-highlight);
+    border-right-color: var(--win95-button-shadow);
+    border-bottom-color: var(--win95-button-shadow);
+    box-shadow: inset 1px 1px 0 0 var(--win95-button-face), 1px 1px 0 0 var(--win95-black);
+}
+button:not([class*="window-button"]):not([class*="start-button"]):not([class*="-control"]):active {
+    /* Apply lowered border on active */
+    border-top-color: var(--win95-button-shadow);
+    border-left-color: var(--win95-button-shadow);
+    border-right-color: var(--win95-button-highlight);
+    border-bottom-color: var(--win95-button-highlight);
+    box-shadow: inset 1px 1px 0 0 #A0A0A0;
+    padding-top: 4px; /* Shift text down */
+    padding-left: 13px; /* Shift text right */
+}
+
+input[type="text"], input[type="file"], select, textarea {
+    padding: 3px 4px; /* Increased padding for better feel */
+    font-family: inherit;
+    font-size: 12px;
+    box-sizing: border-box;
+    /* Sunken border for inputs */
+    border: 1px solid var(--win95-white);
+    border-top-color: var(--win95-dark-gray);
+    border-left-color: var(--win95-dark-gray);
+    box-shadow: inset 1px 1px 0 0 #A0A0A0;
+    background-color: var(--win95-white);
+    color: var(--win95-black);
+}
+select {
+    appearance: none; /* Basic reset for select */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2212%22%20height%3D%228%22%20viewBox%3D%220%200%2012%208%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M1%201.5L6%206.5L11%201.5%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E'); /* Simple dropdown arrow */
+    background-repeat: no-repeat;
+    background-position: right 5px center;
+    padding-right: 20px; /* Space for arrow */
+}
+
+
 /* --- Mobile Responsiveness --- */
 @media (max-width: 768px) {
     body {
-        font-size: 14px; /* Slightly larger base font */
-        overflow: auto; /* Allow body scroll on mobile if needed */
+        font-size: 14px;
+        overflow: auto; /* Allow body scroll on mobile */
     }
-
     .desktop {
-        height: auto; /* Allow content to determine height */
+        height: auto;
         min-height: 100vh;
         display: flex;
-        flex-direction: column; /* Stack elements vertically */
-        padding-bottom: 45px; /* Space for fixed taskbar */
+        flex-direction: column;
+        padding-bottom: 50px; /* Space for fixed taskbar */
     }
 
-    /* Rearrange Icons into a scrollable list/grid */
-    .icon-container { /* Create a wrapper for icons on mobile */
+    .icon-container { /* Wrapper for icons on mobile */
         display: flex;
         flex-wrap: wrap;
-        padding: 10px;
+        padding: 15px;
         gap: 15px;
-        justify-content: flex-start; /* Align left */
-        order: 1; /* Place icons after taskbar */
+        justify-content: flex-start;
+        order: 1; /* Icons appear after taskbar in flow */
     }
-    .icon {
-        position: static; /* Remove absolute positioning */
-        width: 70px; /* Larger touch target */
+    .icon { /* Mobile icon styling */
+        position: static;
+        width: 80px; /* Larger touch target */
         height: auto;
-        padding: 5px;
-        color: var(--win95-black); /* Text color on mobile might need changing */
-        background: #eee; /* Give icons a background */
+        padding: 8px;
+        color: var(--win95-black);
+        background: #E0E0E0; /* Light gray background for icons */
         border: 1px solid var(--win95-dark-gray);
         border-radius: 5px;
         text-shadow: none;
-        margin: 0; /* Reset margin */
+        margin: 0;
     }
-    .icon .icon-img {
-        width: 32px;
-        height: 32px;
-    }
-     .icon div {
-        font-size: 10px; /* Smaller text inside icon box */
-        margin-top: 3px;
-     }
-    .icon.selected div { /* Mobile selection style */
-        background-color: var(--win95-blue);
-        color: white;
-        outline: none;
-    }
-
+    .icon .icon-img { width: 36px; height: 36px; }
+    .icon div { font-size: 11px; margin-top: 4px; max-width: 100%; }
+    .icon.selected div { background-color: var(--win95-blue); color: white; outline: none; }
 
     .taskbar {
-        position: fixed; /* Fixed at the bottom */
-        bottom: 0;
-        left: 0;
-        right: 0;
+        position: fixed;
         height: 45px; /* Taller taskbar */
-        z-index: 10000;
-        order: 0; /* Place taskbar first visually (at bottom) */
+        order: 0; /* Taskbar appears first in DOM flow (at bottom) */
         padding: 3px;
     }
-    .start-button {
-        min-width: 70px;
-        font-size: 14px;
-    }
-     .start-button img {
-         width: 22px; height: 22px;
-     }
-
-    #window-buttons-container {
-        /* Hide window buttons on mobile, or simplify drastically */
-        /* Option 1: Hide */
-         display: none;
-        /* Option 2: Simplify (e.g., show only icons) */
-        /* display: flex; */
-        /* flex-wrap: nowrap; */
-    }
-    /* Adjust if simplifying instead of hiding */
-    /* .window-button { min-width: 30px; max-width: 40px; padding: 2px; font-size: 0; } */
-    /* .window-button img { margin: 0 auto; } */
-
-    .tray {
-        padding: 0 6px;
-    }
+    .start-button { min-width: 70px; font-size: 14px; }
+    .start-button img { width: 22px; height: 22px; }
+    #window-buttons-container { display: none; } /* Hide window buttons on mobile */
+    .tray { padding: 0 6px; }
     .tray img { width: 20px; height: 20px; }
     .clock { font-size: 13px; }
 
-
-    /* Start Menu on Mobile */
     .start-menu {
-        width: 80vw; /* Wider menu */
-        max-width: 300px;
+        width: 80vw; max-width: 300px;
         bottom: 48px; /* Above taller taskbar */
         left: 5px;
         font-size: 14px;
     }
     .start-menu-sidebar { width: 30px; font-size: 20px; }
-    .start-menu-items li { padding: 6px 8px 6px 30px; font-size: 14px; }
-    .start-menu-items li img { width: 20px; height: 20px; left: 6px; }
-    .start-menu-items li.has-submenu::after { right: 8px; }
-    /* Make submenus potentially overlay better */
-    .start-menu-items li ul {
-        left: 50%; /* Position relative to parent */
-        top: 50%;
-        transform: translate(-50%, -50%); /* Center roughly */
-        width: 80%; /* Take most of parent width */
-        z-index: 1600; /* Ensure above other items */
-        border: 2px solid black;
-        box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+    .start-menu-items li { padding: 6px 8px 6px 35px; font-size: 14px; min-height: 28px; }
+    .start-menu-items li img { width: 20px; height: 20px; left: 8px; }
+    .start-menu-items li.has-submenu::after { right: 10px; }
+    .start-menu-items li ul { /* Submenu overlay on mobile */
+        left: 10%; top: 10%; width: 80%; z-index: 1600;
+        border: 2px solid black; box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
     }
-     .start-menu-items li:hover > ul {
-         /* Consider click-to-open on mobile instead of hover */
-     }
 
-
-    /* Windows on Mobile */
-    .window {
-        position: fixed; /* Fixed overlay */
-        left: 0 !important;
-        top: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important; /* Full screen */
-        z-index: 5000; /* High z-index */
-        display: none; /* Keep hidden by default */
-        box-shadow: none;
-        border: none;
-        background: var(--win95-gray); /* Ensure background covers */
+    .window { /* Mobile window styling: always fullscreen */
+        position: fixed;
+        left: 0 !important; top: 0 !important;
+        width: 100vw !important; height: 100vh !important;
+        z-index: 5000; /* High z-index to cover icons */
+        box-shadow: none; border: none;
+        background: var(--win95-gray); /* Ensure full background */
     }
-    .window.active { /* Ensure active state still applies */
-        display: flex; /* Use flex again */
-    }
-    /* No maximizing on mobile */
-    .window.maximized { height: 100vh !important; }
-    .maximize-button { display: none; }
+    .window.active { display: flex; } /* Ensure it's visible */
+    .maximize-button { display: none; } /* No maximize on mobile */
 
-    .title-bar {
-        height: 35px; /* Taller title bar */
-        font-size: 14px;
-        padding: 5px 8px;
-    }
-     .title-bar-icon { width: 20px; height: 20px; }
-     .window-controls button { width: 28px; height: 24px; font-size: 16px; line-height: 22px;}
+    .title-bar { height: 40px; font-size: 16px; padding: 5px 10px; }
+    .title-bar-icon { width: 22px; height: 22px; }
+    .window-controls button { width: 30px; height: 28px; font-size: 16px; line-height: 26px;}
 
-    .menu-bar { height: 30px; font-size: 14px; padding: 2px 8px; }
-    .menu-item { padding: 4px 8px; }
-    .dropdown-menu { /* Adjust dropdown position if needed */
-         top: 100%;
-         left: 0;
-         width: 150px;
-         font-size: 14px;
-    }
-    .dropdown-item { padding: 5px 10px 5px 30px; }
+    .menu-bar { height: 35px; font-size: 14px; padding: 2px 10px; }
+    .menu-item { padding: 5px 10px; }
+    .dropdown-menu { width: 180px; font-size: 14px; }
+    .dropdown-item { padding: 6px 12px 6px 30px; }
 
-
-    .content {
-        padding: 15px;
-        font-size: 14px;
-        overflow: auto; /* Ensure content scrolls within window */
-    }
-     /* Adjust specific content areas */
-     .email-container { flex-direction: column; height: calc(100% - 35px - 30px); } /* Stack nav/main */
-     .email-nav { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--win95-button-shadow); flex-shrink: 0; display: flex; gap: 5px; }
-     .email-nav .folder { margin-bottom: 0; padding: 5px; }
+    .content { padding: 15px; font-size: 14px; margin: 0; border: none; } /* Simpler content area on mobile */
+     .email-container { flex-direction: column; height: calc(100% - 40px - 35px); } /* Title - Menu */
+     .email-nav { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--win95-button-shadow); flex-shrink: 0; display: flex; flex-wrap: wrap; gap: 5px; padding: 8px; }
+     .email-nav .folder { margin-bottom: 0; padding: 6px 8px; flex-grow: 1; text-align: center; }
      .email-main { flex-grow: 1; height: auto; }
      .email-list { height: 35%; }
-     .email-content { flex-grow: 1; }
 
-     .folder-grid { justify-content: center; } /* Center items */
-     .folder-item { width: 90px; }
-     .folder-item img { width: 70px; height: 70px; }
+     .folder-grid { justify-content: space-around; }
+     .folder-item { width: 100px; }
+     .folder-item img { width: 80px; height: 80px; }
 
-     .ie-toolbar { flex-wrap: wrap; height: auto; padding: 5px;} /* Allow wrapping */
-     .ie-toolbar input[type="text"] { margin-top: 5px; width: calc(100% - 70px);} /* Adjust width */
+     .ie-toolbar { flex-wrap: wrap; height: auto; padding: 8px;}
+     .ie-toolbar input[type="text"] { margin-top: 5px; width: calc(100% - 80px); height: 28px; }
+     .ie-toolbar button { height: 28px; }
      .ie-content { margin: 5px; }
-     .ie-history { flex-wrap: wrap; height: auto; padding: 5px;}
-     #ie-history-select { margin-top: 5px; width: 100%;}
+     .ie-history { flex-wrap: wrap; height: auto; padding: 8px;}
+     #ie-history-select { margin-top: 5px; width: 100%; height: 28px;}
 
-    /* Disable Resizers on mobile */
-    .resizer { display: none; }
-
-     /* Hide context menu on mobile (right-click isn't standard) */
-     #context-menu { display: none !important; }
+    .resizer { display: none !important; } /* Resizers always hidden on mobile */
+    #context-menu { display: none !important; } /* No context menu on mobile */
 }
 
-/* Add styles for pressed/active buttons if needed */
-button:active, .button-border-raised:active, .start-button:active, .window-button:active, .window-controls button:active {
-    /* Apply .button-border-lowered styles */
-    border-color: var(--win95-button-shadow) var(--win95-button-highlight) var(--win95-button-highlight) var(--win95-button-shadow);
-    box-shadow: inset 1px 1px 0px 0px #dfdfdf;
-    /* Text shift effect */
-    padding-top: 1px;
-    padding-left: 1px; /* Adjust as needed per button */
-}
-/* Specific adjustments for buttons */
-.start-button:active img { margin-top: 1px; margin-left: 1px; }
-.window-controls button:active { /* No text shift needed here usually */ padding: 0; }
+/* Pressed/active state for generic buttons (not taskbar/window controls which have their own) */
+/* This is now integrated into the general button styling above */
 
-/* Ensure standard buttons also have the look */
-button {
-    background: var(--win95-button-face);
-    color: var(--win95-button-text);
-    padding: 3px 12px;
-    font-family: inherit;
-    font-size: 12px;
-    cursor: pointer;
-}
-input[type="text"], input[type="file"], select, textarea {
-    padding: 2px 4px;
-    font-family: inherit;
-    font-size: 12px;
+/* Gallery specific styling (if needed beyond folder-item) */
+.gallery-item { /* Used by JS for NAS gallery */
+    /* Inherits from .button-border-raised if class is added */
+    /* Example: */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* background-color: var(--win95-gray); */
 }
