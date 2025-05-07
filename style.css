@@ -235,118 +235,58 @@ body {
     flex-direction: row;
     padding: 1px; /* Outer padding */
 }
-.start-menu.active {
-    display: flex;
-}
 
 .start-menu-sidebar {
-    width: 25px; /* Width of the vertical bar */
-    background: var(--win95-dark-gray); /* Darker gray */
+    width: 25px;
+    background: var(--win95-dark-gray);
     color: var(--win95-gray);
     writing-mode: vertical-lr;
-    transform: rotate(180deg);
+    transform: rotate(180deg); /* This flips the text correctly for vertical display */
     text-align: center;
     font-weight: bold;
-    font-size: 18px; /* Larger text */
-    padding: 10px 0;
+    font-size: 16px; /* Slightly smaller to prevent overflow */
+    padding: 10px 0; /* Vertical padding */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Center text horizontally in the vertical bar */
+    justify-content: center; /* Center text vertically in the vertical bar */
     text-transform: uppercase;
     letter-spacing: 1px;
+    overflow: hidden; /* Hide overflow if text is still too big for the bar */
 }
 .start-menu-sidebar span {
-     display: block;
-     padding-left: 3px; /* Adjust positioning */
-     white-space: nowrap;
+    display: block;
+    /* padding-left: 3px; */ /* This might shift text too much in vertical mode; adjust or remove */
+    white-space: nowrap; /* Keep it on one line vertically */
+    /* Add transform for fine-tuning if needed: */
+    /* transform: translateY(5px); /* Example: shift down slightly */
 }
 
-
-.start-menu-items {
-    flex: 1;
-    background: var(--win95-gray);
-    padding: 2px; /* Padding around items */
-}
 .start-menu-items ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 .start-menu-items li {
-    padding: 3px 5px 3px 25px; /* Space for icon */
+    padding: 4px 5px 4px 28px; /* Increased top/bottom padding, increased left for icon */
     position: relative;
-    white-space: nowrap;
+    white-space: nowrap; /* Keep this, but ensure menu is wide enough or text is short */
     cursor: pointer;
     display: flex;
     align-items: center;
     font-size: 12px;
+    line-height: 1.4; /* Added line-height for better vertical spacing if text wraps (if nowrap is removed) */
+                      /* Or just rely on padding if nowrap is kept */
+    min-height: 20px; /* Ensure a minimum height for each item */
 }
 .start-menu-items li img {
     position: absolute;
-    left: 5px;
+    left: 6px; /* Adjusted for increased padding */
     top: 50%;
     transform: translateY(-50%);
     width: 16px;
     height: 16px;
     image-rendering: pixelated;
 }
-.start-menu-items li span {
-    flex-grow: 1;
-}
-.start-menu-items li.has-submenu::after { /* Arrow for submenu */
-    content: '►';
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 8px;
-}
-
-.start-menu-items li a { /* Make links fill the li */
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-.start-menu-items li a span {
-     flex-grow: 1;
-}
-
-
-.start-menu-items li:hover,
-.start-menu-items li a:hover {
-    background-color: var(--win95-blue);
-    color: white;
-}
-
-/* Submenus */
-.start-menu-items li ul {
-    display: none;
-    position: absolute;
-    left: 100%;
-    top: -3px; /* Align with parent item */
-    background: var(--win95-gray);
-    z-index: 1500;
-    min-width: 150px;
-    padding: 2px;
-}
-.start-menu-items li:hover > ul {
-    display: block;
-}
-.start-menu-items li ul li {
-    padding-left: 25px; /* Indent submenu items slightly less */
-}
-.start-menu-items li ul li img {
-     left: 5px;
-}
-.start-menu-items li.separator hr {
-    border: none;
-    border-top: 1px solid var(--win95-button-shadow);
-    border-bottom: 1px solid var(--win95-button-highlight);
-    margin: 3px 0;
-}
-
 
 /* Windows (Application Windows) */
 .window {
@@ -423,14 +363,17 @@ body {
     cursor: pointer;
     margin-left: 2px;
     padding: 0;
-    width: 18px;
-    height: 16px; /* Slightly shorter */
-    font-family: "Marlett", "Webdings"; /* Use icon fonts if available */
-    font-size: 12px; /* Adjust size for symbols */
-    line-height: 14px; /* Center symbols vertically */
+    width: 18px;  /* Or adjust based on symbol size */
+    height: 16px; /* Or adjust */
+    /* font-family: "Marlett", "Webdings"; */ /* Consider removing if Unicode is primary */
+    font-size: 12px; /* May need adjustment for specific Unicode chars */
+    line-height: 14px; /* Adjust for vertical centering of symbols */
     text-align: center;
-    font-weight: normal;
+    font-weight: normal; /* Some symbols are inherently bold */
     color: var(--win95-black);
+    display: flex; /* For better centering if needed */
+    align-items: center; /* For better centering if needed */
+    justify-content: center; /* For better centering if needed */
 }
 .window-controls button:active {
     padding-top: 1px;
