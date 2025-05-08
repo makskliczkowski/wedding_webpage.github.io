@@ -2,71 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- Added user-scalable=no for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Wedding Windows 95</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Add a favicon -->
     <link rel="icon" href="icons/All [Without duplicates]/Windows logo (without text).ico" type="image/x-icon">
 </head>
 <body>
     <div class="desktop" id="desktop-area">
         <!-- Desktop Icons -->
         <div class="icon" id="invitation-icon" data-window-id="invitation-window">
-            <img src="icons/All [Without duplicates]/Document with phone.ico" alt="Invitation Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/Document with phone.ico" alt="Icon" class="icon-img">
             <div>Invitation.txt</div>
         </div>
         <div class="icon" id="outlook-icon" data-window-id="email-window">
-            <img src="icons/All [Without duplicates]/Mail catalog.ico" alt="Email Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/Mail catalog.ico" alt="Icon" class="icon-img">
             <div>Fancy-Outlook</div>
         </div>
         <div class="icon" id="recycle-icon" data-window-id="recycle-window">
-            <img src="icons/All [Without duplicates]/Recycle Bin with torned document and program.ico" alt="Recycle Bin Icon" class="icon-img" id="recycle-bin-image">
+            <img src="icons/All [Without duplicates]/Recycle Bin with torned document and program.ico" alt="Icon" class="icon-img" id="recycle-bin-image">
             <div>Recycle Bin</div>
         </div>
         <div class="icon" id="mycomputer-icon" data-window-id="mycomputer-window">
-            <img src="icons/All [Without duplicates]/My Computer.ico" alt="My Computer Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/My Computer.ico" alt="Icon" class="icon-img">
             <div>My Computer</div>
         </div>
-         <!-- Picture icons now primarily use openPicture via the generic viewer -->
         <div class="icon" id="picture1-icon" data-img-src="Photos/dworek2.jpg" data-img-title="separowo.jpg">
-            <img src="icons/All [Without duplicates]/Drawing red picture.ico" alt="Picture 1 Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/Drawing red picture.ico" alt="Icon" class="icon-img">
             <div>separowo.jpg</div>
         </div>
         <div class="icon" id="picture2-icon" data-img-src="Photos/my2.jpg" data-img-title="to_my.png">
-            <img src="icons/All [Without duplicates]/Drawing green picture.ico" alt="Picture 2 Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/Drawing green picture.ico" alt="Icon" class="icon-img">
             <div>to_my.png</div>
         </div>
         <div class="icon" id="folder-icon" data-window-id="folder-window">
-            <img src="icons/All [Without duplicates]/Folder.ico" alt="Folder Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/Folder.ico" alt="Icon" class="icon-img">
             <div>Photos</div>
         </div>
         <div class="icon" id="upload-icon" data-window-id="upload-window">
-            <img src="icons/All [Without duplicates]/Upload cloud.ico" alt="Upload Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/Upload cloud.ico" alt="Icon" class="icon-img">
             <div>Send Media</div>
         </div>
         <div class="icon" id="gallery-icon" data-window-id="gallery-window">
-            <img src="icons/All [Without duplicates]/Pictures.ico" alt="Gallery Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/Pictures.ico" alt="Icon" class="icon-img">
             <div>View Gallery</div>
         </div>
         <div class="icon" id="ie-icon" data-window-id="ie-widget">
-            <img src="icons/explorer.png" alt="IE Icon" class="icon-img">
+            <img src="icons/explorer.png" alt="Icon" class="icon-img">
             <div>Internet Fun</div>
         </div>
         <div class="icon" id="notepad-icon" data-window-id="notepad-window">
-            <img src="icons/All [Without duplicates]/Notepad.ico" alt="Notepad Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/Notepad.ico" alt="Icon" class="icon-img">
             <div>Notepad</div>
         </div>
         <div class="icon" id="minesweeper-icon" data-window-id="minesweeper-window">
-            <!-- NOTE: Now opens the actual game -->
-            <img src="icons/All [Without duplicates]/Game.ico" alt="Minesweeper Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/Game.ico" alt="Icon" class="icon-img">
             <div>Minesweeper</div>
         </div>
+         <div class="icon" id="snake-icon" data-window-id="snake-window">
+            <img src="icons/All [Without duplicates]/CD Music.ico" alt="Icon" class="icon-img"> <!-- Placeholder Icon -->
+            <div>Snake</div>
+        </div>
          <div class="icon" id="controlpanel-icon" data-window-id="controlpanel-window">
-            <img src="icons/All [Without duplicates]/Controls.ico" alt="Control Panel Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/Controls.ico" alt="Icon" class="icon-img">
             <div>Control Panel</div>
         </div>
 
-        <!-- Application Windows -->
+
+        <!-- ========= Application Windows ========== -->
 
         <!-- Invitation Window -->
         <div class="window" id="invitation-window">
@@ -93,16 +95,15 @@
                 <img src="Photos/my5.jpg" alt="Event Image" style="display:block; margin:10px auto; max-width:90%; max-height: 150px; border: 1px solid var(--win95-dark-gray);">
                 <p style="text-align: center; margin-top: 15px;">Jak coś, prosimy o śmiałe odzywanie się!</p>
             </div>
-            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-            <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-            <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div>
+            <div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Upload window -->
         <div class="window" id="upload-window">
             <div class="title-bar">
                 <img src="icons/All [Without duplicates]/Upload cloud.ico" alt="Icon" class="title-bar-icon">
-                <span>Send Media to NAS</span>
+                <span>Send Media</span>
                 <div class="window-controls">
                     <button class="minimize-button button-border-raised">ˍ</button>
                     <button class="maximize-button button-border-raised">□</button>
@@ -113,13 +114,42 @@
                 <p>Select media files to upload to the shared wedding gallery:</p>
                 <form id="upload-form" style="margin-top:10px;">
                     <input type="file" id="file-input" name="file" multiple accept="image/*,video/*">
-                    <button type="button" class="button-border-raised" onclick="uploadMedia()">Send</button>
+                    <button type="button" class="button-border-raised" onclick="uploadMedia()">Send to NAS</button>
                 </form>
                 <div id="upload-status" style="margin-top: 15px; font-style: italic;"></div>
-                <hr style="margin: 15px 0;">
-                <p style="font-size:10px;"><strong>Note:</strong> This uses a Synology NAS backend. Ensure NAS_BASE_URL, username, and password are correctly configured in script.js for this feature to work. Target: /Public/WeddingUploads.</p>
+                <hr>
+                <p style="font-size:10px;"><strong>Note:</strong> NAS Upload requires server configuration (details in script.js). If unavailable, use alternative sharing methods.</p>
             </div>
-            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
+            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div>
+            <div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+        </div>
+
+        <!-- Hosting Info Window (alternative to NAS) -->
+        <div class="window" id="hosting-info-window" style="width: 400px; height: 250px;">
+             <div class="title-bar">
+                <img src="icons/All [Without duplicates]/Help book.ico" alt="Icon" class="title-bar-icon">
+                <span>Media Upload Info</span>
+                <div class="window-controls">
+                    <button class="minimize-button button-border-raised">ˍ</button>
+                    <button class="close-button button-border-raised">✕</button>
+                </div>
+            </div>
+            <div class="content">
+                <h4>NAS Upload Not Configured</h4>
+                <p>The direct upload feature requires server setup.</p>
+                <p>To share your photos and videos from the wedding, please consider using a service like:</p>
+                <ul>
+                    <li>Google Photos (Shared Album)</li>
+                    <li>Dropbox</li>
+                    <li>WeTransfer</li>
+                    <li>Or any similar service!</li>
+                </ul>
+                <p>Please share the link with Oliwia & Maks afterwards. Thank you!</p>
+                 <div style="text-align:center; margin-top:15px;">
+                    <button class="button-border-raised" onclick="closeWindow('hosting-info-window')">OK</button>
+                </div>
+            </div>
+             <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
             <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
             <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
@@ -138,12 +168,10 @@
           <div class="content">
             <button class="button-border-raised" onclick="loadGallery()">Refresh Gallery</button>
             <div id="gallery-container" class="folder-grid content-border-sunken" style="margin-top: 10px; background: #e8e8e8; min-height: 150px;">
-              <p>Click 'Refresh Gallery' to load media from NAS.</p>
+              <p>Click 'Refresh Gallery' to load media from NAS (if configured).</p>
             </div>
           </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-          <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-          <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Email Window -->
@@ -158,15 +186,10 @@
                 </div>
             </div>
             <div class="menu-bar">
-              <div class="menu-item"><u>F</u>ile
-                <div class="dropdown-menu">
-                  <div class="dropdown-item" onclick="sendEmailMessage()"><u>S</u>end/Receive</div>
-                  <div class="dropdown-item" onclick="closeWindow('email-window')">E<u>x</u>it</div>
-                </div>
-              </div>
-              <div class="menu-item" onclick="alert('Edit menu not implemented for this demo.')"><u>E</u>dit</div>
-              <div class="menu-item" onclick="alert('View menu not implemented for this demo.')"><u>V</u>iew</div>
-              <div class="menu-item" onclick="alert('Help is on the way... eventually.')"><u>H</u>elp</div>
+              <div class="menu-item"><u>F</u>ile<div class="dropdown-menu"><div class="dropdown-item" onclick="sendEmailMessage()"><u>S</u>end/Receive</div><div class="dropdown-item" onclick="closeWindow('email-window')">E<u>x</u>it</div></div></div>
+              <div class="menu-item"><u>E</u>dit<div class="dropdown-menu"><div class="dropdown-item disabled">Undo</div><div class="dropdown-item disabled">Copy</div></div></div>
+              <div class="menu-item"><u>V</u>iew<div class="dropdown-menu"><div class="dropdown-item disabled">Toolbar</div></div></div>
+              <div class="menu-item"><u>H</u>elp<div class="dropdown-menu"><div class="dropdown-item" onclick="alert('Help is on the way... eventually.')">About</div></div></div>
             </div>
             <div class="email-container">
                 <div class="email-nav">
@@ -180,9 +203,8 @@
                     <div class="email-content content-border-sunken" id="email-content"><p style="padding: 20px; text-align: center;">Select an email.</p></div>
                 </div>
             </div>
-            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-            <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-            <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div>
+            <div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Help Window -->
@@ -205,9 +227,8 @@
             <p><strong>Q: Song requests?</strong><br>A: Yes! 90s priority. Macarena = Clippy escort.</p>
             <p><strong>Q: Technical issue?</strong><br>A: Try turning it off and on again? (Contact the couple!)</p>
           </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-          <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-          <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div>
+          <div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- My Computer Window -->
@@ -233,9 +254,7 @@
             <p style="text-align: center; margin-top: 10px; font-size:11px;">System Properties: Pentium II 300MHz, 64MB RAM, Windows 95 Wedding Edition</p>
             <img src="Photos/cake.jpg" alt="Cake" style="display:block; margin: 5px auto; max-width:80%; max-height: 100px; border: 1px solid var(--win95-dark-gray);">
           </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-          <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-          <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Generic Explorer Window -->
@@ -249,12 +268,10 @@
               <button class="close-button button-border-raised">✕</button>
             </div>
           </div>
-          <div class="content" id="explorer-content" style="background-color: var(--win95-white);">
-             <!-- Content added by JS --> <p>Select an item.</p>
+          <div class="content content-border-sunken" id="explorer-content" style="background-color: var(--win95-white);">
+             <p>Select an item.</p> <!-- Content added by JS -->
           </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-          <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-          <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Picture Viewer Window (Generic) -->
@@ -271,9 +288,7 @@
           <div class="content image-content">
             <img id="picture1-image" src="" alt="Viewed Picture">
           </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-          <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-          <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Folder Window (Photos) -->
@@ -297,9 +312,7 @@
               <div class="folder-item" onclick="openPicture('Photos/placeholder3.jpg', 'Placeholder_Smile.jpg')"><img src="Photos/placeholder3.jpg" alt="Thumb"><div>Smile.jpg</div></div>
             </div>
           </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-          <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-          <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Internet Explorer Window -->
@@ -315,10 +328,10 @@
             </div>
             <div class="menu-bar">
               <div class="menu-item"><u>F</u>ile <div class="dropdown-menu"><div class="dropdown-item" onclick="closeWindow('ie-widget')">E<u>x</u>it</div></div></div>
-              <div class="menu-item"><u>E</u>dit</div>
-              <div class="menu-item"><u>V</u>iew</div>
-              <div class="menu-item" id="ie-favorites-menu">F<u>a</u>vorites <div class="dropdown-menu" id="ie-favorites-dropdown"> <!-- Populated by JS --> </div></div>
-              <div class="menu-item"><u>H</u>elp</div>
+              <div class="menu-item"><u>E</u>dit <div class="dropdown-menu"><div class="dropdown-item disabled">Copy</div></div></div>
+              <div class="menu-item"><u>V</u>iew <div class="dropdown-menu"><div class="dropdown-item disabled">Source</div></div></div>
+              <div class="menu-item ie-favorites-menu">F<u>a</u>vorites <div class="dropdown-menu" id="ie-favorites-dropdown"></div></div>
+              <div class="menu-item"><u>H</u>elp <div class="dropdown-menu"><div class="dropdown-item" onclick="alert('No help for IE available.')">About</div></div></div>
             </div>
             <div class="ie-toolbar">
                 <button class="button-border-raised" onclick="ieGoBack()" title="Back" disabled>◀</button>
@@ -334,9 +347,7 @@
                 <label for="ie-history-select">History:</label>
                 <select id="ie-history-select" onchange="ieHistorySelect()"><option value="">-- Visited Sites --</option></select>
             </div>
-            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-            <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-            <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Recycle Bin Window -->
@@ -351,24 +362,20 @@
             </div>
           </div>
           <div class="menu-bar">
-            <div class="menu-item"><u>F</u>ile
-                <div class="dropdown-menu"> <div class="dropdown-item" onclick="emptyRecycleBin()"><u>E</u>mpty Recycle Bin</div></div>
-            </div>
-            <div class="menu-item"><u>E</u>dit</div>
+            <div class="menu-item"><u>F</u>ile<div class="dropdown-menu"> <div class="dropdown-item" onclick="emptyRecycleBin()"><u>E</u>mpty Recycle Bin</div></div></div>
+            <div class="menu-item"><u>E</u>dit<div class="dropdown-menu"><div class="dropdown-item disabled">Select All</div></div></div>
           </div>
           <div class="content content-border-sunken" style="background: var(--win95-white);">
              <ul id="recycle-bin-list"></ul> <!-- Items populated by JS -->
           </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-          <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-          <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Notepad Window -->
         <div class="window" id="notepad-window">
             <div class="title-bar">
                 <img src="icons/All [Without duplicates]/Notepad.ico" alt="Icon" class="title-bar-icon">
-                <span id="notepad-title">Untitled - Notepad</span> <!-- Title fixed -->
+                <span id="notepad-title">Untitled - Notepad</span>
                 <div class="window-controls">
                     <button class="minimize-button button-border-raised">ˍ</button>
                     <button class="maximize-button button-border-raised">□</button>
@@ -377,19 +384,16 @@
             </div>
             <div class="menu-bar"><div class="menu-item"><u>F</u>ile</div><div class="menu-item"><u>E</u>dit</div><div class="menu-item"><u>S</u>earch</div><div class="menu-item"><u>H</u>elp</div></div>
             <div class="content" style="padding:0; margin:0; border: none;"><textarea class="notepad-textarea" spellcheck="false"></textarea></div>
-            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-            <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-            <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Minesweeper Game Window -->
         <div class="window" id="minesweeper-window">
             <div class="title-bar">
                 <img src="icons/All [Without duplicates]/Game.ico" alt="Icon" class="title-bar-icon">
-                <span>Minesweeper</span> <!-- Title fixed -->
+                <span>Minesweeper</span>
                 <div class="window-controls">
                     <button class="minimize-button button-border-raised">ˍ</button>
-                    <!-- No Maximize for fixed size game -->
                     <button class="close-button button-border-raised">✕</button>
                 </div>
             </div>
@@ -403,19 +407,40 @@
                     <div class="minesweeper-face" id="minesweeper-face">😊</div>
                     <div class="minesweeper-timer" id="minesweeper-timer">0</div>
                 </div>
-                <div class="minesweeper-grid button-border-sunken" id="minesweeper-grid">
-                    <!-- Grid generated by JS -->
+                <div class="minesweeper-grid button-border-sunken" id="minesweeper-grid"></div>
+            </div>
+            <!-- No resizers for fixed size game -->
+        </div>
+
+         <!-- Snake Game Window -->
+        <div class="window" id="snake-window" style="width: 340px; height: 390px;"> <!-- Fixed size -->
+            <div class="title-bar">
+                <img src="icons/All [Without duplicates]/CD Music.ico" alt="Icon" class="title-bar-icon"> <!-- Placeholder Icon -->
+                <span>Snake!</span>
+                <div class="window-controls">
+                    <button class="minimize-button button-border-raised">ˍ</button>
+                    <button class="close-button button-border-raised">✕</button>
                 </div>
             </div>
-            <!-- No resizers for fixed size game window -->
+             <div class="menu-bar">
+                <div class="menu-item" onclick="snakeGame.newGame()"><u>G</u>ame</div>
+                <div class="menu-item"><u>H</u>elp</div>
+            </div>
+            <div class="content snake-content">
+                <div class="snake-score button-border-sunken" id="snake-score">Score: 0</div>
+                <canvas id="snake-canvas" class="content-border-sunken" width="300" height="300"></canvas>
+                <div class="snake-instructions">Use Arrow Keys to Move</div>
+            </div>
+            <!-- No resizers -->
         </div>
+
 
         <!-- Screen Saver Window -->
         <div class="window" id="screensaver-window">
             <div class="title-bar">
                 <img src="icons/All [Without duplicates]/Desktop.ico" alt="Icon" class="title-bar-icon">
                 <span>3D Flying Objects (Wedding Edition)</span>
-                <div class="window-controls"><button class="close-button button-border-raised">✕</button></div> <!-- Only close -->
+                <div class="window-controls"><button class="close-button button-border-raised">✕</button></div>
             </div>
             <div class="content screensaver-content">
                 <div class="flying-object">💍</div><div class="flying-object">💖</div><div class="flying-object">🥂</div><div class="flying-object">🎂</div><div class="flying-object">🎉</div>
@@ -443,13 +468,11 @@
                  <div class="folder-item" data-opens-explorer="add-remove-programs" data-explorer-title="Add/Remove Programs" data-explorer-icon="icons/All [Without duplicates]/Program group.ico"><img src="icons/All [Without duplicates]/Program group.ico" alt="Icon"><div>Add/Remove Programs</div></div>
             </div>
           </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-          <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-          <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Sound Control Placeholder Window -->
-        <div class="window" id="sound-control-window" style="width:250px; height:200px;"> <!-- Adjusted size -->
+        <div class="window" id="sound-control-window" style="width:250px; height:200px;">
             <div class="title-bar">
                 <img src="icons/All [Without duplicates]/Sound program.ico" alt="Icon" class="title-bar-icon">
                 <span>Volume Control</span>
@@ -466,16 +489,14 @@
                     <span style="font-size:10px; margin-left:5px;">High</span>
                 </div>
                 <input type="checkbox" id="sound-mute"> <label for="sound-mute" style="font-size:11px;">Mute all</label>
-                <hr style="margin:15px 0;">
-                <p style="font-size:10px; text-align:center;">(Simulation Only! Adjusting has no effect.)</p>
+                <hr>
+                <p style="font-size:10px; text-align:center;">(Simulation Only!)</p>
             </div>
-             <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-            <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-            <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+             <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
 
-        <!-- Taskbar -->
+        <!-- ========= Taskbar & System Elements ========== -->
         <div class="taskbar">
             <button class="start-button button-border-raised" id="start-button">
                 <img src="icons/All [Without duplicates]/Windows logo (without text).ico" alt="Win95 Logo">Start
@@ -496,39 +517,41 @@
                 <ul>
                     <li class="has-submenu"><img src="icons/All [Without duplicates]/Programs.ico" alt=""><span><u>P</u>rograms</span>
                         <ul>
-                            <li><a href="#" onclick="openWindow('notepad-window')"><img src="icons/All [Without duplicates]/Notepad.ico" alt=""><span>Notepad</span></a></li>
-                            <li><a href="#" onclick="openWindow('minesweeper-window')"><img src="icons/All [Without duplicates]/Game.ico" alt=""><span>Minesweeper</span></a></li>
-                            <li><a href="#" onclick="openWindow('ie-widget')"><img src="icons/explorer.png" alt=""><span>Internet Fun</span></a></li>
+                            <li><a href="#" onclick="openWindow('notepad-window'); return false;"><img src="icons/All [Without duplicates]/Notepad.ico" alt=""><span>Notepad</span></a></li>
+                            <li><a href="#" onclick="openWindow('minesweeper-window'); return false;"><img src="icons/All [Without duplicates]/Game.ico" alt=""><span>Minesweeper</span></a></li>
+                            <li><a href="#" onclick="openWindow('snake-window'); return false;"><img src="icons/All [Without duplicates]/CD Music.ico" alt=""><span>Snake</span></a></li>
+                            <li><a href="#" onclick="openWindow('ie-widget'); return false;"><img src="icons/explorer.png" alt=""><span>Internet Fun</span></a></li>
                             <li class="separator"><hr></li>
-                            <li><a href="#" onclick="openWindow('screensaver-window')"><img src="icons/All [Without duplicates]/Desktop.ico" alt=""><span>Screensaver</span></a></li>
+                            <li><a href="#" onclick="openWindow('screensaver-window'); return false;"><img src="icons/All [Without duplicates]/Desktop.ico" alt=""><span>Screensaver</span></a></li>
                         </ul>
                     </li>
                     <li class="has-submenu"><img src="icons/All [Without duplicates]/Folder.ico" alt=""><span><u>D</u>ocuments</span>
                         <ul>
-                            <li><a href="#" onclick="openWindow('invitation-window')"><img src="icons/All [Without duplicates]/Document with phone.ico" alt=""><span>Invitation.txt</span></a></li>
-                            <li><a href="#" onclick="openWindow('folder-window')"><img src="icons/All [Without duplicates]/Folder.ico" alt=""><span>Photo Album</span></a></li>
+                            <li><a href="#" onclick="openWindow('invitation-window'); return false;"><img src="icons/All [Without duplicates]/Document with phone.ico" alt=""><span>Invitation.txt</span></a></li>
+                            <li><a href="#" onclick="openWindow('folder-window'); return false;"><img src="icons/All [Without duplicates]/Folder.ico" alt=""><span>Photo Album</span></a></li>
                         </ul>
                     </li>
                     <li class="has-submenu"><img src="icons/All [Without duplicates]/Settings.ico" alt=""><span><u>S</u>ettings</span>
                         <ul>
-                            <li><a href="#" onclick="openWindow('controlpanel-window')"><img src="icons/All [Without duplicates]/Controls.ico" alt=""><span>Control Panel</span></a></li>
-                            <li><a href="#" onclick="openExplorerWindow('Printers', 'Printers', 'icons/All [Without duplicates]/Printer (3D).ico', state.explorerWindowContents['printers'].items)"><img src="icons/All [Without duplicates]/Printer (3D).ico" alt=""><span>Printers</span></a></li>
+                            <li><a href="#" onclick="openWindow('controlpanel-window'); return false;"><img src="icons/All [Without duplicates]/Controls.ico" alt=""><span>Control Panel</span></a></li>
+                            <li><a href="#" onclick="openExplorerWindow('Printers', 'Printers', 'icons/All [Without duplicates]/Printer (3D).ico', state.explorerWindowContents['printers'].items); return false;"><img src="icons/All [Without duplicates]/Printer (3D).ico" alt=""><span>Printers</span></a></li>
                         </ul>
                     </li>
-                    <li><a href="#" onclick="alert('Find function is still searching for itself since 1998.')"><img src="icons/All [Without duplicates]/Search folder.ico" alt=""><span><u>F</u>ind</span></a></li>
-                    <li><a href="#" onclick="openWindow('help-window')"><img src="icons/All [Without duplicates]/Help page.ico" alt=""><span><u>H</u>elp</span></a></li>
-                    <li><a href="#" onclick="alert('Run command disabled. System integrity is paramount (and fragile).')"><img src="icons/All [Without duplicates]/Run.ico" alt=""><span><u>R</u>un...</span></a></li>
+                    <li><a href="#" onclick="alert('Find function is still searching for itself since 1998.'); return false;"><img src="icons/All [Without duplicates]/Search folder.ico" alt=""><span><u>F</u>ind</span></a></li>
+                    <li><a href="#" onclick="openWindow('help-window'); return false;"><img src="icons/All [Without duplicates]/Help page.ico" alt=""><span><u>H</u>elp</span></a></li>
+                    <li><a href="#" onclick="alert('Run command disabled. System integrity is paramount (and fragile).'); return false;"><img src="icons/All [Without duplicates]/Run.ico" alt=""><span><u>R</u>un...</span></a></li>
                     <li class="separator"><hr></li>
-                    <li><a href="#" onclick="if(confirm('Are you sure you want to shut down your wedding experience?')) { document.body.innerHTML = '<div style=font-family:Tahoma,sans-serif;font-size:24px;text-align:center;padding-top:100px;color:white;background:black;height:100vh;>It\\\'s now safe to turn off your computer. <br><br> Thanks for celebrating with us!</div>'; };"><img src="icons/All [Without duplicates]/Turn Off Computer (full).ico" alt=""><span>Sh<u>u</u>t Down...</span></a></li>
+                    <li><a href="#" onclick="if(confirm('Are you sure you want to shut down your wedding experience?')) { document.body.innerHTML = '<div style=font-family:Tahoma,sans-serif;font-size:24px;text-align:center;padding-top:100px;color:white;background:black;height:100vh;>It\\\'s now safe to turn off your computer. <br><br> Thanks for celebrating with us!</div>'; }; return false;"><img src="icons/All [Without duplicates]/Turn Off Computer (full).ico" alt=""><span>Sh<u>u</u>t Down...</span></a></li>
                 </ul>
             </div>
         </div>
 
         <!-- Right-click Context Menu (initially hidden) -->
         <div id="context-menu"></div>
+
     </div> <!-- End of .desktop -->
 
-    <!-- Mobile Overlay - Shown only on mobile, hides most icons -->
+    <!-- ========= Mobile Overlay ========== -->
     <div class="mobile-overlay" id="mobile-overlay">
          <div class="icon" id="mobile-invitation-icon" data-window-id="invitation-window">
             <img src="icons/All [Without duplicates]/Document with phone.ico" alt="Invitation Icon" class="icon-img">
