@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="icons/All [Without duplicates]/Windows logo (without text).ico" type="image/x-icon">
 </head>
+
+<!-- CONTROLS SAVED -->
+<!-- 
+<div class="window-controls">
+    <button class="minimize-button button-border-raised">ˍ</button>
+    <button class="maximize-button button-border-raised">□</button>
+    <button class="close-button button-border-raised">✕</button>
+</div> 
+-->
+
 <body>
     <div class="desktop" id="desktop-area">
         <!-- Desktop Icons -->
@@ -26,47 +36,67 @@
             <img src="icons/All [Without duplicates]/My Computer.ico" alt="Icon" class="icon-img">
             <div>My Computer</div>
         </div>
-        <div class="icon" id="picture1-icon" data-window-id="picture1-window" data-img-src="Photos/dworek2.jpg" data-img-title="separowo.jpg">
+        <!-- !PICTURES PUT BELOW -->
+        <div class="icon" id="picture1-icon" data-img-src="Photos/dworek2.jpg" data-img-title="separowo.jpg">
             <img src="icons/All [Without duplicates]/Drawing red picture.ico" alt="Icon" class="icon-img">
             <div>separowo.jpg</div>
         </div>
-        <div class="icon" id="picture2-icon" data-window-id="picture2-window" data-img-src="Photos/my2.jpg" data-img-title="to_my.png">
+        <div class="icon" id="picture2-icon" data-img-src="Photos/my2.jpg" data-img-title="to_my.png">
             <img src="icons/All [Without duplicates]/Drawing green picture.ico" alt="Icon" class="icon-img">
             <div>to_my.png</div>
         </div>
+        <!-- !FOLDER ICON -->
         <div class="icon" id="folder-icon" data-window-id="folder-window">
             <img src="icons/All [Without duplicates]/Folder.ico" alt="Icon" class="icon-img">
             <div>Photos</div>
         </div>
         <div class="icon" id="upload-icon" data-window-id="upload-window">
-            <img src="icons/All [Without duplicates]/Upload cloud.ico" alt="Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/Explosion (1 of 3).ico" alt="Icon" class="icon-img">
             <div>Send Media</div>
         </div>
         <div class="icon" id="gallery-icon" data-window-id="gallery-window">
-            <img src="icons/All [Without duplicates]/Pictures.ico" alt="Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/Drive.ico" alt="Icon" class="icon-img">
             <div>View Gallery</div>
         </div>
+        <!-- !IE FOR SOME FUNNY STUFF GOING ON :O -->
         <div class="icon" id="ie-icon" data-window-id="ie-widget">
             <img src="icons/explorer.png" alt="Icon" class="icon-img">
             <div>Internet Fun</div>
         </div>
+        <!-- !NOTEPAD ICON - YOU CAN WRITE HERE IF YOU WANT -->
         <div class="icon" id="notepad-icon" data-window-id="notepad-window">
-            <img src="icons/All [Without duplicates]/Notepad.ico" alt="Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/New letter.ico" alt="Icon" class="icon-img">
             <div>Notepad</div>
         </div>
+        <!-- !GAMES  -->
         <div class="icon" id="minesweeper-icon" data-window-id="minesweeper-window">
-            <img src="icons/All [Without duplicates]/Game.ico" alt="Icon" class="icon-img">
+            <img src="icons/All [Without duplicates]/mines.ico" alt="Icon" class="icon-img">
             <div>Minesweeper</div>
         </div>
-         <div class="icon" id="snake-icon" data-window-id="snake-window">
-            <img src="icons/All [Without duplicates]/CD Music.ico" alt="Icon" class="icon-img"> <!-- Placeholder Icon -->
+        <div class="icon" id="snake-icon" data-window-id="snake-window">
+            <img src="icons/All [Without duplicates]/snake.ico" alt="Icon" class="icon-img"> <!-- Placeholder Icon -->
             <div>Snake</div>
         </div>
-         <div class="icon" id="controlpanel-icon" data-window-id="controlpanel-window">
+        <!-- !CONTROL PANEL ICON -->
+        <div class="icon" id="controlpanel-icon" data-window-id="controlpanel-window">
             <img src="icons/All [Without duplicates]/Controls.ico" alt="Icon" class="icon-img">
             <div>Control Panel</div>
         </div>
-
+        <!-- !HELP ICON -->
+        <div class="icon" id="help-icon" data-window-id="help-window">
+            <img src="icons/All [Without duplicates]/Help page.ico" alt="Icon" class="icon-img">
+            <div>Help</div>
+        </div>
+        <!-- !PRINTERS ICON -->
+        <div class="icon" id="printers-icon" data-window-id="printers-window">
+            <img src="icons/All [Without duplicates]/Printer (3D).ico" alt="Icon" class="icon-img">
+            <div>Printers</div>
+        </div>
+        <!-- !SCREEN SAVER ICON -->
+        <div class="icon" id="screensaver-icon" data-window-id="screensaver-window">
+            <img src="icons/All [Without duplicates]/Exit (gray).ICO" alt="Icon" class="icon-img">
+            <div>Screen Saver</div>
+        </div>
 
         <!-- ========= Application Windows ========== -->
 
@@ -87,11 +117,12 @@
                 <p style="text-align: center;">na uroczystość zawarcia związku małżeńskiego oraz przyjęcie weselne, które odbędą się</p>
                 <h2 style="text-align: center;">3 sierpnia 2025 o godzinie 17:00 w Dworku Separowo</h2>
                 <h4 style="text-align: center;">Separowo 8, 62-066 Separowo</h4>
-                <p style="text-align: center;">Prosimy o potwierdzenie swojej obecności do 01.05.2025.</p>
+                <p style="text-align: center;">Prosimy o potwierdzenie swojej obecności do 25.05.2025.</p>
                 <p style="text-align: center;">
                     <button class="button-border-raised" onclick="sendEmail(true)">Confirm Attendance</button>
                     <button class="button-border-raised" style="margin-left: 10px;" onclick="sendEmail(false)">Decline Attendance</button>
                 </p>
+                <!-- Nasza fota ;) -->
                 <img src="Photos/my5.jpg" alt="Event Image" style="display:block; margin:10px auto; max-width:90%; max-height: 150px; border: 1px solid var(--win95-dark-gray);">
                 <p style="text-align: center; margin-top: 15px;">Jak coś, prosimy o śmiałe odzywanie się!</p>
             </div>
@@ -102,8 +133,8 @@
         <!-- Upload window -->
         <div class="window" id="upload-window">
             <div class="title-bar">
-                <img src="icons/All [Without duplicates]/Upload cloud.ico" alt="Icon" class="title-bar-icon">
-                <span>Send Media</span>
+                <img src="icons/All [Without duplicates]/Explosion (1 of 3).ico" alt="Icon" class="title-bar-icon">
+                <span>Send media</span>
                 <div class="window-controls">
                     <button class="minimize-button button-border-raised">ˍ</button>
                     <button class="maximize-button button-border-raised">□</button>
@@ -111,67 +142,37 @@
                 </div>
             </div>
             <div class="content">
-                <p>Select media files to upload to the shared wedding gallery:</p>
+                <p>Wybierz media, ktore chcialbys wyslac do naszej biblioteczki slubnej:</p>
                 <form id="upload-form" style="margin-top:10px;">
                     <input type="file" id="file-input" name="file" multiple accept="image/*,video/*">
-                    <button type="button" class="button-border-raised" onclick="uploadMedia()">Send to NAS</button>
+                    <button type="button" class="button-border-raised" onclick="uploadMedia()">Wyslij!</button>
                 </form>
                 <div id="upload-status" style="margin-top: 15px; font-style: italic;"></div>
                 <hr>
-                <p style="font-size:10px;"><strong>Note:</strong> NAS Upload requires server configuration (details in script.js). If unavailable, use alternative sharing methods.</p>
+                <p style="font-size:10px;"><strong>Uwaga:</strong> Wysyłanie na NAS wymaga konfiguracji serwera. Jeśli opcja jest niedostępna, skorzystaj z alternatywnych metod udostępniania.</p>
             </div>
             <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div>
             <div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
-        <!-- Hosting Info Window (alternative to NAS) -->
-        <div class="window" id="hosting-info-window" style="width: 400px; height: 250px;">
-             <div class="title-bar">
-                <img src="icons/All [Without duplicates]/Help book.ico" alt="Icon" class="title-bar-icon">
-                <span>Media Upload Info</span>
-                <div class="window-controls">
-                    <button class="minimize-button button-border-raised">ˍ</button>
-                    <button class="close-button button-border-raised">✕</button>
-                </div>
-            </div>
-            <div class="content">
-                <h4>NAS Upload Not Configured</h4>
-                <p>The direct upload feature requires server setup.</p>
-                <p>To share your photos and videos from the wedding, please consider using a service like:</p>
-                <ul>
-                    <li>Google Photos (Shared Album)</li>
-                    <li>Dropbox</li>
-                    <li>WeTransfer</li>
-                    <li>Or any similar service!</li>
-                </ul>
-                <p>Please share the link with Oliwia & Maks afterwards. Thank you!</p>
-                 <div style="text-align:center; margin-top:15px;">
-                    <button class="button-border-raised" onclick="closeWindow('hosting-info-window')">OK</button>
-                </div>
-            </div>
-             <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div>
-            <div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div>
-            <div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
-        </div>
-
         <!-- Gallery Window -->
         <div class="window" id="gallery-window">
-          <div class="title-bar">
-            <img src="icons/All [Without duplicates]/Pictures.ico" alt="Icon" class="title-bar-icon">
-            <span>Shared Media Gallery</span>
+        <div class="title-bar">
+            <img src="icons/All [Without duplicates]/Drive.ico" alt="Icon" class="title-bar-icon">
+            <span>Gallery</span>
             <div class="window-controls">
-              <button class="minimize-button button-border-raised">ˍ</button>
-              <button class="maximize-button button-border-raised">□</button>
-              <button class="close-button button-border-raised">✕</button>
+                <button class="minimize-button button-border-raised">ˍ</button>
+                <button class="maximize-button button-border-raised">□</button>
+                <button class="close-button button-border-raised">✕</button>
             </div>
-          </div>
-          <div class="content">
+        </div>
+        <div class="content">
             <button class="button-border-raised" onclick="loadGallery()">Refresh Gallery</button>
             <div id="gallery-container" class="folder-grid content-border-sunken" style="margin-top: 10px; background: #e8e8e8; min-height: 150px;">
-              <p>Click 'Refresh Gallery' to load media from NAS (if configured).</p>
+                <p>Kliknij „Odśwież galerię”, aby załadować media z NAS (jeśli skonfigurowano).</p>
             </div>
-          </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+        </div>
+        <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Email Window -->
@@ -186,21 +187,53 @@
                 </div>
             </div>
             <div class="menu-bar">
-              <div class="menu-item"><u>F</u>ile<div class="dropdown-menu"><div class="dropdown-item" onclick="sendEmailMessage()"><u>S</u>end/Receive</div><div class="dropdown-item" onclick="closeWindow('email-window')">E<u>x</u>it</div></div></div>
-              <div class="menu-item"><u>E</u>dit<div class="dropdown-menu"><div class="dropdown-item disabled">Undo</div><div class="dropdown-item disabled">Copy</div></div></div>
-              <div class="menu-item"><u>V</u>iew<div class="dropdown-menu"><div class="dropdown-item disabled">Toolbar</div></div></div>
-              <div class="menu-item"><u>H</u>elp<div class="dropdown-menu"><div class="dropdown-item" onclick="alert('Help is on the way... eventually.')">About</div></div></div>
+                <div class="menu-item"><u>F</u>ile
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item" onclick="sendEmailMessage()">
+                            <u>S</u>end/Receive
+                        </div>
+                        <div class="dropdown-item" onclick="closeWindow('email-window')">
+                            E<u>x</u>it
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item"><u>E</u>dit
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item disabled">Undo</div>
+                        <div class="dropdown-item disabled">Copy</div>
+                    </div>
+                </div>
+                <div class="menu-item"><u>V</u>iew
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item disabled">Toolbar</div>
+                    </div>
+                </div>
+                <div class="menu-item"><u>H</u>elp
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item" onclick="alert('Help is on the way... eventually.')">About</div>
+                    </div>
+                </div>
             </div>
+
+            <!-- !EMAIL CONTENT -->
             <div class="email-container">
                 <div class="email-nav">
-                    <div class="folder active" onclick="switchFolder('inbox', this)" id="folder-inbox"><img src="icons/All [Without duplicates]/Mail catalog.ico" alt="">Inbox</div>
-                    <div class="folder" onclick="switchFolder('outbox', this)" id="folder-outbox"><img src="icons/All [Without duplicates]/Mail wizard.ico" alt="">Outbox</div>
-                    <div class="folder" onclick="switchFolder('sent', this)" id="folder-sent"><img src="icons/All [Without duplicates]/Mail stamp (return).ico" alt="">Sent Items</div>
-                    <div class="folder" onclick="switchFolder('spam', this)" id="folder-spam"><img src="icons/All [Without duplicates]/Mail (forbidden).ico" alt="">Junk Mail</div>
+                    <div class="folder active" onclick="switchFolder('inbox', this)" id="folder-inbox">
+                        <img src="icons/All [Without duplicates]/Mail catalog.ico" alt="">Inbox
+                    </div>
+                    <div class="folder" onclick="switchFolder('outbox', this)" id="folder-outbox">
+                        <img src="icons/All [Without duplicates]/Mail wizard.ico" alt="">Outbox
+                    </div>
+                    <div class="folder" onclick="switchFolder('sent', this)" id="folder-sent">
+                        <img src="icons/All [Without duplicates]/Mail stamp (return).ico" alt="">Wyslane
+                    </div>
+                    <div class="folder" onclick="switchFolder('spam', this)" id="folder-spam">
+                        <img src="icons/All [Without duplicates]/Recycle Bin with torned document and program.ico" alt="">Spam
+                    </div>
                 </div>
                 <div class="email-main">
                     <div class="email-list content-border-sunken" id="email-list"></div>
-                    <div class="email-content content-border-sunken" id="email-content"><p style="padding: 20px; text-align: center;">Select an email.</p></div>
+                    <div class="email-content content-border-sunken" id="email-content"><p style="padding: 20px; text-align: center;">Wybierz wiadomosc.</p></div>
                 </div>
             </div>
             <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div>
@@ -209,117 +242,143 @@
 
         <!-- Help Window -->
         <div class="window" id="help-window">
-          <div class="title-bar">
-            <img src="icons/All [Without duplicates]/Help page.ico" alt="Icon" class="title-bar-icon">
-            <span>Wedding Day Survival Guide</span>
-            <div class="window-controls">
-              <button class="minimize-button button-border-raised">ˍ</button>
-              <button class="maximize-button button-border-raised">□</button>
-              <button class="close-button button-border-raised">✕</button>
+            <div class="title-bar">
+                <img src="icons/All [Without duplicates]/Help page.ico" alt="Icon" class="title-bar-icon">
+                <span>Pomoc podczas wesela</span>
+                <div class="window-controls">
+                    <button class="minimize-button button-border-raised">ˍ</button>
+                    <button class="maximize-button button-border-raised">□</button>
+                    <button class="close-button button-border-raised">✕</button>
+                </div>
             </div>
-          </div>
-          <div class="content">
-            <h2>Map to Dworek Separowo</h2>
-            <img src="Photos/mapa1.png" alt="Map" style="display:block; margin-bottom:10px; max-width: 100%; border: 1px solid var(--win95-dark-gray);">
-            <p><strong>Getting there:</strong> Follow signs for "Awesome Wedding"! GPS: 52.2115° N, 16.4020° E (approx). Listen for music.</p>
-            <hr><h4>FAQs:</h4>
-            <p><strong>Q: Dress code?</strong><br>A: "Fabulously retro" or "Comfortably chic". Win95 themes welcome!</p>
-            <p><strong>Q: Song requests?</strong><br>A: Yes! 90s priority. Macarena = Clippy escort.</p>
-            <p><strong>Q: Technical issue?</strong><br>A: Try turning it off and on again? (Contact the couple!)</p>
-          </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div>
-          <div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+            <div class="content">
+                <h2>Mapa do Dworku Separowo</h2>
+                <img src="Photos/mapa1.png" alt="Map" style="display:block; margin-bottom:10px; max-width: 100%; border: 1px solid var(--win95-dark-gray);">
+                <p><strong>Jak dojechać:</strong> Kieruj się znakami na „Najlepsze Wesele”! GPS: 35.7040744° N, 139.5577317° E (mniej więcej).</p>
+                <p> Jeśli usłyszysz disco polo, to nie tu... Jeśli zobaczysz Ernesta - jesteś na miejscu. </p>
+                <p> Jeśli spotkasz gołębie zaproś je na parkiet!</p>
+                <br>
+                <hr><h4>FAQs:</h4>
+                <p><strong>P: Jaki jest dress code?</strong><br>O: Byle wygodnie!</p>
+                <p><strong>P: Prośby o utwory?</strong><br>O: Sprobuj odpalic wirusa...</p>
+                <p><strong>P: Problem techniczny?</strong><br>O: Spróbuj wyłączyć i włączyć ponownie? Nic mi nie zaplacili, jak mam nad tym pracowac... (Skontaktuj się z parą młodą!)</p>
+            </div>
+            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div>
+            <div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- My Computer Window -->
         <div class="window" id="mycomputer-window">
-          <div class="title-bar">
-            <img src="icons/All [Without duplicates]/My Computer.ico" alt="Icon" class="title-bar-icon">
-            <span>My Computer</span>
-            <div class="window-controls">
-              <button class="minimize-button button-border-raised">ˍ</button>
-              <button class="maximize-button button-border-raised">□</button>
-              <button class="close-button button-border-raised">✕</button>
+            <div class="title-bar">
+                <img src="icons/All [Without duplicates]/My Computer.ico" alt="Icon" class="title-bar-icon">
+                <span>My Computer</span>
+                <div class="window-controls">
+                    <button class="minimize-button button-border-raised">ˍ</button>
+                    <button class="maximize-button button-border-raised">□</button>
+                    <button class="close-button button-border-raised">✕</button>
+                </div>
             </div>
-          </div>
-          <div class="content">
-            <div class="drive-container">
-                <div class="drive" data-drive-id="A" data-drive-name="3½ Floppy (A:)"><img src="icons/All [Without duplicates]/Drive (Floppy 3).ico" alt="Icon"><div>(A:)</div></div>
-                <div class="drive" data-drive-id="C" data-drive-name="Local Disk (C:)"><img src="icons/All [Without duplicates]/Drive.ico" alt="Icon"><div>(C:)</div></div>
-                <div class="drive" data-drive-id="D_Wedding" data-drive-name="Wedding Files (D:)"><img src="icons/All [Without duplicates]/Drive.ico" alt="Icon"><div>(D:) Wedding</div></div>
-                <div class="drive" data-drive-id="E_CD" data-drive-name="CD-ROM Drive (E:)"><img src="icons/All [Without duplicates]/CD Drive.ico" alt="Icon"><div>(E:) CD-ROM</div></div>
-                 <div class="drive" data-drive-id="controlpanel" data-drive-name="Control Panel" data-opens-window="controlpanel-window"><img src="icons/All [Without duplicates]/Controls.ico" alt="Icon"><div>Control Panel</div></div>
-                <div class="drive" data-drive-id="printers" data-drive-name="Printers" data-opens-explorer="printers"><img src="icons/All [Without duplicates]/Printer (3D).ico" alt="Icon"><div>Printers</div></div>
-            </div><hr>
-            <p style="text-align: center; margin-top: 10px; font-size:11px;">System Properties: Pentium II 300MHz, 64MB RAM, Windows 95 Wedding Edition</p>
-            <img src="Photos/cake.jpg" alt="Cake" style="display:block; margin: 5px auto; max-width:80%; max-height: 100px; border: 1px solid var(--win95-dark-gray);">
-          </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+            <div class="content">
+                <div class="drive-container">
+                    <div class="drive" data-drive-id="A" data-drive-name="Floppy (A:)">
+                        <img src="icons/All [Without duplicates]/Drive.ico" alt="Icon">Floppy
+                        <div>
+                            (A:)
+                        </div>
+                    </div>
+                    <div class="drive" data-drive-id="C" data-drive-name="Local Disk (C:)">
+                        <img src="icons/All [Without duplicates]/Drive.ico" alt="Icon">All the data for the UM and RPM
+                        <div>
+                            (C:)
+                        </div>
+                    </div>
+                    <div class="drive" data-drive-id="D_Wedding" data-drive-name="Wedding Files (D:)">
+                        <img src="icons/All [Without duplicates]/Drive.ico" alt="Icon">
+                        <div>(D:) Wedding</div>
+                    </div>
+                    <div class="drive" data-drive-id="E_CD" data-drive-name="CD-ROM Drive (E:)">
+                        <img src="icons/All [Without duplicates]/CD-ROM_22649.png" alt="Icon">
+                        <div>(E:) CD-ROM</div>
+                    </div>
+                    <div class="drive" data-drive-id="controlpanel" data-drive-name="Control Panel" data-opens-window="controlpanel-window">
+                        <img src="icons/All [Without duplicates]/Controls.ico" alt="Icon">
+                        <div>Control Panel</div>
+                    </div>
+                    <div class="drive" data-drive-id="printers" data-drive-name="Printers" data-opens-explorer="printers">
+                        <img src="icons/All [Without duplicates]/Printer (3D).ico" alt="Icon">
+                        <div>Printers</div>
+                    </div>
+                </div>
+                <hr>
+                <p style="text-align: center; margin-top: 10px; font-size:11px;">System Properties: Pentium II 300MHz, 64MB RAM, Windows 95 Wedding Edition. <br> Remember at the wedding... the cake is a lie!</p>
+                <img src="Photos/cake.jpg" alt="Cake" style="display:block; margin: 5px auto; max-width:80%; max-height: 100px; border: 1px solid var(--win95-dark-gray);">
+            </div>
+            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Generic Explorer Window -->
         <div class="window" id="explorer-window">
-          <div class="title-bar">
-            <img src="icons/All [Without duplicates]/Folder (Open).ico" alt="Icon" class="title-bar-icon" id="explorer-title-icon">
-            <span id="explorer-title-text">Explorer</span>
-            <div class="window-controls">
-              <button class="minimize-button button-border-raised">ˍ</button>
-              <button class="maximize-button button-border-raised">□</button>
-              <button class="close-button button-border-raised">✕</button>
+            <div class="title-bar">
+                <img src="icons/All [Without duplicates]/Folder (Open).ico" alt="Icon" class="title-bar-icon" id="explorer-title-icon">
+                <span id="explorer-title-text">Explorer</span>
+                <div class="window-controls">
+                    <button class="minimize-button button-border-raised">ˍ</button>
+                    <button class="maximize-button button-border-raised">□</button>
+                    <button class="close-button button-border-raised">✕</button>
+                </div>
             </div>
-          </div>
-          <div class="content content-border-sunken" id="explorer-content" style="background-color: var(--win95-white);">
-             <p>Select an item.</p> <!-- Content added by JS -->
-          </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+            <div class="content content-border-sunken" id="explorer-content" style="background-color: var(--win95-white);">
+                <p>Wybierz plik</p> <!-- Content added by JS -->
+            </div>
+            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Picture Viewer Window (Generic) -->
         <div class="window" id="picture1-window">
-          <div class="title-bar">
-            <img src="icons/All [Without duplicates]/Picture.ico" alt="Icon" class="title-bar-icon">
-            <span id="picture1-title">Image Viewer</span>
-            <div class="window-controls">
-              <button class="minimize-button button-border-raised">ˍ</button>
-              <button class="maximize-button button-border-raised">□</button>
-              <button class="close-button button-border-raised">✕</button>
+            <div class="title-bar">
+                <img src="icons/All [Without duplicates]/Picture.ico" alt="Icon" class="title-bar-icon">
+                <span id="picture1-title">Image Viewer</span>
+                <div class="window-controls">
+                    <button class="minimize-button button-border-raised">ˍ</button>
+                    <button class="maximize-button button-border-raised">□</button>
+                    <button class="close-button button-border-raised">✕</button>
+                </div>
             </div>
-          </div>
-          <div class="content image-content">
-            <img id="picture1-image" src="" alt="Viewed Picture">
-          </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+            <div class="content image-content">
+                <img id="picture1-image" src="" alt="Viewed Picture">
+            </div>
+            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Folder Window (Photos) -->
         <div class="window" id="folder-window">
-          <div class="title-bar">
-            <img src="icons/All [Without duplicates]/Folder.ico" alt="Icon" class="title-bar-icon">
-            <span>Photos</span>
-            <div class="window-controls">
-              <button class="minimize-button button-border-raised">ˍ</button>
-              <button class="maximize-button button-border-raised">□</button>
-              <button class="close-button button-border-raised">✕</button>
+            <div class="title-bar">
+                <img src="icons/All [Without duplicates]/Folder.ico" alt="Icon" class="title-bar-icon">
+                <span>Photos</span>
+                <div class="window-controls">
+                    <button class="minimize-button button-border-raised">ˍ</button>
+                    <button class="maximize-button button-border-raised">□</button>
+                    <button class="close-button button-border-raised">✕</button>
+                </div>
             </div>
-          </div>
-          <div class="content">
-            <div class="folder-grid">
-              <div class="folder-item" onclick="openPicture('Photos/my1.jpg', 'O&M_1.jpg')"><img src="Photos/my1.jpg" alt="Thumb"><div>O&M_1.jpg</div></div>
-              <div class="folder-item" onclick="openPicture('Photos/my3.jpg', 'O&M_3.jpg')"><img src="Photos/my3.jpg" alt="Thumb"><div>O&M_3.jpg</div></div>
-              <div class="folder-item" onclick="openPicture('Photos/my5.jpg', 'O&M_5.jpg')"><img src="Photos/my5.jpg" alt="Thumb"><div>O&M_5.jpg</div></div>
-              <div class="folder-item" onclick="openPicture('Photos/placeholder1.jpg', 'Placeholder_View.jpg')"><img src="Photos/placeholder1.jpg" alt="Thumb"><div>View.jpg</div></div>
-              <div class="folder-item" onclick="openPicture('Photos/placeholder2.jpg', 'Placeholder_Relax.jpg')"><img src="Photos/placeholder2.jpg" alt="Thumb"><div>Relax.jpg</div></div>
-              <div class="folder-item" onclick="openPicture('Photos/placeholder3.jpg', 'Placeholder_Smile.jpg')"><img src="Photos/placeholder3.jpg" alt="Thumb"><div>Smile.jpg</div></div>
+            <div class="content">
+                <div class="folder-grid">
+                    <div class="folder-item" onclick="openPicture('Photos/my1.jpg', 'O&M_1.jpg')"><img src="Photos/my1.jpg" alt="Thumb"><div>O&M_1.jpg</div></div>
+                    <div class="folder-item" onclick="openPicture('Photos/my3.jpg', 'O&M_3.jpg')"><img src="Photos/my3.jpg" alt="Thumb"><div>O&M_3.jpg</div></div>
+                    <div class="folder-item" onclick="openPicture('Photos/my5.jpg', 'O&M_5.jpg')"><img src="Photos/my5.jpg" alt="Thumb"><div>O&M_5.jpg</div></div>
+                    <div class="folder-item" onclick="openPicture('Photos/my2.jpg', 'O&M_2.jpg')"><img src="Photos/my2.jpg" alt="Thumb"><div>O&M_2.jpg</div></div>
+                    <div class="folder-item" onclick="openPicture('Photos/my4.jpg', 'O&M_4.jpg')"><img src="Photos/my4.jpg" alt="Thumb"><div>O&M_4.jpg</div></div>
+                    <div class="folder-item" onclick="openPicture('Photos/dworek2.jpg', 'dworek.jpg')"><img src="Photos/dworek.jpg" alt="Thumb"><div>Dworson.jpg</div></div>
+                </div>
             </div>
-          </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+            <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Internet Explorer Window -->
         <div class="window" id="ie-widget">
             <div class="title-bar">
                 <img src="icons/explorer.png" alt="Icon" class="title-bar-icon">
-                <span>Internet Explorer - Wedding Edition</span>
+                <span>Internet Explorer - Wedding Edition - Is it 2000 already?</span>
                 <div class="window-controls">
                     <button class="minimize-button button-border-raised">ˍ</button>
                     <button class="maximize-button button-border-raised">□</button>
@@ -327,11 +386,36 @@
                 </div>
             </div>
             <div class="menu-bar">
-              <div class="menu-item"><u>F</u>ile <div class="dropdown-menu"><div class="dropdown-item" onclick="closeWindow('ie-widget')">E<u>x</u>it</div></div></div>
-              <div class="menu-item"><u>E</u>dit <div class="dropdown-menu"><div class="dropdown-item disabled">Copy</div></div></div>
-              <div class="menu-item"><u>V</u>iew <div class="dropdown-menu"><div class="dropdown-item disabled">Source</div></div></div>
-              <div class="menu-item ie-favorites-menu">F<u>a</u>vorites <div class="dropdown-menu" id="ie-favorites-dropdown"></div></div>
-              <div class="menu-item"><u>H</u>elp <div class="dropdown-menu"><div class="dropdown-item" onclick="alert('No help for IE available.')">About</div></div></div>
+                <div class="menu-item">
+                    <u>F</u>ile 
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item" onclick="closeWindow('ie-widget')">E<u>x</u>it</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <u>E</u>dit 
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item disabled">Copy</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <u>V</u>iew 
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item disabled">
+                            Source
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item ie-favorites-menu">
+                    F<u>a</u>vorites 
+                    <div class="dropdown-menu" id="ie-favorites-dropdown"></div>
+                </div>
+                <div class="menu-item">
+                    <u>H</u>elp 
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item" onclick="alert('No help for IE available. The loss of functionality is a known issue. Sorry not sorry...')">About</div>
+                    </div>
+                </div>
             </div>
             <div class="ie-toolbar">
                 <button class="button-border-raised" onclick="ieGoBack()" title="Back" disabled>◀</button>
@@ -343,6 +427,7 @@
             <div class="content ie-content">
                 <iframe id="ie-iframe" src="about:blank" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
             </div>
+            <!-- History -->
             <div class="ie-history">
                 <label for="ie-history-select">History:</label>
                 <select id="ie-history-select" onchange="ieHistorySelect()"><option value="">-- Visited Sites --</option></select>
@@ -352,23 +437,43 @@
 
         <!-- Recycle Bin Window -->
         <div class="window" id="recycle-window">
-          <div class="title-bar">
-            <img src="icons/All [Without duplicates]/Recycle Bin with torned document and program.ico" alt="Icon" class="title-bar-icon" id="recycle-window-title-icon">
+            <div class="title-bar">
+            <img src="icons/All [Without duplicates]/Recycle Bin with torned document and program.ico" 
+                    alt="Icon" class="title-bar-icon" id="recycle-window-title-icon">
             <span>Recycle Bin</span>
             <div class="window-controls">
-              <button class="minimize-button button-border-raised">ˍ</button>
-              <button class="maximize-button button-border-raised">□</button>
-              <button class="close-button button-border-raised">✕</button>
+                <button class="minimize-button button-border-raised" title="Minimize">ˍ</button>
+                <button class="maximize-button button-border-raised" title="Maximize">□</button>
+                <button class="close-button button-border-raised" title="Close">✕</button>
             </div>
-          </div>
-          <div class="menu-bar">
-            <div class="menu-item"><u>F</u>ile<div class="dropdown-menu"> <div class="dropdown-item" onclick="emptyRecycleBin()"><u>E</u>mpty Recycle Bin</div></div></div>
-            <div class="menu-item"><u>E</u>dit<div class="dropdown-menu"><div class="dropdown-item disabled">Select All</div></div></div>
-          </div>
-          <div class="content content-border-sunken" style="background: var(--win95-white);">
-             <ul id="recycle-bin-list"></ul> <!-- Items populated by JS -->
-          </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+            </div>
+            <div class="menu-bar">
+            <div class="menu-item">
+                <u>F</u>ile
+                <div class="dropdown-menu">
+                <div class="dropdown-item" onclick="emptyRecycleBin()">
+                    <u>E</u>mpty Recycle Bin
+                </div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <u>E</u>dit
+                <div class="dropdown-menu">
+                <div class="dropdown-item disabled">Select All</div>
+                </div>
+            </div>
+            </div>
+            <div class="content content-border-sunken" style="background: var(--win95-white);">
+            <ul id="recycle-bin-list"></ul> <!-- Items populated by JS -->
+            </div>
+            <div class="resizer resizer-n"></div>
+            <div class="resizer resizer-ne"></div>
+            <div class="resizer resizer-e"></div>
+            <div class="resizer resizer-se"></div>
+            <div class="resizer resizer-s"></div>
+            <div class="resizer resizer-sw"></div>
+            <div class="resizer resizer-w"></div>
+            <div class="resizer resizer-nw"></div>
         </div>
 
         <!-- Notepad Window -->
@@ -388,113 +493,174 @@
         </div>
 
         <!-- Minesweeper Game Window -->
-        <div class="window" id="minesweeper-window">
+        <div class="window" id="minesweeper-window" style="width: 320px; height: 410px;">
             <div class="title-bar">
-                <img src="icons/All [Without duplicates]/Game.ico" alt="Icon" class="title-bar-icon">
-                <span>Minesweeper</span>
-                <div class="window-controls">
-                    <button class="minimize-button button-border-raised">ˍ</button>
-                    <button class="close-button button-border-raised">✕</button>
+            <img src="icons/All [Without duplicates]/Game.ico" alt="Icon" class="title-bar-icon">
+            <span>Minesweeper</span>
+            <div class="window-controls">
+                <button class="minimize-button button-border-raised" title="Minimize">ˍ</button>
+                <button class="close-button button-border-raised" title="Close">✕</button>
+            </div>
+            </div>
+            <div class="menu-bar">
+            <div class="menu-item" onclick="minesweeper.newGame()"><u>G</u>ame
+                <div class="dropdown-menu">
+                <div class="dropdown-item" onclick="minesweeper.newGame('beginner')">Beginner</div>
+                <div class="dropdown-item" onclick="minesweeper.newGame('intermediate')">Intermediate</div>
+                <div class="dropdown-item" onclick="minesweeper.newGame('expert')">Expert</div>
+                <div class="dropdown-item" onclick="minesweeper.newGame('custom')">Custom...</div>
                 </div>
             </div>
-             <div class="menu-bar">
-                <div class="menu-item" onclick="minesweeper.newGame()"><u>G</u>ame</div>
-                <div class="menu-item"><u>H</u>elp</div>
+            <div class="menu-item"><u>H</u>elp
+                <div class="dropdown-menu">
+                <div class="dropdown-item" onclick="alert('Left click: Reveal cell\nRight click: Flag mine\nDouble click: Quick open\n\nTry not to explode!')">How to Play</div>
+                <div class="dropdown-item" onclick="alert('Classic Minesweeper, Wedding Edition!')">About</div>
+                </div>
+            </div>
             </div>
             <div class="content minesweeper-content">
-                <div class="minesweeper-info button-border-sunken">
-                    <div class="minesweeper-mines-left" id="mines-left">10</div>
-                    <div class="minesweeper-face" id="minesweeper-face">😊</div>
-                    <div class="minesweeper-timer" id="minesweeper-timer">0</div>
-                </div>
-                <div class="minesweeper-grid button-border-sunken" id="minesweeper-grid"></div>
+            <div class="minesweeper-info button-border-sunken">
+                <div class="minesweeper-mines-left" id="mines-left" title="Mines Left">10</div>
+                <div class="minesweeper-face" id="minesweeper-face" title="New Game" onclick="minesweeper.newGame()">😊</div>
+                <div class="minesweeper-timer" id="minesweeper-timer" title="Time">0</div>
+            </div>
+            <div class="minesweeper-grid button-border-sunken" id="minesweeper-grid" tabindex="0" aria-label="Minesweeper grid"></div>
             </div>
             <!-- No resizers for fixed size game -->
         </div>
 
-         <!-- Snake Game Window -->
-        <div class="window" id="snake-window" style="width: 340px; height: 390px;"> <!-- Fixed size -->
+        <!-- Snake Game Window -->
+        <div class="window" id="snake-window" style="width: 340px; height: 390px;">
+            <!-- Title Bar -->
             <div class="title-bar">
-                <img src="icons/All [Without duplicates]/CD Music.ico" alt="Icon" class="title-bar-icon"> <!-- Placeholder Icon -->
-                <span>Snake!</span>
-                <div class="window-controls">
-                    <button class="minimize-button button-border-raised">ˍ</button>
-                    <button class="close-button button-border-raised">✕</button>
+            <img src="icons/All [Without duplicates]/CD Music.ico" alt="Icon" class="title-bar-icon">
+            <span>Snake!</span>
+            <div class="window-controls">
+                <button class="minimize-button button-border-raised" title="Minimize">ˍ</button>
+                <button class="close-button button-border-raised" title="Close">✕</button>
+            </div>
+            </div>
+            <!-- Menu Bar -->
+            <div class="menu-bar">
+            <div class="menu-item" tabindex="0" onclick="snakeGame.newGame()" title="Start a new game">
+                <u>G</u>ame
+                <div class="dropdown-menu">
+                <div class="dropdown-item" onclick="snakeGame.newGame()">New Game</div>
+                <div class="dropdown-item" onclick="snakeGame.setSpeed('slow')">Slow</div>
+                <div class="dropdown-item" onclick="snakeGame.setSpeed('normal')">Normal</div>
+                <div class="dropdown-item" onclick="snakeGame.setSpeed('fast')">Fast</div>
                 </div>
             </div>
-             <div class="menu-bar">
-                <div class="menu-item" onclick="snakeGame.newGame()"><u>G</u>ame</div>
-                <div class="menu-item"><u>H</u>elp</div>
+            <div class="menu-item" tabindex="0">
+                <u>H</u>elp
+                <div class="dropdown-menu">
+                <div class="dropdown-item" onclick="alert('Use Arrow Keys to move the snake.\nEat apples to grow.\nDon\\'t hit the walls or yourself!\n\nPress G for a new game.')">How to Play</div>
+                <div class="dropdown-item" onclick="alert('Classic Snake, Wedding Edition!')">About</div>
+                </div>
             </div>
+            </div>
+            <!-- Game Content -->
             <div class="content snake-content">
-                <div class="snake-score button-border-sunken" id="snake-score">Score: 0</div>
-                <canvas id="snake-canvas" class="content-border-sunken" width="300" height="300"></canvas>
-                <div class="snake-instructions">Use Arrow Keys to Move</div>
+            <div class="snake-score button-border-sunken" id="snake-score" aria-live="polite">Score: 0</div>
+            <canvas id="snake-canvas" class="content-border-sunken" width="300" height="300" tabindex="0" aria-label="Snake game area"></canvas>
+            <div class="snake-instructions" style="font-size:12px; margin-top:8px; color:#444;">
+                Use <b>Arrow Keys</b> or <b>WASD</b> to Move<br>
+                <span style="font-size:11px;">Press <b>G</b> for new game, <b>P</b> to pause</span>
             </div>
-            <!-- No resizers -->
+            </div>
+            <!-- No resizers for fixed size game -->
         </div>
 
 
         <!-- Screen Saver Window -->
-        <div class="window" id="screensaver-window">
+        <div class="window" id="screensaver-window" tabindex="0" aria-label="Screen Saver">
             <div class="title-bar">
-                <img src="icons/All [Without duplicates]/Desktop.ico" alt="Icon" class="title-bar-icon">
-                <span>3D Flying Objects (Wedding Edition)</span>
-                <div class="window-controls"><button class="close-button button-border-raised">✕</button></div>
+            <img src="icons/All [Without duplicates]/Desktop.ico" alt="Icon" class="title-bar-icon">
+            <span>3D Flying Objects (Wedding Edition)</span>
+            <div class="window-controls">
+                <button class="minimize-button button-border-raised" title="Minimize">ˍ</button>
+                <button class="close-button button-border-raised" title="Close">✕</button>
             </div>
-            <div class="content screensaver-content">
-                <div class="flying-object">💍</div><div class="flying-object">💖</div><div class="flying-object">🥂</div><div class="flying-object">🎂</div><div class="flying-object">🎉</div>
-                <p style="position:absolute; bottom:10px; left:10px; color:rgba(255,255,255,0.5); font-size:10px;">Click or press any key to exit</p>
+            </div>
+            <div class="content screensaver-content" style="position:relative; overflow:hidden; height:100%;">
+            <div class="flying-object" aria-hidden="true">💍</div>
+            <div class="flying-object" aria-hidden="true">💖</div>
+            <div class="flying-object" aria-hidden="true">🥂</div>
+            <div class="flying-object" aria-hidden="true">🎂</div>
+            <div class="flying-object" aria-hidden="true">🎉</div>
+            <div class="flying-object" aria-hidden="true">👰</div>
+            <div class="flying-object" aria-hidden="true">🤵</div>
+            <div class="flying-object" aria-hidden="true">🌹</div>
+            <p style="position:absolute; bottom:10px; left:10px; color:rgba(255,255,255,0.7); font-size:11px; text-shadow:1px 1px 2px #000;">
+                Click or press any key to exit
+            </p>
             </div>
         </div>
 
         <!-- Control Panel Window -->
         <div class="window" id="controlpanel-window">
-          <div class="title-bar">
-            <img src="icons/All [Without duplicates]/Controls.ico" alt="Icon" class="title-bar-icon">
-            <span>Control Panel</span>
-            <div class="window-controls">
-              <button class="minimize-button button-border-raised">ˍ</button>
-              <button class="maximize-button button-border-raised">□</button>
-              <button class="close-button button-border-raised">✕</button>
-            </div>
-          </div>
-          <div class="content">
-            <div class="folder-grid"> <!-- Items trigger openExplorerWindow via JS -->
-                <div class="folder-item" data-opens-explorer="display-props" data-explorer-title="Display Properties" data-explorer-icon="icons/All [Without duplicates]/Desktop.ico"><img src="icons/All [Without duplicates]/Desktop.ico" alt="Icon"><div>Display</div></div>
-                <div class="folder-item" data-opens-explorer="printers" data-explorer-title="Printers" data-explorer-icon="icons/All [Without duplicates]/Printer (3D).ico"><img src="icons/All [Without duplicates]/Printer (3D).ico" alt="Icon"><div>Printers</div></div>
-                <div class="folder-item" data-opens-explorer="mouse-settings" data-explorer-title="Mouse Properties" data-explorer-icon="icons/All [Without duplicates]/Mouse.ico"><img src="icons/All [Without duplicates]/Mouse.ico" alt="Icon"><div>Mouse</div></div>
-                 <div class="folder-item" data-opens-explorer="sound-settings" data-explorer-title="Sounds" data-explorer-icon="icons/All [Without duplicates]/Sound program.ico"><img src="icons/All [Without duplicates]/Sound program.ico" alt="Icon"><div>Sounds</div></div>
-                 <div class="folder-item" data-opens-explorer="add-remove-programs" data-explorer-title="Add/Remove Programs" data-explorer-icon="icons/All [Without duplicates]/Program group.ico"><img src="icons/All [Without duplicates]/Program group.ico" alt="Icon"><div>Add/Remove Programs</div></div>
-            </div>
-          </div>
-          <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
-        </div>
-
-        <!-- Sound Control Placeholder Window -->
-        <div class="window" id="sound-control-window" style="width:250px; height:200px;">
             <div class="title-bar">
-                <img src="icons/All [Without duplicates]/Sound program.ico" alt="Icon" class="title-bar-icon">
-                <span>Volume Control</span>
+                <img src="icons/All [Without duplicates]/Controls.ico" alt="Control Panel Icon" class="title-bar-icon">
+                <span>Control Panel</span>
                 <div class="window-controls">
                     <button class="minimize-button button-border-raised">ˍ</button>
+                    <button class="maximize-button button-border-raised">□</button>
                     <button class="close-button button-border-raised">✕</button>
                 </div>
             </div>
-            <div class="content" style="padding:10px;">
-                <p>Volume</p>
-                <div style="display:flex; align-items:center; margin-bottom:10px;">
-                    <span style="font-size:10px; margin-right:5px;">Low</span>
-                    <input type="range" min="0" max="100" value="75" style="flex-grow:1;">
-                    <span style="font-size:10px; margin-left:5px;">High</span>
+            <div class="content">
+                <div class="folder-grid">
+                    <!-- Display Properties -->
+                    <div class="folder-item"
+                            data-opens-explorer="display-props"
+                            data-explorer-title="Display Properties"
+                            data-explorer-icon="icons/All [Without duplicates]/Document with phone.ico">
+                        <img src="icons/All [Without duplicates]/Document with phone.ico" alt="Display Icon">
+                        <div>Display</div>
+                    </div>
+                    <!-- Printers -->
+                    <div class="folder-item"
+                            data-opens-explorer     =   "printers"
+                            data-explorer-title     =   "Printers"
+                            data-explorer-icon      =   "icons/All [Without duplicates]/Printer (3D).ico">
+                        <img src="icons/All [Without duplicates]/Printer (3D).ico" alt="Printers Icon">
+                        <div>Printers</div>
+                    </div>
+                    <!-- Mouse Properties -->
+                    <div class="folder-item"
+                            data-opens-explorer     =   "mouse-settings"
+                            data-explorer-title     =   "Mouse Properties"
+                            data-explorer-icon      =   "icons/All [Without duplicates]/mouse-arrow_icon-icons.com_53943.png">
+                        <img src="icons/All [Without duplicates]/mouse-arrow_icon-icons.com_53943.png" alt="Mouse Icon">
+                        <div>Mouse</div>
+                    </div>
+                    <!-- Sounds -->
+                    <div class="folder-item"
+                                data-opens-explorer =   "sound-settings"
+                                data-explorer-title =   "Sounds"
+                                data-explorer-icon  =   "icons/All [Without duplicates]/Sound program.ico">
+                        <img src="icons/All [Without duplicates]/Sound program.ico" alt="Sound Icon">
+                        <div>Sounds</div>
+                    </div>
+                    <!-- Add/Remove Programs -->
+                    <div class="folder-item"
+                                data-opens-explorer =   "add-remove-programs"
+                                data-explorer-title =   "Add/Remove Programs"
+                                data-explorer-icon  =   "icons/All [Without duplicates]/Programs.ico">
+                        <img src="icons/All [Without duplicates]/Programs.ico" alt="Programs Icon">
+                        <div>Add/Remove Programs</div>
+                    </div>
                 </div>
-                <input type="checkbox" id="sound-mute"> <label for="sound-mute" style="font-size:11px;">Mute all</label>
-                <hr>
-                <p style="font-size:10px; text-align:center;">(Simulation Only!)</p>
             </div>
-             <div class="resizer resizer-n"></div><div class="resizer resizer-ne"></div><div class="resizer resizer-e"></div><div class="resizer resizer-se"></div><div class="resizer resizer-s"></div><div class="resizer resizer-sw"></div><div class="resizer resizer-w"></div><div class="resizer resizer-nw"></div>
+            <div class="resizer resizer-n"></div>
+            <div class="resizer resizer-ne"></div>
+            <div class="resizer resizer-e"></div>
+            <div class="resizer resizer-se"></div>
+            <div class="resizer resizer-s"></div>
+            <div class="resizer resizer-sw"></div>
+            <div class="resizer resizer-w"></div>
+            <div class="resizer resizer-nw"></div>
         </div>
-
 
         <!-- ========= Taskbar & System Elements ========== -->
         <div class="taskbar">
@@ -512,44 +678,154 @@
 
         <!-- Start Menu (initially hidden) -->
         <div class="start-menu" id="start-menu">
-            <div class="start-menu-sidebar"><span>Wedding 95</span></div>
-            <div class="start-menu-items">
-                <ul>
-                    <li class="has-submenu"><img src="icons/All [Without duplicates]/Programs.ico" alt=""><span><u>P</u>rograms</span>
-                        <ul>
-                            <li><a href="#" onclick="openWindow('notepad-window'); return false;"><img src="icons/All [Without duplicates]/Notepad.ico" alt=""><span>Notepad</span></a></li>
-                            <li><a href="#" onclick="openWindow('minesweeper-window'); return false;"><img src="icons/All [Without duplicates]/Game.ico" alt=""><span>Minesweeper</span></a></li>
-                            <li><a href="#" onclick="openWindow('snake-window'); return false;"><img src="icons/All [Without duplicates]/CD Music.ico" alt=""><span>Snake</span></a></li>
-                            <li><a href="#" onclick="openWindow('ie-widget'); return false;"><img src="icons/explorer.png" alt=""><span>Internet Fun</span></a></li>
-                            <li class="separator"><hr></li>
-                            <li><a href="#" onclick="openWindow('screensaver-window'); return false;"><img src="icons/All [Without duplicates]/Desktop.ico" alt=""><span>Screensaver</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="has-submenu"><img src="icons/All [Without duplicates]/Folder.ico" alt=""><span><u>D</u>ocuments</span>
-                        <ul>
-                            <li><a href="#" onclick="openWindow('invitation-window'); return false;"><img src="icons/All [Without duplicates]/Document with phone.ico" alt=""><span>Invitation.txt</span></a></li>
-                            <li><a href="#" onclick="openWindow('folder-window'); return false;"><img src="icons/All [Without duplicates]/Folder.ico" alt=""><span>Photo Album</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="has-submenu"><img src="icons/All [Without duplicates]/Settings.ico" alt=""><span><u>S</u>ettings</span>
-                        <ul>
-                            <li><a href="#" onclick="openWindow('controlpanel-window'); return false;"><img src="icons/All [Without duplicates]/Controls.ico" alt=""><span>Control Panel</span></a></li>
-                            <li><a href="#" onclick="openExplorerWindow('Printers', 'Printers', 'icons/All [Without duplicates]/Printer (3D).ico', state.explorerWindowContents['printers'].items); return false;"><img src="icons/All [Without duplicates]/Printer (3D).ico" alt=""><span>Printers</span></a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#" onclick="alert('Find function is still searching for itself since 1998.'); return false;"><img src="icons/All [Without duplicates]/Search folder.ico" alt=""><span><u>F</u>ind</span></a></li>
-                    <li><a href="#" onclick="openWindow('help-window'); return false;"><img src="icons/All [Without duplicates]/Help page.ico" alt=""><span><u>H</u>elp</span></a></li>
-                    <li><a href="#" onclick="alert('Run command disabled. System integrity is paramount (and fragile).'); return false;"><img src="icons/All [Without duplicates]/Run.ico" alt=""><span><u>R</u>un...</span></a></li>
-                    <li class="separator"><hr></li>
-                    <li><a href="#" onclick="if(confirm('Are you sure you want to shut down your wedding experience?')) { document.body.innerHTML = '<div style=font-family:Tahoma,sans-serif;font-size:24px;text-align:center;padding-top:100px;color:white;background:black;height:100vh;>It\\\'s now safe to turn off your computer. <br><br> Thanks for celebrating with us!</div>'; }; return false;"><img src="icons/All [Without duplicates]/Turn Off Computer (full).ico" alt=""><span>Sh<u>u</u>t Down...</span></a></li>
-                </ul>
+            <div class="start-menu-sidebar">
+            <span style="display: flex; align-items: center; gap: 6px; padding: 4px 0 4px 2px; font-weight: bold; font-size: 17px;">
+                <img src="icons/All [Without duplicates]/Windows logo (without text).ico" alt="Win95 Logo" style="width:20px; height:20px; vertical-align:middle; margin-right:4px;">
+                Wedding 95
+            </span>
             </div>
-        </div>
+            <div class="start-menu-items">
+            <ul>
+                <li class="has-submenu">
+                    <span class="start-menu-icon-text">
+                        <img src="icons/All [Without duplicates]/Programs.ico" alt="Programs" class="start-menu-icon">
+                        <span><u>P</u>rograms</span>
+                    </span>
+                    <ul>
+                        <li>
+                            <a href="#" onclick="openWindow('notepad-window'); return false;">
+                                <img src="icons/All [Without duplicates]/New letter.ico" alt="Notepad" class="start-menu-icon">
+                                <span>Notepad</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="openWindow('minesweeper-window'); return false;">
+                                <img src="icons/All [Without duplicates]/mines.ico" alt="Minesweeper" class="start-menu-icon">
+                                <span>Minesweeper</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="openWindow('snake-window'); return false;">
+                                <img src="icons/All [Without duplicates]/snake.ico" alt="Snake" class="start-menu-icon">
+                                <span>Snake</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="openWindow('ie-widget'); return false;">
+                                <img src="icons/explorer.png" alt="Internet Fun" class="start-menu-icon">
+                                <span>Internet Fun</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="openWindow('screensaver-window'); return false;">
+                                <img src="icons/All [Without duplicates]/Controls.ico" alt="Screensaver" class="start-menu-icon">
+                                <span>Screensaver</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                <span class="start-menu-icon-text">
+                    <img src="icons/All [Without duplicates]/Folder.ico" alt="Documents" class="start-menu-icon">
+                    <span><u>D</u>ocuments</span>
+                </span>
+                <ul>
+                    <li>
+                        <a href="#" onclick="openWindow('invitation-window'); return false;">
+                            <img src="icons/All [Without duplicates]/Document with phone.ico" alt="Invitation.txt" class="start-menu-icon">
+                            <span>Invitation.txt</span>
+                        </a>
+                    </li>
+                    <li>
+                    <a href="#" onclick="openWindow('folder-window'); return false;">
+                        <img src="icons/All [Without duplicates]/Folder.ico" alt="Photo Album" class="start-menu-icon">
+                        <span>Photo Album</span>
+                    </a>
+                    </li>
+                </ul>
+                </li>
+                <li class="has-submenu">
+                    <span class="start-menu-icon-text">
+                        <img src="icons/All [Without duplicates]/Settings.ico" alt="Settings" class="start-menu-icon">
+                        <span><u>S</u>ettings</span>
+                    </span>
+                    <ul>
+                        <li>
+                        <a href="#" onclick="openWindow('controlpanel-window'); return false;">
+                            <img src="icons/All [Without duplicates]/Controls.ico" alt="Control Panel" class="start-menu-icon">
+                            <span>Control Panel</span>
+                        </a>
+                        </li>
+                        <li>
+                        <a href="#" onclick="openExplorerWindow('Printers', 'Printers', 'icons/All [Without duplicates]/Printer (3D).ico', state.explorerWindowContents['printers'].items); return false;">
+                            <img src="icons/All [Without duplicates]/Printer (3D).ico" alt="Printers" class="start-menu-icon">
+                            <span>Printers</span>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" onclick="alert('Find function is still searching for itself since 1998.'); return false;">
+                        <img src="icons/All [Without duplicates]/Search folder.ico" alt="Find" class="start-menu-icon">
+                        <span><u>F</u>ind</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="openWindow('help-window'); return false;">
+                        <img src="icons/All [Without duplicates]/Help page.ico" alt="Help" class="start-menu-icon">
+                        <span><u>H</u>elp</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="alert('Run command disabled. System integrity is paramount (and fragile).'); return false;">
+                        <img src="icons/All [Without duplicates]/Run.ico" alt="Run" class="start-menu-icon">
+                        <span><u>R</u>un...</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="if(confirm('Are you sure you want to shut down your wedding experience?')) { document.body.innerHTML = '<div style=font-family:Tahoma,sans-serif;font-size:24px;text-align:left;padding-top:100px;color:white;background:black;height:100vh;>It\\\'s now safe to turn off your computer. <br><br> Thanks for celebrating with us!</div>'; }; return false;">
+                        <img src="icons/All [Without duplicates]/Turn Off Computer (full).ico" alt="Shut Down" class="start-menu-icon">
+                        <span>Sh<u>u</u>t Down...</span>
+                    </a>
+                </li>
+            </ul>
+            </div>
+            </div>
+            <style>
+                .start-menu-sidebar {
+                    padding-bottom: 0 !important;
+                }
+                .start-menu-items ul li,
+                .start-menu-items ul li a,
+                .start-menu-items ul li span.start-menu-icon-text {
+                    display: flex;
+                    align-items: center;
+                    gap: 7px;
+                    justify-content: flex-start;
+                    text-align: left;
+                }
+                .start-menu-icon {
+                    width: 17px;
+                    height: 17px;
+                    flex-shrink: 0;
+                    margin-right: 6px;
+                    vertical-align: middle;
+                }
+                .start-menu-items ul li > ul {
+                    margin-left: 24px;
+                }
+                .start-menu-items ul,
+                .start-menu-items ul li,
+                .start-menu-items ul li a,
+                .start-menu-items ul li span {
+                    text-align: left !important;
+                }
+            </style>
 
         <!-- Right-click Context Menu (initially hidden) -->
         <div id="context-menu"></div>
 
-    </div> <!-- End of .desktop -->
+    </div> <!-- End of .desktop for desktop ;) -->
 
     <!-- Mobile Overlay - Should be outside .desktop -->
     <div class="mobile-overlay" id="mobile-overlay" style="display: none;">
@@ -561,7 +837,6 @@
             <img src="icons/All [Without duplicates]/Upload cloud.ico" alt="Icon" class="icon-img">
             <div>Send Media</div>
         </div>
-        <!-- You can add more icons here for the mobile view if needed -->
     </div>
 
     <script src="script.js"></script>

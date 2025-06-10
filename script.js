@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- DOM Element References ---
     const desktop = document.querySelector('.desktop');
-    const desktopArea = document.getElementById('desktop-area'); // May not be used if desktop is hidden
+    const desktopArea = document.querySelector('.desktop');
     const taskbar = document.querySelector('.taskbar');
     const startButton = document.getElementById('start-button');
     const startMenu = document.getElementById('start-menu');
@@ -119,41 +119,22 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileOverlay.querySelectorAll('.icon').forEach(icon => {
                 const windowId = icon.dataset.windowId;
                 if (windowId) {
-                    // Remove any previous listeners to avoid duplication if setupMobileMode is called multiple times
-                    const newIcon = icon.cloneNode(true);
-                    icon.parentNode.replaceChild(newIcon, icon);
-
-                    newIcon.addEventListener('click', (e) => {
-                        e.stopPropagation(); // Prevent event bubbling
-                        openWindow(windowId);
-                    });
-                    // Basic touchstart for visual feedback, touchend for action
-                    newIcon.addEventListener('touchstart', (e) => {
-                        e.stopPropagation();
-                        newIcon.classList.add('active-touch'); // For visual feedback
-                    }, { passive: true });
-                    newIcon.addEventListener('touchend', (e) => {
-                        e.preventDefault(); // Prevent click from firing immediately after if not handled well
-                        e.stopPropagation();
-                        newIcon.classList.remove('active-touch');
-                        // openWindow(windowId); // Click handler will take care of this
-                    });
-                } else {
-                    // icon.style.display = 'none'; // Or handle icons without windowId differently
+                    icon.onclick = () => openWindow(windowId);
                 }
             });
         }
-        // Ensure all desktop icons are non-interactive if they somehow become visible
-        document.querySelectorAll('.desktop .icon').forEach(dIcon => dIcon.style.pointerEvents = 'none');
     }
 
     function setupDesktopMode() {
         console.log("Setting up Desktop Mode");
-        if (mobileOverlay) mobileOverlay.style.display = 'none';
-        if (desktop) desktop.style.display = 'block';
-        if (taskbar) taskbar.style.position = 'absolute'; // Reset taskbar position
-        if (startButton) startButton.style.display = 'flex';
-        if (windowButtonsContainer) windowButtonsContainer.style.display = 'flex';
+        if (mobileOverlay)
+            mobileOverlay.style.display = 'none';
+        if (desktop)
+            desktop.style.display = 'grid';
+
+        if (taskbar) taskbar.style.position = '';
+        if (startButton) startButton.style.display = '';
+        if (windowButtonsContainer) windowButtonsContainer.style.display = '';
 
         // Close any open mobile windows before switching
         Object.keys(state.windows).forEach(winId => closeWindow(winId, true));
@@ -562,18 +543,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function initDesktopIcons() {
         if (state.isMobile || !desktopArea) return;
         desktopArea.querySelectorAll('.icon').forEach(icon => {
-            // remove old listeners
-            const newIcon = icon.cloneNode(true);
-            icon.parentNode.replaceChild(newIcon, icon);
+             // remove old listeners
+             const newIcon = icon.cloneNode(true);
+             icon.parentNode.replaceChild(newIcon, icon);
 
-            // single‐click opens (instead of dblclick)
-            newIcon.addEventListener('click', e => {
-                e.stopPropagation();
-                handleIconDoubleClick(newIcon);
-            });
-        });
-        desktopArea.addEventListener('click', handleDesktopClick);
-    }
+             // single‐click opens (instead of dblclick)
+             newIcon.addEventListener('click', e => {
+                 e.stopPropagation();
+                 handleIconDoubleClick(newIcon);
+             });
+         });
+         desktopArea.addEventListener('click', handleDesktopClick);
+     }
 
     function handleIconDoubleClick(icon) {
         if (state.isMobile || state.isDraggingOrResizing) return;
@@ -1348,3 +1329,84 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(state.isMobile ? "Running in MOBILE mode." : "Running in DESKTOP mode.");
 
 }); // === END DOMContentLoaded ===
+
+    // --- Simple Snake Game Implementation ---
+    window.snakeGame = (function() {
+        const canvas = document.getElementById('snake-canvas');
+        const scoreEl = document.getElementById('snake-score');
+        const ctx = canvas.getContext('2d');
+        const grid = 15;
+        let snake = [], dir = 'RIGHT', food = {}, gameLoopId;
+        function placeFood() {
+            food.x = Math.floor(Math.random() * (canvas.width / grid));
+            food.y = Math.floor(Math.random() * (canvas.height / grid));
+        }
+        function loop() {
+            const head = { x: snake[0].x, y: snake[0].y };
+            if (dir === 'LEFT') head.x--;
+            if (dir === 'RIGHT') head.x++;
+            if (dir === 'UP') head.y--;
+            if (dir === 'DOWN') head.y++;
+            head.x = (head.x + canvas.width / grid) % (canvas.width / grid);
+            head.y = (head.y + canvas.height / grid) % (canvas.height / grid);
+            snake.unshift(head);
+            if (head.x === food.x && head.y === food.y) {
+                placeFood();
+            } else {
+                snake.pop();
+            }
+            ctx.fillStyle = '#000'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0f0'; snake.forEach(s => ctx.fillRect(s.x * grid, s.y * grid, grid - 2, grid - 2));
+            ctx.fillStyle = '#f00'; ctx.fillRect(food.x * grid, food.y * grid, grid - 2, grid - 2);
+            if (scoreEl) scoreEl.textContent = `Score: ${snake.length - 1}`;
+        }
+        function newGame() { clearInterval(gameLoopId); snake = [{ x:5,y:5 }]; dir='RIGHT'; placeFood(); gameLoopId = setInterval(loop, 100); }
+        document.addEventListener('keydown', e => {
+            if (['ArrowLeft','ArrowUp','ArrowRight','ArrowDown'].includes(e.key)) {
+                const opposites = { 'LEFT':'RIGHT','RIGHT':'LEFT','UP':'DOWN','DOWN':'UP' };
+                if (e.key.replace('Arrow','').toUpperCase() !== opposites[dir]) dir = e.key.replace('Arrow','').toUpperCase();
+                e.preventDefault();
+            } else if (e.key.toLowerCase() === 'g') newGame();
+        });
+        return { newGame };
+    })();
+
+    // --- Simple Minesweeper Stub Implementation ---
+    window.minesweeper = (function() {
+        const gridSize = 9, mineCount = 10;
+        let cells = [];
+        function init(gridId) {
+            const container = document.getElementById(gridId);
+            container.innerHTML = '';
+            container.style.display = 'grid';
+            container.style.gridTemplate = `repeat(${gridSize}, 30px) / repeat(${gridSize}, 30px)`;
+            container.style.gap = '1px';
+            const mines = new Set();
+            while (mines.size < mineCount) mines.add(Math.floor(Math.random()*gridSize*gridSize));
+            cells = [];
+            for (let i=0;i<gridSize*gridSize;i++) {
+                const btn = document.createElement('button');
+                btn.style.width = btn.style.height = '30px';
+                btn.style.padding = '0';
+                btn.style.fontSize = '14px';
+                btn.onclick = () => reveal(i);
+                container.appendChild(btn);
+                cells.push(btn);
+            }
+            function reveal(i) {
+                if (mines.has(i)) {
+                    alert('Boom! Game over.'); init(gridId);
+                } else {
+                    cells[i].disabled = true;
+                    cells[i].textContent = '';
+                }
+            }
+        }
+        return { init, newGame: init };
+    })();
+
+    // After DOM is ready, wire up games
+    document.addEventListener('DOMContentLoaded', () => {
+        if (document.getElementById('snake-canvas')) window.snakeGame.newGame();
+        if (document.getElementById('minesweeper-grid')) window.minesweeper.init('minesweeper-grid');
+    });
