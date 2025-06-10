@@ -551,18 +551,70 @@
 
     </div> <!-- End of .desktop -->
 
-    <!-- ========= Mobile Overlay ========== -->
-    <div class="mobile-overlay" id="mobile-overlay">
-         <div class="icon" id="mobile-invitation-icon" data-window-id="invitation-window">
-            <img src="icons/All [Without duplicates]/Document with phone.ico" alt="Invitation Icon" class="icon-img">
-            <div>View Invitation</div>
+    <!-- Mobile Overlay - Should be outside .desktop -->
+    <div class="mobile-overlay" id="mobile-overlay" style="display: none;">
+        <div class="icon" id="mobile-invitation-icon" data-window-id="invitation-window">
+            <img src="icons/All [Without duplicates]/Document with phone.ico" alt="Icon" class="icon-img">
+            <div>Invitation.txt</div>
         </div>
-         <div class="icon" id="mobile-upload-icon" data-window-id="upload-window">
-            <img src="icons/All [Without duplicates]/Upload cloud.ico" alt="Upload Icon" class="icon-img">
+        <div class="icon" id="mobile-upload-icon" data-window-id="upload-window">
+            <img src="icons/All [Without duplicates]/Upload cloud.ico" alt="Icon" class="icon-img">
             <div>Send Media</div>
         </div>
-        <p class="mobile-info">Tap an icon to open.<br>(Desktop version has more features!)</p>
+        <!-- You can add more icons here for the mobile view if needed -->
     </div>
+
+    <div class="taskbar">
+            <button class="start-button button-border-raised" id="start-button">
+                <img src="icons/All [Without duplicates]/Windows logo (without text).ico" alt="Win95 Logo">Start
+            </button>
+            <div id="window-buttons-container"></div>
+            <div class="tray">
+                <div class="sound-tray-icon" id="sound-tray-icon-clickable" title="Volume">
+                    <img src="icons/All [Without duplicates]/Sound program.ico" alt="Sound Icon">
+                </div>
+                <div class="clock" id="clock">12:00</div>
+            </div>
+        </div>
+
+    <!-- Start Menu (initially hidden) -->
+    <div class="start-menu" id="start-menu">
+        <div class="start-menu-sidebar"><span>Wedding 95</span></div>
+        <div class="start-menu-items">
+            <ul>
+                <li class="has-submenu"><img src="icons/All [Without duplicates]/Programs.ico" alt=""><span><u>P</u>rograms</span>
+                    <ul>
+                        <li><a href="#" onclick="openWindow('notepad-window'); return false;"><img src="icons/All [Without duplicates]/Notepad.ico" alt=""><span>Notepad</span></a></li>
+                        <li><a href="#" onclick="openWindow('minesweeper-window'); return false;"><img src="icons/All [Without duplicates]/Game.ico" alt=""><span>Minesweeper</span></a></li>
+                        <li><a href="#" onclick="openWindow('snake-window'); return false;"><img src="icons/All [Without duplicates]/CD Music.ico" alt=""><span>Snake</span></a></li>
+                        <li><a href="#" onclick="openWindow('ie-widget'); return false;"><img src="icons/explorer.png" alt=""><span>Internet Fun</span></a></li>
+                        <li class="separator"><hr></li>
+                        <li><a href="#" onclick="openWindow('screensaver-window'); return false;"><img src="icons/All [Without duplicates]/Desktop.ico" alt=""><span>Screensaver</span></a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu"><img src="icons/All [Without duplicates]/Folder.ico" alt=""><span><u>D</u>ocuments</span>
+                    <ul>
+                        <li><a href="#" onclick="openWindow('invitation-window'); return false;"><img src="icons/All [Without duplicates]/Document with phone.ico" alt=""><span>Invitation.txt</span></a></li>
+                        <li><a href="#" onclick="openWindow('folder-window'); return false;"><img src="icons/All [Without duplicates]/Folder.ico" alt=""><span>Photo Album</span></a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu"><img src="icons/All [Without duplicates]/Settings.ico" alt=""><span><u>S</u>ettings</span>
+                    <ul>
+                        <li><a href="#" onclick="openWindow('controlpanel-window'); return false;"><img src="icons/All [Without duplicates]/Controls.ico" alt=""><span>Control Panel</span></a></li>
+                        <li><a href="#" onclick="openExplorerWindow('Printers', 'Printers', 'icons/All [Without duplicates]/Printer (3D).ico', state.explorerWindowContents['printers'].items); return false;"><img src="icons/All [Without duplicates]/Printer (3D).ico" alt=""><span>Printers</span></a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="alert('Find function is still searching for itself since 1998.'); return false;"><img src="icons/All [Without duplicates]/Search folder.ico" alt=""><span><u>F</u>ind</span></a></li>
+                <li><a href="#" onclick="openWindow('help-window'); return false;"><img src="icons/All [Without duplicates]/Help page.ico" alt=""><span><u>H</u>elp</span></a></li>
+                <li><a href="#" onclick="alert('Run command disabled. System integrity is paramount (and fragile).'); return false;"><img src="icons/All [Without duplicates]/Run.ico" alt=""><span><u>R</u>un...</span></a></li>
+                <li class="separator"><hr></li>
+                <li><a href="#" onclick="if(confirm('Are you sure you want to shut down your wedding experience?')) { document.body.innerHTML = '<div style=font-family:Tahoma,sans-serif;font-size:24px;text-align:center;padding-top:100px;color:white;background:black;height:100vh;>It\\\'s now safe to turn off your computer. <br><br> Thanks for celebrating with us!</div>'; }; return false;"><img src="icons/All [Without duplicates]/Turn Off Computer (full).ico" alt=""><span>Sh<u>u</u>t Down...</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Right-click Context Menu (initially hidden) -->
+    <div id="context-menu"></div>
 
     <script src="script.js"></script>
 </body>

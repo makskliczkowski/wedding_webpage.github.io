@@ -17,7 +17,8 @@
 /* Optional Pixel Font */
 @font-face {
   font-family: 'W95FA';
-  /* src: url('fonts/w95fa.woff2') format('woff2'), url('fonts/w95fa.woff') format('woff'); */
+  src: url('fonts/w95fa.woff2') format('woff2'),
+       url('fonts/w95fa.woff') format('woff');
   font-weight: normal; font-style: normal;
 }
 
@@ -203,38 +204,215 @@ input[type="range"]{appearance:none;width:100%;height:15px;background:var(--win9
 input[type="checkbox"]{appearance:none;width:13px;height:13px;background:var(--win95-white);border:1px solid var(--win95-dark-gray);border-right-color:var(--win95-white);border-bottom-color:var(--win95-white);box-shadow:inset 1px 1px 0 0 #A0A0A0;position:relative;vertical-align:middle;margin-right:4px;} input[type="checkbox"]:checked::after{content:'✓';position:absolute;top:-3px;left:1px;font-size:12px;color:var(--win95-black);}
 
 /* --- Mobile Responsiveness --- */
-.mobile-overlay { display: none; } /* Hidden on desktop */
+.mobile-overlay { display: none; } /* Hidden on desktop by default */
 
 @media (max-width: 768px) {
-    body{font-size:14px;overflow:auto;}
-    .desktop{display: none !important;} /* Hide entire desktop area */
-    #context-menu { display: none !important; } /* Hide context menu */
-    .start-menu { display: none !important; } /* Hide start menu */
+    body {
+        font-size: 14px;
+        overflow: auto; /* Allow scrolling on mobile */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+    .desktop {
+        display: none !important; /* Hide entire desktop area */
+    }
+    #context-menu,
+    .start-menu {
+        display: none !important; /* Hide context and start menus */
+    }
 
-    .mobile-overlay { display: flex; flex-wrap: wrap; padding: 20px; gap: 20px; justify-content: center; align-items: flex-start; margin-top: 20px; }
-    .mobile-overlay .icon { position: static; display: flex; width: 100px; height: auto; padding: 10px; color: var(--win95-black); background: #E0E0E0; border: 1px solid var(--win95-dark-gray); border-radius: 8px; text-shadow: none; margin: 0; box-shadow: 2px 2px 3px rgba(0,0,0,0.2); flex-direction: column; align-items: center; text-align: center; cursor: pointer; }
-    .mobile-overlay .icon .icon-img { width: 48px; height: 48px; margin-bottom: 5px; }
-    .mobile-overlay .icon div { font-size: 12px; margin-top: 5px; max-width: 100%; }
-    .mobile-info { width: 100%; text-align: center; color: #333; font-size: 12px; margin-top: 20px; }
+    .mobile-overlay {
+        display: flex; /* Show the mobile overlay */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+        padding: 20px;
+        gap: 15px; /* Space between icon groups or sections */
+        margin-top: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
 
-    .taskbar { position: fixed; height: 45px; padding: 3px; z-index: 10000; }
-    .start-button { display: none; } /* Hide start button */
-    #window-buttons-container { display: none; } /* Hide taskbar buttons */
-    .tray { padding: 0 6px; } .tray img { width: 20px; height: 20px; } .clock { font-size: 13px; }
+    .mobile-icon-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+    }
 
-    .window { position: fixed !important; left:0 !important; top:0 !important; width:100vw !important; height:100vh !important; z-index: 5000; box-shadow: none; border: none; background: var(--win95-gray); }
-    .window.active { display: flex; }
-    .maximize-button, .resizer, .menu-bar { display: none !important; } /* Hide maximize, resizers, menus */
-    .title-bar { height: 40px; font-size: 16px; padding: 5px 10px; }
-    .title-bar-icon { width: 22px; height: 22px; }
-    .window-controls button { width: 30px; height: 28px; font-size: 16px; line-height: 26px; }
-    .content { padding: 15px; font-size: 14px; margin: 0; border: none; height: calc(100% - 40px); overflow: auto;} /* Adjust height for title bar */
+    .mobile-overlay .icon {
+        position: static; /* Override absolute positioning */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100px; /* Fixed width for icons */
+        height: auto;
+        padding: 10px;
+        color: var(--win95-black);
+        background: #EFEFEF; /* Lighter background for touch friendliness */
+        border: 1px solid var(--win95-dark-gray);
+        border-radius: 8px;
+        text-shadow: none;
+        margin: 0;
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+        cursor: pointer;
+        transition: transform 0.1s ease-out; /* Add slight press effect */
+    }
+    .mobile-overlay .icon:active {
+        transform: scale(0.95);
+        background: #DCDCDC;
+    }
+
+    .mobile-overlay .icon .icon-img {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 8px;
+    }
+    .mobile-overlay .icon div {
+        font-size: 12px;
+        margin-top: 5px;
+        max-width: 100%;
+        word-wrap: break-word;
+    }
+    .mobile-info {
+        width: 100%;
+        text-align: center;
+        color: #555;
+        font-size: 13px;
+        margin-top: 15px;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    .taskbar {
+        position: fixed; /* Keep taskbar at bottom */
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 45px;
+        padding: 3px;
+        z-index: 10000;
+        background: var(--win95-gray); /* Ensure it has a background */
+    }
+    .start-button,
+    #window-buttons-container {
+        display: none !important; /* Hide start button and window buttons on mobile */
+    }
+    .tray {
+        padding: 0 8px;
+    }
+    .tray img {
+        width: 22px;
+        height: 22px;
+    }
+    .clock {
+        font-size: 14px;
+        padding: 0 8px;
+    }
+
+    /* Mobile Window Styling */
+    .window {
+        position: fixed !important; /* Full screen */
+        left: 0 !important;
+        top: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 5000; /* Ensure windows are above mobile overlay but below system UI if any */
+        box-shadow: none;
+        border: none;
+        background: var(--win95-white); /* Use white for content background generally */
+        display: none; /* Hidden by default, shown by JS */
+        flex-direction: column;
+    }
+    .window.active {
+        display: flex !important; /* Ensure active mobile windows are shown */
+    }
+
+    .window .title-bar {
+        background: var(--win95-blue); /* Consistent active-like title bar */
+        color: var(--win95-white);
+        height: 44px; /* Slightly taller for touch */
+        font-size: 16px;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+    }
+    .window .title-bar-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+    }
+    .window .window-controls button {
+        width: 36px; /* Larger touch targets */
+        height: 30px;
+        font-size: 18px;
+        line-height: 28px;
+        background: var(--win95-gray); /* Standard button face */
+        color: var(--win95-black);
+    }
+    .window .window-controls .minimize-button {
+        display: none; /* Hide minimize button on mobile */
+    }
+    .window .maximize-button,
+    .window .resizer,
+    .window .menu-bar {
+        display: none !important; /* Hide maximize, resizers, and menu bars on mobile */
+    }
+
+    .window .content {
+        padding: 15px;
+        font-size: 14px;
+        margin: 0;
+        border: none;
+        flex-grow: 1; /* Content takes remaining space */
+        overflow-y: auto; /* Allow content to scroll */
+        background-color: var(--win95-white);
+        height: calc(100% - 44px); /* Adjust height for title bar */
+        -webkit-overflow-scrolling: touch;
+    }
 
     /* Specific mobile content adjustments */
-    #invitation-window .content img { max-height: 200px; }
-    #upload-window .content input[type="file"] { width: 100%; margin-bottom: 10px; padding: 10px; font-size: 14px; }
-    #upload-window .content button { width: 100%; padding: 10px; font-size: 16px; }
+    #invitation-window .content {
+        background-color: #FFFDE7; /* Creamy background for invitation */
+    }
+    #invitation-window .content img {
+        max-height: 180px; /* Adjust image size */
+        border-radius: 4px;
+    }
+    #invitation-window .content button {
+        padding: 10px 15px;
+        font-size: 15px;
+        margin-top: 10px;
+    }
+
+    #upload-window .content {
+        background-color: #F0F4F8; /* Light blue-gray for upload */
+    }
+    #upload-window .content input[type="file"] {
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 12px;
+        font-size: 14px;
+        border: 1px dashed var(--win95-dark-gray);
+        background-color: var(--win95-white);
+        border-radius: 4px;
+    }
+    #upload-window .content button {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        background-color: #4CAF50; /* Greenish button */
+        color: white;
+        border: none;
+        box-shadow: none;
+    }
+    #upload-window .content button:active {
+        background-color: #45a049;
+    }
 }
 
 /* Gallery specific styling */
-.gallery-item { /* Used by JS for NAS gallery */ }
+.gallery-item { /* Used by JS for NAS gallery */
+    display: inline-block; /* Prevent empty ruleset */
+}
