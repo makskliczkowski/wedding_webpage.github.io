@@ -217,33 +217,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Menu Bar Interaction (Desktop Windows) ---
     function initMenuBarInteraction() {
         document.querySelectorAll('.menu-bar').forEach(menuBar => {
-            // Remove previous listeners to avoid duplication if called multiple times
-            const newMenuBar = menuBar.cloneNode(true);
-            menuBar.parentNode.replaceChild(newMenuBar, menuBar);
-
-            newMenuBar.addEventListener('click', (e) => {
-                if (state.isMobile) return; // Menu bars are desktop only
-                const menuItem = e.target.closest('.menu-item');
-                if (!menuItem) return;
-
-                newMenuBar.querySelectorAll('.dropdown-menu').forEach(d => {
-                    if (menuItem.contains(d)) return;
-                    d.style.display = 'none';
+            menuBar.addEventListener('click', e => {
+                if (state.isMobile) return;
+                const mi = e.target.closest('.menu-item');
+                if (!mi) return;
+                menuBar.querySelectorAll('.dropdown-menu').forEach(d => {
+                    if (!mi.contains(d)) d.style.display = 'none';
                 });
-
-                const dropdown = menuItem.querySelector('.dropdown-menu');
-                if (dropdown) {
-                    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-                }
+                const dd = mi.querySelector('.dropdown-menu');
+                if (dd) dd.style.display = dd.style.display === 'block' ? 'none' : 'block';
             });
         });
-        // Close dropdowns when clicking outside the menu bar (Desktop only)
-        document.addEventListener('click', (e) => {
+        document.addEventListener('click', e => {
             if (state.isMobile) return;
             document.querySelectorAll('.menu-bar').forEach(mb => {
-                 if (!mb.contains(e.target)) {
-                    mb.querySelectorAll('.dropdown-menu').forEach(d => d.style.display = 'none');
-                }
+                if (!mb.contains(e.target))
+                    mb.querySelectorAll('.dropdown-menu').forEach(d=>d.style.display='none');
             });
         });
     }
@@ -572,21 +561,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Desktop Icons & Interaction (Desktop only) ---
     function initDesktopIcons() {
         if (state.isMobile || !desktopArea) return;
-        const icons = desktopArea.querySelectorAll('.icon');
-        icons.forEach((icon, index) => {
-            // Remove previous listeners
+        desktopArea.querySelectorAll('.icon').forEach(icon => {
+            // remove old listeners
             const newIcon = icon.cloneNode(true);
             icon.parentNode.replaceChild(newIcon, icon);
 
-            // Initial positioning (example, can be more dynamic)
-            const col = index % Math.floor(desktopArea.clientWidth / state.iconGridSize);
-            const row = Math.floor(index / Math.floor(desktopArea.clientWidth / state.iconGridSize));
-            newIcon.style.left = `${col * state.iconGridSize}px`;
-            newIcon.style.top = `${row * state.iconGridSize}px`;
-
-            newIcon.addEventListener('dblclick', () => handleIconDoubleClick(newIcon));
-            newIcon.addEventListener('click', (e) => { e.stopPropagation(); selectIcon(newIcon); });
-            makeIconDraggable(newIcon);
+            // single‐click opens (instead of dblclick)
+            newIcon.addEventListener('click', e => {
+                e.stopPropagation();
+                handleIconDoubleClick(newIcon);
+            });
         });
         desktopArea.addEventListener('click', handleDesktopClick);
     }
@@ -768,24 +752,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Window Control Button Listeners (Event Delegation) ---
     function initWindowControls() {
-        // Use event delegation on a parent container if windows are dynamically added
-        // For now, assuming all .window elements are present at DOMContentLoaded
-        document.body.addEventListener('click', function(event) {
-            if (state.isDraggingOrResizing) return; // Don't process clicks during drag/resize
-
-            const button = event.target.closest('.window-controls button');
-            if (!button) return;
-
-            const windowId = button.closest('.window')?.id;
-            if (!windowId) return;
-
-            if (button.classList.contains('close-button')) {
-                closeWindow(windowId);
-            } else if (button.classList.contains('minimize-button')) {
-                minimizeWindow(windowId);
-            } else if (button.classList.contains('maximize-button') && !state.isMobile) {
-                maximizeWindow(windowId);
-            }
+        document.querySelectorAll('.window-controls button').forEach(btn => {
+            const winEl = btn.closest('.window');
+            if (!winEl) return;
+            const id = winEl.id;
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                if (btn.classList.contains('close-button'))      closeWindow(id);
+                else if (btn.classList.contains('minimize-button')) minimizeWindow(id);
+                else if (btn.classList.contains('maximize-button')) maximizeWindow(id);
+            });
         });
     }
 
@@ -793,49 +769,33 @@ document.addEventListener('DOMContentLoaded', () => {
     function initStartMenu() {
         if (state.isMobile || !startButton || !startMenu) return;
 
-        // Remove previous listeners
-        const newStartButton = startButton.cloneNode(true);
-        startButton.parentNode.replaceChild(newStartButton, startButton);
-        // Update reference
-        // startButton = newStartButton; // This would reassign a const, better to use the new var directly
-
-        newStartButton.addEventListener('click', (e) => {
+        // attach directly to the existing startButton
+        startButton.addEventListener('click', e => {
             e.stopPropagation();
             toggleStartMenu();
         });
 
-        // Event delegation for start menu items
-        startMenu.addEventListener('click', (e) => {
-            const targetItem = e.target.closest('[data-window-id], [data-action]');
-            if (targetItem) {
-                const windowId = targetItem.dataset.windowId;
-                const action = targetItem.dataset.action;
-                if (windowId) openWindow(windowId);
-                else if (action === 'shutdown') alert('Shutting down... not really!');
-                else if (action === 'screensaver') openWindow('screensaver-window');
-                closeStartMenu();
-            }
+        // delegate clicks inside the menu
+        startMenu.addEventListener('click', e => {
+            const winId = e.target.closest('[data-window-id]')?.dataset.windowId;
+            if (winId) openWindow(winId);
+            closeStartMenu();
         });
     }
 
     function toggleStartMenu() {
-        if (state.isMobile || !startMenu || !startButton) return;
-        const isActive = startMenu.classList.toggle('active');
-        startButton.classList.toggle('active', isActive);
-        if (isActive) {
-            startButton.classList.add('button-border-lowered');
-            startButton.classList.remove('button-border-raised');
-            startMenu.style.zIndex = state.nextZIndex + 1; // Ensure it's above other elements
-        } else {
-            startButton.classList.add('button-border-raised');
-            startButton.classList.remove('button-border-lowered', 'active');
-        }
+        if (state.isMobile) return;
+        const active = startMenu.classList.toggle('active');
+        startButton.classList.toggle('active', active);
+        startButton.classList.toggle('button-border-lowered', active);
+        startButton.classList.toggle('button-border-raised', !active);
+        if (active) startMenu.style.zIndex = ++state.nextZIndex;
     }
 
     function closeStartMenu() {
-        if (state.isMobile || !startMenu || !startButton) return;
+        if (state.isMobile) return;
         startMenu.classList.remove('active');
-        startButton.classList.remove('active', 'button-border-lowered');
+        startButton.classList.remove('active','button-border-lowered');
         startButton.classList.add('button-border-raised');
     }
 
